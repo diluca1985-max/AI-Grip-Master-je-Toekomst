@@ -626,8 +626,24 @@
   }
 
   /* Admin settings gear */
-  
-  
+  .settings-gear {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0.3rem;
+    border-radius: 6px;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.75rem;
+  }
+  .settings-gear:hover {
+    color: var(--text-primary);
+    background: rgba(255,255,255,0.08);
+  }
 
   /* Admin overlay / modal */
   .admin-overlay {
@@ -1675,7 +1691,16 @@
 </header>
 
 <!-- ADMIN OVERLAY -->
-
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-modal" id="adminModal">
+    <h2>&#x2699; Video-instellingen</h2>
+    <div id="adminRows"></div>
+    <div class="admin-buttons">
+      <button class="admin-btn-close" onclick="closeAdminPanel()">Sluiten</button>
+      <button class="admin-btn-save" onclick="saveAdminUrls()">Opslaan</button>
+    </div>
+  </div>
+</div>
 
 <!-- PAGE: WELCOME -->
 <div class="page active" id="page-welcome">
@@ -1868,6 +1893,69 @@ function getVideoUrl(weekNum) {
 }
 
 // ===== ADMIN PANEL =====
+function openAdminPanel() {
+  var overlay = document.getElementById('adminOverlay');
+  var container = document.getElementById('adminRows');
+  var stored = {};
+  try { stored = JSON.parse(localStorage.getItem('aigrip_video_urls')) || {}; } catch(e) {}
+
+  var html = '';
+  courseData.forEach(function(week) {
+    if (week.week === 10) {
+      html += '<div class="admin-row">' +
+        '<span class="week-num">Week ' + week.week + '</span>' +
+        '<span class="week-title">' + week.title + '</span>' +
+        '<span class="no-video-label">Geen video — eindopdracht</span>' +
+        '</div>';
+    } else {
+      var currentUrl = stored[week.week] || (week.video ? week.video.url : '') || '';
+      html += '<div class="admin-row">' +
+        '<span class="week-num">Week ' + week.week + '</span>' +
+        '<span class="week-title">' + week.title + '</span>' +
+        '<input type="text" id="admin-url-' + week.week + '" value="' + currentUrl + '" placeholder="YouTube URL...">' +
+        '</div>';
+    }
+  });
+  container.innerHTML = html;
+  overlay.classList.add('open');
+}
+
+function closeAdminPanel() {
+  document.getElementById('adminOverlay').classList.remove('open');
+}
+
+function saveAdminUrls() {
+  var urls = {};
+  courseData.forEach(function(week) {
+    if (week.week === 10) return;
+    var input = document.getElementById('admin-url-' + week.week);
+    if (input && input.value.trim()) {
+      urls[week.week] = input.value.trim();
+    }
+  });
+  if (Object.keys(urls).length > 0) {
+    localStorage.setItem('aigrip_video_urls', JSON.stringify(urls));
+  } else {
+    localStorage.removeItem('aigrip_video_urls');
+  }
+  closeAdminPanel();
+  // Refresh current view if on a week page
+  var weekPage = document.getElementById('page-week');
+  if (weekPage && weekPage.classList.contains('active')) {
+    var weekLabel = weekPage.querySelector('.week-label');
+    if (weekLabel) {
+      var weekNum = parseInt(weekLabel.textContent.replace('Week ', ''));
+      if (!isNaN(weekNum)) renderWeek(weekNum);
+    }
+  }
+}
+
+// Close admin panel on overlay click (outside modal)
+document.addEventListener('click', function(e) {
+  var overlay = document.getElementById('adminOverlay');
+  if (e.target === overlay) closeAdminPanel();
+});
+
 // ===== COURSE DATA =====
 const courseData = [
   {
@@ -3882,27 +3970,18 @@ function renderOverview() {
   const certSection = document.createElement('div');
   certSection.style.cssText = 'margin-top: 2.5rem; background: var(--bg-glass); backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%); border: 1px solid var(--border-glass); border-radius: 16px; padding: 2rem; text-align: center;';
   certSection.innerHTML = `
-    <h3 style="color: var(--white); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">Rond alle 10 weken af en ontvang je Certificaat van Deelname</h3>
-    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">${progress.completedWeeks.length} van 10 weken afgerond</p>
-    <div style="max-width: 300px; margin: 0 auto; background: #ffffff; border: 2px solid #d4d4d4; border-radius: 4px; padding: 0; aspect-ratio: 800/565; position: relative; overflow: hidden; box-shadow: 0 8px 24px -8px rgba(0,0,0,0.3); opacity: 0.9;">
-      <div style="border: 1px solid #e5e5e5; margin: 4px; padding: 1rem 1.2rem 0.8rem; height: calc(100% - 8px); box-sizing: border-box; display: flex; flex-direction: column; position: relative;">
-        <div style="position: absolute; top: 0; right: 0; background: #374151; color: #fff; font-size: 0.3rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.3rem 0.25rem; writing-mode: vertical-rl; text-orientation: mixed; line-height: 1;">CERTIFICAAT VAN DEELNAME</div>
-        <div style="font-family: Georgia, serif; font-size: 1rem; color: #1a1a1a; margin-bottom: 0.1rem;">AI-Grip</div>
-        <div style="font-size: 0.35rem; color: #666; margin-bottom: 0.6rem;">${new Date().toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })}</div>
-        <div style="font-size: 0.65rem; font-weight: 700; color: #999; margin-bottom: 0.15rem; font-style: italic;">Jouw naam</div>
-        <div style="font-size: 0.35rem; color: #666; margin-bottom: 0.1rem;">heeft met succes afgerond</div>
-        <div style="font-size: 0.45rem; font-weight: 700; color: #1a1a1a; margin-bottom: 0.1rem;">AI-Grip: Master je Toekomst</div>
-        <div style="font-size: 0.3rem; color: #666;">10-weekse training AI-geletterdheid</div>
-        <div style="margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; padding-top: 0.5rem;">
-          <div>
-            <div style="width: 50px; height: 1px; background: #d4d4d4; margin-bottom: 0.15rem;"></div>
-            <div style="font-size: 0.3rem; font-weight: 600; color: #1a1a1a;">Luuk Otten</div>
+    <div style="display: flex; align-items: center; gap: 1.5rem; text-align: left;">
+      <div style="flex-shrink: 0; width: 80px; height: 80px; border-radius: 50%; border: 3px solid #b8860b; display: flex; align-items: center; justify-content: center; background: rgba(184,134,11,0.08);">
+        <span style="font-size: 2rem; color: #b8860b;">&#x2726;</span>
+      </div>
+      <div>
+        <h3 style="color: var(--white); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem;">Certificaat van Deelname</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">Rond alle 10 weken af en ontvang een officieel certificaat van Health Stars EdTech.</p>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <div style="flex: 1; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden;">
+            <div style="height: 100%; width: ${progress.completedWeeks.length * 10}%; background: linear-gradient(90deg, #b8860b, #d4a843); border-radius: 3px; transition: width 0.5s;"></div>
           </div>
-          <div style="width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid #b8860b; display: flex; align-items: center; justify-content: center; font-size: 0.5rem; color: #b8860b;">&#x2726;</div>
-          <div style="text-align: right;">
-            <div style="width: 50px; height: 1px; background: #d4d4d4; margin-bottom: 0.15rem; margin-left: auto;"></div>
-            <div style="font-size: 0.3rem; font-weight: 600; color: #1a1a1a;">Esther Eijgenstein</div>
-          </div>
+          <span style="color: #b8860b; font-size: 0.85rem; font-weight: 600; white-space: nowrap;">${progress.completedWeeks.length}/10</span>
         </div>
       </div>
     </div>
