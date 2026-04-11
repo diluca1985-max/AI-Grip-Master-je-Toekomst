@@ -1282,6 +1282,190 @@
     margin-top: 0.5rem;
   }
 
+  /* ===== CHECKLIST CALLOUT (Check je werk) ===== */
+  .checklist-callout {
+    background: linear-gradient(180deg, rgba(34,197,94,0.07) 0%, rgba(34,197,94,0.02) 100%);
+    border: 1px solid rgba(34,197,94,0.28);
+    border-left: 3px solid var(--green);
+    border-radius: var(--radius-sm);
+    padding: 1.6rem 1.6rem 1.35rem;
+    margin: 1.75rem 0 1.25rem;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .checklist-callout .callout-title {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--white);
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.015em;
+  }
+
+  .checklist-callout .callout-title .ico {
+    color: var(--green);
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .checklist-callout .callout-intro {
+    color: var(--text-secondary);
+    margin: 0 0 1.1rem;
+    line-height: 1.65;
+    font-size: 0.95rem;
+  }
+
+  .checklist-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 0.85rem 1rem;
+    background: rgba(255,255,255,0.025);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-xs);
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text-secondary);
+    line-height: 1.55;
+    font-size: 0.94rem;
+    user-select: none;
+  }
+
+  .checklist-item:hover {
+    background: rgba(255,255,255,0.045);
+    border-color: rgba(34,197,94,0.35);
+    transform: translateX(2px);
+  }
+
+  .checklist-item .check-box {
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid rgba(255,255,255,0.28);
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+    background: rgba(255,255,255,0.04);
+    transition: var(--transition);
+    position: relative;
+    display: inline-block;
+  }
+
+  .checklist-item.checked .check-box {
+    background: var(--green);
+    border-color: var(--green);
+  }
+
+  .checklist-item.checked .check-box::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 1px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+  }
+
+  .checklist-item .item-text {
+    flex: 1;
+  }
+
+  .checklist-item .item-text strong {
+    color: var(--text-primary);
+  }
+
+  .checklist-item.checked {
+    background: rgba(34,197,94,0.07);
+    border-color: rgba(34,197,94,0.3);
+    color: var(--text-muted);
+  }
+
+  .checklist-item.checked .item-text {
+    text-decoration: line-through;
+    text-decoration-color: rgba(255,255,255,0.25);
+    text-decoration-thickness: 1.5px;
+  }
+
+  .checklist-callout .callout-outro {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin: 1rem 0 0;
+    padding-top: 0.85rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    line-height: 1.6;
+  }
+
+  /* ===== BONUS CALLOUT (Ga een stap verder) ===== */
+  .bonus-callout {
+    background: linear-gradient(180deg, rgba(245,158,11,0.07) 0%, rgba(245,158,11,0.02) 100%);
+    border: 1px solid rgba(245,158,11,0.28);
+    border-left: 3px solid var(--amber-500);
+    border-radius: var(--radius-sm);
+    padding: 1.6rem 1.6rem 1.35rem;
+    margin: 1.5rem 0 1.25rem;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .bonus-callout .callout-title {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--white);
+    margin: 0 0 0.6rem;
+    letter-spacing: -0.015em;
+  }
+
+  .bonus-callout .callout-title .ico {
+    color: var(--amber-500);
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .bonus-callout p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0 0 0.85rem;
+    font-size: 0.94rem;
+  }
+
+  .bonus-callout p:last-child { margin-bottom: 0; }
+
+  .bonus-callout p strong { color: var(--text-primary); }
+
+  .bonus-callout p em {
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+
+  .bonus-callout ul {
+    margin: 0 0 1rem 0;
+    padding-left: 1.4rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-size: 0.94rem;
+  }
+
+  .bonus-callout ul li { margin-bottom: 0.3rem; }
+
   .assignment-outro-text strong { color: var(--text-primary); }
 
   /* Quiz */
@@ -4480,6 +4664,109 @@ function saveStepAssignment(weekNum, stepNum, text) {
   saveProgress(progress);
 }
 
+function getChecklistState(weekNum, itemIdx) {
+  var progress = getProgress();
+  if (!progress.checklists) return false;
+  return progress.checklists['week' + weekNum + '-' + itemIdx] === true;
+}
+
+function toggleChecklistItem(weekNum, itemIdx, liEl) {
+  var progress = getProgress();
+  if (!progress.checklists) progress.checklists = {};
+  var key = 'week' + weekNum + '-' + itemIdx;
+  var newState = !progress.checklists[key];
+  progress.checklists[key] = newState;
+  saveProgress(progress);
+  if (newState) {
+    liEl.classList.add('checked');
+  } else {
+    liEl.classList.remove('checked');
+  }
+}
+
+function transformAssignmentExtras(htmlString, weekNum) {
+  if (!htmlString || !htmlString.trim()) return htmlString;
+  var temp = document.createElement('div');
+  temp.innerHTML = htmlString;
+
+  var headings = Array.prototype.slice.call(temp.querySelectorAll('h3, h4'));
+  var checklistItemCounter = 0;
+
+  for (var hi = 0; hi < headings.length; hi++) {
+    var h = headings[hi];
+    if (!h.parentNode) continue; // already moved
+    var text = (h.textContent || '').trim();
+    var sectionType = null, icon = null, className = null;
+    if (/^Check je werk/i.test(text)) {
+      sectionType = 'checklist'; icon = 'ico-check'; className = 'checklist-callout';
+    } else if (/^Ga een stap verder/i.test(text)) {
+      sectionType = 'bonus'; icon = 'ico-spark'; className = 'bonus-callout';
+    } else {
+      continue;
+    }
+
+    // Collect siblings until next h3/h4 (or end)
+    var nodesToWrap = [h];
+    var n = h.nextElementSibling;
+    while (n) {
+      if (n.tagName === 'H3' || n.tagName === 'H4') break;
+      nodesToWrap.push(n);
+      n = n.nextElementSibling;
+    }
+
+    // Build the callout
+    var callout = document.createElement('div');
+    callout.className = className;
+
+    var titleEl = document.createElement('div');
+    titleEl.className = 'callout-title';
+    titleEl.innerHTML = '<i class="ico ' + icon + '"></i><span>' + escapeHtml(text) + '</span>';
+    callout.appendChild(titleEl);
+
+    var listSeen = false;
+    for (var ni = 1; ni < nodesToWrap.length; ni++) {
+      var node = nodesToWrap[ni];
+      if ((node.tagName === 'UL' || node.tagName === 'OL') && sectionType === 'checklist') {
+        var ulNew = document.createElement('ul');
+        ulNew.className = 'checklist-items';
+        var items = node.querySelectorAll('li');
+        for (var i = 0; i < items.length; i++) {
+          var li = document.createElement('li');
+          li.className = 'checklist-item';
+          var globalIdx = checklistItemCounter++;
+          li.setAttribute('data-checklist-idx', globalIdx);
+          li.setAttribute('onclick', 'toggleChecklistItem(' + weekNum + ',' + globalIdx + ',this)');
+          if (getChecklistState(weekNum, globalIdx)) li.classList.add('checked');
+          li.innerHTML = '<span class="check-box"></span><span class="item-text">' + items[i].innerHTML + '</span>';
+          ulNew.appendChild(li);
+        }
+        callout.appendChild(ulNew);
+        listSeen = true;
+      } else if (node.tagName === 'P') {
+        var pEl = document.createElement('p');
+        if (sectionType === 'checklist') {
+          pEl.className = listSeen ? 'callout-outro' : 'callout-intro';
+        }
+        pEl.innerHTML = node.innerHTML;
+        callout.appendChild(pEl);
+      } else {
+        callout.appendChild(node.cloneNode(true));
+        if (node.tagName === 'UL' || node.tagName === 'OL') listSeen = true;
+      }
+    }
+
+    // Replace original nodes with the callout
+    h.parentNode.insertBefore(callout, h);
+    for (var ri = 0; ri < nodesToWrap.length; ri++) {
+      if (nodesToWrap[ri].parentNode) {
+        nodesToWrap[ri].parentNode.removeChild(nodesToWrap[ri]);
+      }
+    }
+  }
+
+  return temp.innerHTML;
+}
+
 var stepSaveTimeouts = {};
 function handleStepAssignmentInput(weekNum, stepNum) {
   var el = document.getElementById('assignment-' + weekNum + '-step-' + stepNum);
@@ -4649,6 +4936,7 @@ function renderAssignmentWithSteps(descriptionHtml, weekNum, savedAssignment) {
   }
 
   if (outroHtml.trim()) {
+    outroHtml = transformAssignmentExtras(outroHtml, weekNum);
     html += '<div class="assignment-outro-text">' + outroHtml + '</div>';
   }
 
