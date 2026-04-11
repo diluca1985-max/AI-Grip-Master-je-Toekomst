@@ -1030,11 +1030,12 @@
     padding: 0.3rem;
     border-radius: 6px;
     transition: var(--transition);
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     margin-left: 0.75rem;
   }
+  body.admin-mode .settings-gear { display: flex; }
   .settings-gear:hover {
     color: var(--text-primary);
     background: rgba(255,255,255,0.08);
@@ -2463,6 +2464,18 @@
 </footer>
 
 <script>
+// ===== ADMIN MODE =====
+// Tandwiel/admin-paneel alleen tonen als URL "?admin=1" bevat.
+// Bezoekers krijgen schone versie zonder admin-knoppen.
+(function checkAdminMode() {
+  try {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('admin') === '1') {
+      document.body.classList.add('admin-mode');
+    }
+  } catch (e) {}
+})();
+
 // ===== LEVEL MANAGEMENT =====
 const LEVEL_KEY = 'aigrip_level';
 
