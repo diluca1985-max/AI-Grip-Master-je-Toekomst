@@ -1794,7 +1794,7 @@
     color: #1a1a1a;
     -webkit-text-fill-color: #1a1a1a;
     background: none;
-    margin-bottom: 0.85rem;
+    margin-bottom: 1.3rem;
     letter-spacing: -0.01em;
     line-height: 1.3;
   }
@@ -1802,7 +1802,7 @@
   .certificate-frame .cert-statement {
     color: #666666;
     font-size: 0.85rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1.1rem;
   }
 
   .certificate-frame .cert-course-title {
@@ -1815,7 +1815,7 @@
   .certificate-frame .cert-details {
     font-size: 0.8rem;
     color: #666666;
-    margin-bottom: 0.45rem;
+    margin-bottom: 0.75rem;
   }
 
   .certificate-frame .cert-footer {
@@ -5333,7 +5333,7 @@ function generateSealSVG(level) {
   const bottomShadow = curvedLetters(bottomText, 150, 30, textR, 9, false, '#1f1404');
   const bottomLetters = curvedLetters(bottomText, 150, 30, textR, 9, false, '#4a3208');
 
-  return `<svg width="170" height="170" viewBox="0 0 170 170" xmlns="http://www.w3.org/2000/svg"><defs><filter id="sealDrop" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#1a1a1a" flood-opacity="0.28"/></filter><radialGradient id="sealPolishedG" cx="30%" cy="22%" r="92%"><stop offset="0%" stop-color="#fff8d4"/><stop offset="10%" stop-color="#ffec9c"/><stop offset="28%" stop-color="#f5c246"/><stop offset="50%" stop-color="#c8920f"/><stop offset="75%" stop-color="#7a5410"/><stop offset="100%" stop-color="#3d2908"/></radialGradient><linearGradient id="sealSheen" x1="0%" y1="0%" x2="70%" y2="100%"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"/><stop offset="25%" stop-color="#ffffff" stop-opacity="0.12"/><stop offset="50%" stop-color="#ffffff" stop-opacity="0"/></linearGradient><linearGradient id="sealRimG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff3b0"/><stop offset="50%" stop-color="#daa520"/><stop offset="100%" stop-color="#3d2908"/></linearGradient><radialGradient id="sealInnerBevelG" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fffdf0"/><stop offset="70%" stop-color="#fffdf0"/><stop offset="92%" stop-color="#e8d9a0"/><stop offset="100%" stop-color="#b89a50"/></radialGradient><linearGradient id="sealLevelG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e8b63c"/><stop offset="45%" stop-color="#b8860b"/><stop offset="100%" stop-color="#5c3f0e"/></linearGradient><radialGradient id="sealBottomShadow" cx="50%" cy="55%" r="55%"><stop offset="70%" stop-color="#000000" stop-opacity="0"/><stop offset="100%" stop-color="#000000" stop-opacity="0.35"/></radialGradient></defs><g filter="url(#sealDrop)"><circle cx="${cx}" cy="${cy}" r="75" fill="#2a1c05"/><circle cx="${cx}" cy="${cy}" r="74" fill="url(#sealPolishedG)"/><circle cx="${cx}" cy="${cy}" r="74" fill="url(#sealBottomShadow)"/><circle cx="${cx}" cy="${cy}" r="74" fill="url(#sealSheen)"/><circle cx="${cx}" cy="${cy}" r="72.5" fill="none" stroke="#fff3b0" stroke-width="0.5" opacity="0.75"/>${rimDots}<circle cx="${cx}" cy="${cy}" r="50" fill="none" stroke="#2a1c05" stroke-width="1.5"/><circle cx="${cx}" cy="${cy}" r="48.5" fill="none" stroke="url(#sealRimG)" stroke-width="1.3"/><circle cx="${cx}" cy="${cy}" r="47" fill="url(#sealInnerBevelG)"/><circle cx="${cx}" cy="${cy}" r="46.2" fill="none" stroke="#8b6508" stroke-width="0.4" opacity="0.5"/><g transform="translate(0, 0.6)" opacity="0.45">${topShadow}</g>${topLetters}<g transform="translate(0, 0.6)" opacity="0.45">${bottomShadow}</g>${bottomLetters}<text x="${cx}" y="${cy - 18}" text-anchor="middle" dominant-baseline="central" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="8" font-weight="700" fill="#fff8d4" opacity="0.55" letter-spacing="2.4">NIVEAU</text><text x="${cx}" y="${cy - 18.8}" text-anchor="middle" dominant-baseline="central" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="8" font-weight="700" fill="#8b6508" letter-spacing="2.4">NIVEAU</text><text x="${cx + 0.8}" y="${cy + 13.5}" text-anchor="middle" dominant-baseline="central" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="50" font-weight="800" fill="#3d2908" opacity="0.35">${level}</text><text x="${cx}" y="${cy + 12.5}" text-anchor="middle" dominant-baseline="central" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="50" font-weight="800" fill="url(#sealLevelG)">${level}</text></g></svg>`;
+  return `<svg width="170" height="170" viewBox="0 0 170 170" xmlns="http://www.w3.org/2000/svg"><defs><filter id="sealDrop" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#1a1a1a" flood-opacity="0.28"/></filter><radialGradient id="sealPolishedG" cx="30%" cy="22%" r="92%"><stop offset="0%" stop-color="#fff8d4"/><stop offset="10%" stop-color="#ffec9c"/><stop offset="28%" stop-color="#f5c246"/><stop offset="50%" stop-color="#c8920f"/><stop offset="75%" stop-color="#7a5410"/><stop offset="100%" stop-color="#3d2908"/></radialGradient><linearGradient id="sealSheen" x1="0%" y1="0%" x2="70%" y2="100%"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"/><stop offset="25%" stop-color="#ffffff" stop-opacity="0.12"/><stop offset="50%" stop-color="#ffffff" stop-opacity="0"/></linearGradient><linearGradient id="sealRimG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff3b0"/><stop offset="50%" stop-color="#daa520"/><stop offset="100%" stop-color="#3d2908"/></linearGradient><radialGradient id="sealInnerBevelG" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fffdf0"/><stop offset="70%" stop-color="#fffdf0"/><stop offset="92%" stop-color="#e8d9a0"/><stop offset="100%" stop-color="#b89a50"/></radialGradient><linearGradient id="sealLevelG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e8b63c"/><stop offset="45%" stop-color="#b8860b"/><stop offset="100%" stop-color="#5c3f0e"/></linearGradient><radialGradient id="sealBottomShadow" cx="50%" cy="55%" r="55%"><stop offset="70%" stop-color="#000000" stop-opacity="0"/><stop offset="100%" stop-color="#000000" stop-opacity="0.35"/></radialGradient></defs><g filter="url(#sealDrop)"><circle cx="${cx}" cy="${cy}" r="75" fill="#2a1c05"/><circle cx="${cx}" cy="${cy}" r="74" fill="url(#sealPolishedG)"/><circle cx="${cx}" cy="${cy}" r="74" fill="url(#sealBottomShadow)"/><circle cx="${cx}" cy="${cy}" r="74" fill="url(#sealSheen)"/><circle cx="${cx}" cy="${cy}" r="72.5" fill="none" stroke="#fff3b0" stroke-width="0.5" opacity="0.75"/>${rimDots}<circle cx="${cx}" cy="${cy}" r="50" fill="none" stroke="#2a1c05" stroke-width="1.5"/><circle cx="${cx}" cy="${cy}" r="48.5" fill="none" stroke="url(#sealRimG)" stroke-width="1.3"/><circle cx="${cx}" cy="${cy}" r="47" fill="url(#sealInnerBevelG)"/><circle cx="${cx}" cy="${cy}" r="46.2" fill="none" stroke="#8b6508" stroke-width="0.4" opacity="0.5"/><g transform="translate(0, 0.6)" opacity="0.45">${topShadow}</g>${topLetters}<g transform="translate(0, 0.6)" opacity="0.45">${bottomShadow}</g>${bottomLetters}<text x="${cx}" y="${cy - 22}" text-anchor="middle" dominant-baseline="central" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="700" fill="#fff8d4" opacity="0.55" letter-spacing="2.8">NIVEAU</text><text x="${cx}" y="${cy - 22.8}" text-anchor="middle" dominant-baseline="central" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="700" fill="#8b6508" letter-spacing="2.8">NIVEAU</text><text x="${cx + 0.8}" y="${cy + 14.5}" text-anchor="middle" dominant-baseline="central" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="50" font-weight="800" fill="#3d2908" opacity="0.35">${level}</text><text x="${cx}" y="${cy + 13.5}" text-anchor="middle" dominant-baseline="central" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="50" font-weight="800" fill="url(#sealLevelG)">${level}</text></g></svg>`;
 }
 
 function generateCertificate() {
@@ -5493,17 +5493,17 @@ function _drawCertificateCanvas(certFrame, estherSigImg, sealImg) {
   // Statement
   ctx.fillStyle = '#666666';
   ctx.font = '13px ' + sans;
-  ctx.fillText('heeft met succes afgerond:', left, 180);
+  ctx.fillText('heeft met succes afgerond:', left, 190);
 
   // Details
   ctx.fillStyle = '#1a1a1a';
   ctx.font = '600 14px ' + sans;
-  ctx.fillText('10-weekse training AI-geletterdheid. Niveau ' + getLevel(), left, 212);
+  ctx.fillText('10-weekse training AI-geletterdheid. Niveau ' + getLevel(), left, 230);
 
   ctx.fillStyle = '#666666';
   ctx.font = '12px ' + sans;
   const canvasTime = getFormattedTimeInvestment();
-  ctx.fillText('Effectieve studietijd: ' + canvasTime, left, 238);
+  ctx.fillText('Effectieve studietijd: ' + canvasTime, left, 260);
 
   // --- Footer area ---
   const footerY = h - 120;
