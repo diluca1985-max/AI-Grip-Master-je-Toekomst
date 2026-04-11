@@ -1756,28 +1756,30 @@
 
   .certificate-frame .cert-brand {
     font-family: Georgia, "Times New Roman", serif;
-    font-size: 2.4rem;
+    font-size: 2.15rem;
     font-weight: 400;
+    font-style: italic;
     color: #1a1a1a;
     margin-bottom: 0.15rem;
-    letter-spacing: -0.01em;
-    line-height: 1.1;
+    letter-spacing: -0.005em;
+    line-height: 1.15;
     display: flex;
     align-items: baseline;
     flex-wrap: wrap;
   }
 
   .certificate-frame .cert-brand .cert-brand-sep {
-    color: #c0c0c0;
-    font-weight: 300;
-    margin: 0 0.5rem;
+    color: #bbbbbb;
+    font-weight: 400;
+    margin: 0 0.55rem;
   }
 
   .certificate-frame .cert-brand .cert-brand-sub {
-    font-size: 1.55rem;
-    font-style: italic;
-    color: #555555;
-    letter-spacing: 0;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    color: inherit;
+    letter-spacing: inherit;
   }
 
   .certificate-frame .cert-date-top {
@@ -5453,26 +5455,25 @@ function _drawCertificateCanvas(certFrame, estherSigImg, sealImg) {
   ctx.fillText('CERTIFICAAT VAN DEELNAME', 0, 0);
   ctx.restore();
 
-  // Brand inline: AI-Grip / Master je Toekomst
+  // Brand inline: AI-Grip / Master je Toekomst (alles italic, gelijk)
   const brandY = 62;
+  const brandFont = 'italic 34px ' + serif;
   ctx.textAlign = 'left';
   ctx.textBaseline = 'alphabetic';
   ctx.fillStyle = '#1a1a1a';
-  ctx.font = '38px ' + serif;
+  ctx.font = brandFont;
   ctx.fillText('AI-Grip', left, brandY);
   const brandMainWidth = ctx.measureText('AI-Grip').width;
 
   // Separator /
-  let sepX = left + brandMainWidth + 12;
-  ctx.fillStyle = '#c0c0c0';
-  ctx.font = '300 34px ' + serif;
+  let sepX = left + brandMainWidth + 11;
+  ctx.fillStyle = '#bbbbbb';
   ctx.fillText('/', sepX, brandY);
   const sepWidth = ctx.measureText('/').width;
 
-  // Subtitle italic
-  const subX = sepX + sepWidth + 12;
-  ctx.fillStyle = '#555555';
-  ctx.font = 'italic 26px ' + serif;
+  // Master je Toekomst — zelfde stijl als AI-Grip
+  const subX = sepX + sepWidth + 11;
+  ctx.fillStyle = '#1a1a1a';
   ctx.fillText('Master je Toekomst', subX, brandY);
 
   // Date top
