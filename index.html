@@ -1560,27 +1560,6 @@
     .assignment-bonus-title { font-size: 1.25rem; }
   }
 
-  /* ===== CERTIFICATE COUNTER (inline in trust badge, italic brand) ===== */
-  .cert-ticker-count-inline {
-    color: var(--text-primary);
-    font-weight: 600;
-  }
-
-  .cert-ticker-brand {
-    font-family: Georgia, 'Times New Roman', serif;
-    font-style: italic;
-    color: var(--text-primary);
-    letter-spacing: 0.005em;
-  }
-
-  .cert-ticker-brand-sep {
-    display: inline-block;
-    margin: 0 0.3em;
-    color: var(--text-muted);
-    font-style: normal;
-    font-weight: 300;
-  }
-
   /* ===== TRUST BADGE LINK (clickable badge) ===== */
   .trust-badge-link:hover {
     background: linear-gradient(180deg, rgba(245,158,11,0.09) 0%, rgba(245,158,11,0.03) 100%) !important;
@@ -2579,13 +2558,14 @@
         </span>
       </a>
 
-      <!-- CERTIFICATE COUNTER TICKER -->
-      <div id="certTicker" aria-live="polite" style="margin-top: 1rem; padding: 1.1rem 1.35rem; background: linear-gradient(180deg, rgba(124,58,237,0.06) 0%, rgba(124,58,237,0.015) 100%); border: 1px solid rgba(168,139,250,0.25); border-radius: 14px; display: flex; align-items: flex-start; gap: 0.9rem; text-align: left;">
-        <span style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:10px;background:rgba(168,139,250,0.18);border:1px solid rgba(168,139,250,0.35);color:#c4b5fd;flex-shrink:0;"><i class="ico ico-award" style="font-size:0.95rem;"></i></span>
+      <!-- MODULE-START COUNTER TICKER -->
+      <div id="certTicker" aria-live="polite" style="margin-top: 1rem; padding: 1.1rem 1.35rem; background: linear-gradient(180deg, rgba(124,58,237,0.06) 0%, rgba(124,58,237,0.015) 100%); border: 1px solid rgba(168,139,250,0.25); border-radius: 14px; display: flex; align-items: center; gap: 0.9rem; text-align: left;">
+        <span style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:10px;background:rgba(168,139,250,0.18);border:1px solid rgba(168,139,250,0.35);color:#c4b5fd;flex-shrink:0;"><i class="ico ico-spark" style="font-size:0.95rem;"></i></span>
         <div style="flex:1;min-width:0;">
-          <strong style="color: #c4b5fd; font-size: 0.8rem; display: block; margin-bottom: 0.2rem; font-family: var(--font-display); letter-spacing: 0.04em; text-transform: uppercase;">Certificaten behaald</strong>
-          <span style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.55;"><span class="cert-ticker-count-inline" id="certTickerCount">0</span> <span id="certTickerLabel">studenten rondden</span> <span class="cert-ticker-brand">AI-Grip<span class="cert-ticker-brand-sep">/</span>Master je Toekomst</span> succesvol af.</span>
+          <strong style="color: #c4b5fd; font-size: 0.8rem; display: block; margin-bottom: 0.2rem; font-family: var(--font-display); letter-spacing: 0.04em; text-transform: uppercase;">Modules gestart</strong>
+          <span style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.55;">op AI-Grip: Master je Toekomst</span>
         </div>
+        <span id="certTickerCount" style="font-family: var(--font-display); font-size: 1.75rem; font-weight: 800; color: #c4b5fd; letter-spacing: -0.03em; line-height: 1; flex-shrink: 0; padding-left: 0.5rem;">0</span>
       </div>
     </div>
   </div>
@@ -2665,47 +2645,41 @@ window.addEventListener('load', function () {
   } catch (e) {}
 });
 
-// ===== CERTIFICATE COUNTER (abacus.jasoncameron.dev) =====
-var CERT_COUNTER_NS = 'aigrip-healthstars-nl';
-var CERT_COUNTER_KEY = 'certificates';
-var CERT_COUNTER_GET = 'https://abacus.jasoncameron.dev/get/' + CERT_COUNTER_NS + '/' + CERT_COUNTER_KEY;
-var CERT_COUNTER_HIT = 'https://abacus.jasoncameron.dev/hit/' + CERT_COUNTER_NS + '/' + CERT_COUNTER_KEY;
-var CERT_COUNTED_FLAG = 'aigrip_cert_counted';
+// ===== MODULE-START COUNTER (abacus.jasoncameron.dev) =====
+var MODULE_COUNTER_NS = 'aigrip-healthstars-nl';
+var MODULE_COUNTER_KEY = 'modules-started';
+var MODULE_COUNTER_GET = 'https://abacus.jasoncameron.dev/get/' + MODULE_COUNTER_NS + '/' + MODULE_COUNTER_KEY;
+var MODULE_COUNTER_HIT = 'https://abacus.jasoncameron.dev/hit/' + MODULE_COUNTER_NS + '/' + MODULE_COUNTER_KEY;
+var MODULE_FLAG_PREFIX = 'aigrip_module_started_week_';
 
-function updateCertTickerDisplay(value) {
+function updateModuleTickerDisplay(value) {
   var countEl = document.getElementById('certTickerCount');
-  var labelEl = document.getElementById('certTickerLabel');
   if (!countEl) return;
   countEl.textContent = value.toLocaleString('nl-NL');
-  if (labelEl) {
-    labelEl.textContent = value === 1 ? 'student rondde' : 'studenten rondden';
-  }
 }
 
-function loadCertificateCount() {
+function loadModuleCount() {
   try {
-    fetch(CERT_COUNTER_GET + '?t=' + Date.now(), { cache: 'no-store' })
+    fetch(MODULE_COUNTER_GET + '?t=' + Date.now(), { cache: 'no-store' })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (data) {
         if (!data || typeof data.value !== 'number') return;
-        updateCertTickerDisplay(data.value);
+        updateModuleTickerDisplay(data.value);
       })
       .catch(function () {});
   } catch (e) {}
 }
 
-function incrementCertificateCount() {
+function trackModuleStarted(weekNum) {
   try {
-    if (localStorage.getItem(CERT_COUNTED_FLAG) === '1') {
-      loadCertificateCount();
-      return;
-    }
-    fetch(CERT_COUNTER_HIT, { cache: 'no-store' })
+    var flagKey = MODULE_FLAG_PREFIX + weekNum;
+    if (localStorage.getItem(flagKey) === '1') return;
+    fetch(MODULE_COUNTER_HIT, { cache: 'no-store' })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (data) {
         if (!data || typeof data.value !== 'number') return;
-        localStorage.setItem(CERT_COUNTED_FLAG, '1');
-        updateCertTickerDisplay(data.value);
+        localStorage.setItem(flagKey, '1');
+        updateModuleTickerDisplay(data.value);
       })
       .catch(function () {});
   } catch (e) {}
@@ -2713,9 +2687,9 @@ function incrementCertificateCount() {
 
 // Load count on page ready
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', loadCertificateCount);
+  document.addEventListener('DOMContentLoaded', loadModuleCount);
 } else {
-  loadCertificateCount();
+  loadModuleCount();
 }
 
 // ===== AUTO VERSION CHECK =====
@@ -5281,6 +5255,9 @@ function renderWeek(weekNum) {
   const week = courseData.find(w => w.week === weekNum);
   if (!week) return;
 
+  // Module-start teller (eenmalig per week per device)
+  trackModuleStarted(weekNum);
+
   const completed = isWeekCompleted(weekNum);
   const savedAssignment = getAssignment(weekNum);
   const theoryContent = L(week.theory);
@@ -5574,9 +5551,6 @@ function generateCertificate() {
     document.getElementById('certNameInput').placeholder = 'Vul eerst je naam in!';
     return;
   }
-
-  // Teller ophogen (eenmalig per apparaat via localStorage guard)
-  incrementCertificateCount();
 
   const today = new Date();
   const dateStr = today.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
