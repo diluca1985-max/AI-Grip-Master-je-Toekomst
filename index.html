@@ -1234,6 +1234,16 @@
 
   .assignment-step-card .step-text strong { color: var(--text-primary); }
 
+  .assignment-step-card .step-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.55rem;
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+  }
+
   .assignment-step-textarea {
     width: 100%;
     min-height: 80px;
@@ -1710,9 +1720,15 @@
     .week-detail { padding: 1.25rem; }
     .section { padding: 1.5rem; }
     .weeks-grid { grid-template-columns: 1fr; }
-    .app-header { padding: 0 1rem; }
-    .app-header .logo { font-size: 1.1rem; }
-    .progress-bar-container { width: 100px; }
+    .app-header { padding: 0 0.9rem; height: 64px; gap: 0.6rem; }
+    .app-header .logo { font-size: 0.98rem; gap: 0.55rem; min-width: 0; flex-shrink: 1; }
+    .app-header .logo > span:not(.logo-mark) { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .app-header .logo .logo-mark { width: 32px; height: 32px; font-size: 0.7rem; border-radius: 9px; }
+    .app-header .logo .logo-sub { display: none; }
+    .progress-header { gap: 0.55rem; flex-shrink: 0; }
+    .progress-header .progress-text { font-size: 0.72rem; }
+    .progress-bar-container { width: 70px; }
+    .level-badge { display: none !important; }
     .theory-content .compare-grid { grid-template-columns: 1fr; }
     .theory-content .timeline { flex-direction: column; }
     .theory-content .timeline-arrow { transform: rotate(90deg); }
@@ -1727,6 +1743,15 @@
     .admin-row { flex-wrap: wrap; }
     .admin-row .week-title { min-width: auto; }
     .admin-row input[type="text"] { min-width: 100%; }
+  }
+
+  @media (max-width: 480px) {
+    .app-header { padding: 0 0.7rem; height: 60px; }
+    .app-header .logo { font-size: 0.92rem; }
+    .app-header .logo .logo-mark { width: 30px; height: 30px; font-size: 0.65rem; }
+    .progress-header .progress-text { display: none; }
+    .progress-bar-container { width: 56px; height: 5px; }
+    .settings-gear { width: 36px; height: 36px; }
   }
 
   /* ===== LEVEL SELECTOR ===== */
@@ -2110,7 +2135,7 @@
 <!-- HEADER -->
 <header class="app-header">
   <div class="logo" onclick="showPage('overview')">
-    <span class="logo-mark">AI</span> <span>AI-Grip<span style="color:var(--text-muted);font-weight:500;margin:0 0.4rem 0 0.5rem;">/</span><span class="accent">Master je Toekomst</span></span>
+    <span class="logo-mark">AI</span> <span>AI-Grip<span class="logo-sub"><span style="color:var(--text-muted);font-weight:500;margin:0 0.4rem 0 0.5rem;">/</span><span class="accent">Master je Toekomst</span></span></span>
   </div>
   <div class="progress-header" id="progressHeader" style="display:none;">
     <span class="level-badge" id="levelBadge" onclick="showPage('welcome')" title="Klik om van niveau te wisselen" style="display:none;"></span>
@@ -2118,10 +2143,21 @@
       <div class="progress-bar-fill" id="progressBarFill" style="width:0%"></div>
     </div>
     <span class="progress-text" id="progressText">0% voltooid</span>
+    <button class="settings-gear" onclick="openAdminPanel()" title="Video-instellingen"><i class="ico ico-gear" style="font-size:1.15rem;"></i></button>
   </div>
 </header>
 
-
+<!-- ADMIN OVERLAY -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-modal" id="adminModal">
+    <h2><i class="ico ico-gear" style="font-size:1.1rem;color:var(--purple-300);margin-right:0.5rem;vertical-align:-0.18em;"></i>Video-instellingen</h2>
+    <div id="adminRows"></div>
+    <div class="admin-buttons">
+      <button class="admin-btn-close" onclick="closeAdminPanel()">Sluiten</button>
+      <button class="admin-btn-save" onclick="saveAdminUrls()">Opslaan</button>
+    </div>
+  </div>
+</div>
 
 <!-- PAGE: WELCOME -->
 <div class="page active" id="page-welcome">
@@ -2314,7 +2350,68 @@ function getVideoUrl(weekNum) {
 }
 
 // ===== ADMIN PANEL =====
+function openAdminPanel() {
+  var overlay = document.getElementById('adminOverlay');
+  var container = document.getElementById('adminRows');
+  var stored = {};
+  try { stored = JSON.parse(localStorage.getItem('aigrip_video_urls')) || {}; } catch(e) {}
 
+  var html = '';
+  courseData.forEach(function(week) {
+    if (week.week === 10) {
+      html += '<div class="admin-row">' +
+        '<span class="week-num">Week ' + week.week + '</span>' +
+        '<span class="week-title">' + week.title + '</span>' +
+        '<span class="no-video-label">Geen video — eindopdracht</span>' +
+        '</div>';
+    } else {
+      var currentUrl = stored[week.week] || (week.video ? week.video.url : '') || '';
+      html += '<div class="admin-row">' +
+        '<span class="week-num">Week ' + week.week + '</span>' +
+        '<span class="week-title">' + week.title + '</span>' +
+        '<input type="text" id="admin-url-' + week.week + '" value="' + currentUrl + '" placeholder="YouTube URL...">' +
+        '</div>';
+    }
+  });
+  container.innerHTML = html;
+  overlay.classList.add('open');
+}
+
+function closeAdminPanel() {
+  document.getElementById('adminOverlay').classList.remove('open');
+}
+
+function saveAdminUrls() {
+  var urls = {};
+  courseData.forEach(function(week) {
+    if (week.week === 10) return;
+    var input = document.getElementById('admin-url-' + week.week);
+    if (input && input.value.trim()) {
+      urls[week.week] = input.value.trim();
+    }
+  });
+  if (Object.keys(urls).length > 0) {
+    localStorage.setItem('aigrip_video_urls', JSON.stringify(urls));
+  } else {
+    localStorage.removeItem('aigrip_video_urls');
+  }
+  closeAdminPanel();
+  // Refresh current view if on a week page
+  var weekPage = document.getElementById('page-week');
+  if (weekPage && weekPage.classList.contains('active')) {
+    var weekLabel = weekPage.querySelector('.week-label');
+    if (weekLabel) {
+      var weekNum = parseInt(weekLabel.textContent.replace('Week ', ''));
+      if (!isNaN(weekNum)) renderWeek(weekNum);
+    }
+  }
+}
+
+// Close admin panel on overlay click (outside modal)
+document.addEventListener('click', function(e) {
+  var overlay = document.getElementById('adminOverlay');
+  if (e.target === overlay) closeAdminPanel();
+});
 
 // ===== COURSE DATA =====
 const courseData = [
@@ -2718,43 +2815,50 @@ const courseData = [
         Kun jij zien wat echt is en wat nep?
       </p>
 
-      <h4>Stap 1: Bekijk de foto's</h4>
+      <h4>Stap 1: Doe de test</h4>
       <p>
-        Je docent laat 10 portretfoto's zien. Sommige zijn echte foto's van echte mensen.
-        Andere zijn volledig door AI gegenereerd (bijvoorbeeld met Midjourney of DALL-E).
+        Ga naar <a href="https://www.whichfaceisreal.com" target="_blank" rel="noopener">whichfaceisreal.com</a>
+        (gemaakt door wetenschappers van de University of Washington). Je krijgt steeds
+        twee gezichten naast elkaar te zien: één is een echte foto, de ander is door AI
+        gegenereerd. Klik op het gezicht dat jij echt vindt.
+      </p>
+      <p>
+        Doe minimaal <strong>10 rondes</strong>. Hou bij hoeveel je goed had.
       </p>
 
-      <h4>Stap 2: Beoordeel elke foto</h4>
+      <h4>Stap 2: Let op de details</h4>
       <p>
-        Schrijf voor elke foto op:
+        Noteer tijdens de test waar je op lette. Denk aan:
       </p>
       <ul>
-        <li>Denk je dat het <strong>echt</strong> of <strong>AI-gegenereerd</strong> is?</li>
-        <li>Waarom denk je dat? Noem minimaal 2 aanwijzingen.</li>
-        <li>Hoe zeker ben je? (schaal 1-5)</li>
+        <li>Ogen (asymmetrisch, vreemde reflectie, raar wit)</li>
+        <li>Oren en sieraden (klopt links niet met rechts?)</li>
+        <li>Achtergrond (vervormd, vlekkerig, onlogisch)</li>
+        <li>Haar en huid (te glad, vreemde overgangen)</li>
+        <li>Tanden, brilmonturen, kraagjes</li>
       </ul>
 
-      <h4>Stap 3: De onthulling</h4>
+      <h4>Stap 3: Tweede ronde — moeilijker</h4>
       <p>
-        Je docent laat zien welke foto's echt waren en welke nep. Hoeveel had je goed?
+        Ga nu naar <a href="https://thispersondoesnotexist.com" target="_blank" rel="noopener">thispersondoesnotexist.com</a>.
+        Elke keer dat je de pagina ververst, zie je een gezicht dat <em>niet bestaat</em> —
+        100% door AI gegenereerd. Ververs 5 keer en zoek per gezicht minstens één detail
+        dat verraadt dat het nep is.
       </p>
 
-      <h4>Stap 4: Discussie</h4>
-      <p>Bespreek samen in de klas:</p>
+      <h4>Stap 4: Reflectie (schriftelijk inleveren)</h4>
+      <p>
+        Schrijf een verslag van <strong>250-350 woorden</strong> waarin je antwoord geeft op:
+      </p>
       <ul>
-        <li>Welke foto's waren het moeilijkst te herkennen? Waarom?</li>
-        <li>Wat zou er gebeuren als iemand een deepfake van jou maakt?</li>
-        <li>Hoe betrouwbaar is het nieuws als iedereen deepfakes kan maken?</li>
-        <li>Wat kunnen platforms als TikTok en Instagram doen tegen deepfakes?</li>
-        <li>Zou er een wet moeten komen die deepfakes verbiedt? Waarom wel of niet?</li>
+        <li>Hoeveel had je goed van de 10 op whichfaceisreal.com?</li>
+        <li>Welke 3 details bleken voor jou het meest betrouwbaar om AI te herkennen?</li>
+        <li>Wat zou er met jouw leven gebeuren als iemand een deepfake-video van jou maakt
+            en die op TikTok zet?</li>
+        <li>Hoe betrouwbaar vind je nieuwsbeelden nog, nu je weet hoe goed AI is geworden?</li>
+        <li>Wat ga je vanaf nu anders doen als je een opvallende foto of video op
+            social media ziet?</li>
       </ul>
-
-      <h4>Inleveren</h4>
-      <p>
-        Schrijf een kort verslag (200-300 woorden) over wat je hebt geleerd. Beschrijf:
-        wat je het meest verbaasde, welke tips je gaat onthouden, en wat je voortaan anders
-        gaat doen als je foto's of video's ziet op social media.
-      </p>
       `
     },
     quiz: [
@@ -3958,13 +4062,14 @@ const courseData = [
         <li>Houd het kort en krachtig: per slide maximaal 3-4 zinnen.</li>
       </ul>
 
-      <h3>Beoordeling</h3>
-      <p>Je wordt beoordeeld op:</p>
+      <h3>Check je werk</h3>
+      <p>Loop je presentatie of poster nog een keer langs en vraag jezelf eerlijk af:</p>
       <ul>
-        <li>Of je alle 5 onderdelen hebt uitgewerkt</li>
-        <li>Of je laat zien dat je begrijpt wat AI wel en niet kan</li>
-        <li>Of je concreet bent over jouw eigen voorbereiding</li>
+        <li>Heb ik alle 5 onderdelen echt uitgewerkt — of heb ik ergens iets overgeslagen?</li>
+        <li>Laat ik zien dat ik begrijp wat AI wél kan én wat AI níét kan?</li>
+        <li>Zijn mijn voorbereidingsacties concreet (bijv. "ik ga elke maand één AI-tool proberen") of blijven ze vaag (bijv. "ik blijf leren")?</li>
       </ul>
+      <p>Twijfel je over een onderdeel? Pas het aan voordat je deze week afvinkt. Niemand controleert je — maar jij weet zelf of je het echt hebt gedaan.</p>
       `
     },
     quiz: [
@@ -4107,18 +4212,28 @@ const courseData = [
         </li>
       </ol>
 
-      <h3>Presenteer je resultaat</h3>
-      <p>Presenteer je eindresultaat aan je klas of collega's. Laat zien wat je hebt gemaakt, welke AI-tools je hebt gebruikt en wat jouw eigen bijdrage was.</p>
-
-      <h3>Beoordeling</h3>
-      <p>Je wordt beoordeeld op:</p>
+      <h3>Check je werk</h3>
+      <p>Loop je eindresultaat zelf langs deze checklist voordat je deze week afvinkt:</p>
       <ul>
-        <li><strong>Probleemkeuze:</strong> Is het realistisch en relevant voor jouw opleiding/beroep?</li>
-        <li><strong>AI-gebruik:</strong> Heb je minimaal 3 AI-tools gebruikt en kun je uitleggen waarom?</li>
-        <li><strong>Oplossing:</strong> Is je oplossing concreet en goed onderbouwd?</li>
-        <li><strong>Reflectie:</strong> Kun je uitleggen wat AI deed en wat jij deed?</li>
-        <li><strong>Presentatie:</strong> Is het duidelijk, overzichtelijk en goed gepresenteerd?</li>
+        <li><strong>Probleemkeuze:</strong> Is het realistisch en relevant voor mijn opleiding of beroep — of heb ik iets willekeurigs gekozen?</li>
+        <li><strong>AI-gebruik:</strong> Heb ik minimaal 3 AI-tools écht gebruikt en kan ik per tool uitleggen waarom ik die koos?</li>
+        <li><strong>Oplossing:</strong> Is mijn oplossing concreet en onderbouwd, of blijft het hangen in algemeenheden?</li>
+        <li><strong>Reflectie:</strong> Kan ik in mijn eigen woorden uitleggen wat AI deed en wat ik zelf deed?</li>
+        <li><strong>Presentatie:</strong> Is het duidelijk en overzichtelijk genoeg dat iemand die er niks van weet het kan volgen?</li>
       </ul>
+      <p>Eerlijk antwoord op één van deze vragen "nee"? Pas het aan voordat je doorgaat. Jij bepaalt zelf wanneer je tevreden bent — dit is jouw eindopdracht.</p>
+
+      <h3>Ga een stap verder: leg het uit aan iemand</h3>
+      <p>Je hebt een eindopdracht gemaakt — nu gaan we kijken of je het écht snapt. Dit heet de <strong>Feynman-techniek</strong> en het is een van de krachtigste manieren om te leren: <em>als je iets niet simpel kunt uitleggen, snap je het zelf nog niet helemaal.</em></p>
+      <p>Zoek iemand op — een vriend, familielid, collega of klasgenoot — en leg in maximaal 5 minuten uit:</p>
+      <ul>
+        <li>Welk probleem je hebt aangepakt en waarom dat probleem ertoe doet</li>
+        <li>Welke AI-tools je gebruikte en waarom juist die</li>
+        <li>Wat AI deed en waar jouw eigen bijdrage zat</li>
+        <li>Wat je belangrijkste les is uit deze hele training</li>
+      </ul>
+      <p>Vraag dan aan diegene: <strong>"Wat snap je nog niet?"</strong> Hun vraag is goud waard — daar zit precies het stuk waar jouw eigen denken nog niet helemaal klaar is. Werk het bij in je eindresultaat en je bent klaar.</p>
+      <p><em>Niemand in de buurt?</em> Leg het hardop uit aan een spiegel, of neem het op met je telefoon en luister terug. Je merkt dan zelf waar je hapert.</p>
       `
     },
     quiz: [
@@ -4384,10 +4499,83 @@ function handleStepAssignmentInput(weekNum, stepNum) {
   }, 500);
 }
 
+function renderH4StepAssignment(tempDiv, weekNum, savedAssignment) {
+  // Walk top-level children. Split into intro + step sections at each <h3|h4>Stap N: ...</h3|h4>
+  var sections = [];
+  var current = { type: 'intro', title: '', contentHtml: '' };
+  var children = tempDiv.childNodes;
+  for (var i = 0; i < children.length; i++) {
+    var node = children[i];
+    var isStapHeader = node.nodeType === 1 && (node.tagName === 'H3' || node.tagName === 'H4') && /^\s*Stap\s*\d/i.test(node.textContent || '');
+    if (isStapHeader) {
+      sections.push(current);
+      current = { type: 'step', title: (node.textContent || '').trim(), contentHtml: '' };
+    } else {
+      var nodeHtml = node.nodeType === 1 ? node.outerHTML : (node.nodeType === 3 ? (node.textContent || '') : '');
+      current.contentHtml += nodeHtml;
+    }
+  }
+  sections.push(current);
+
+  // Count steps for migration check
+  var totalSteps = 0;
+  for (var k = 0; k < sections.length; k++) if (sections[k].type === 'step') totalSteps++;
+
+  var migratedToStep1 = '';
+  if (savedAssignment && totalSteps > 0 && !getStepAssignment(weekNum, 1)) {
+    var hasAnyStepData = false;
+    for (var m = 1; m <= totalSteps; m++) {
+      if (getStepAssignment(weekNum, m)) { hasAnyStepData = true; break; }
+    }
+    if (!hasAnyStepData) {
+      migratedToStep1 = savedAssignment;
+      saveStepAssignment(weekNum, 1, savedAssignment);
+    }
+  }
+
+  var html = '';
+  var stepNum = 0;
+  for (var s = 0; s < sections.length; s++) {
+    var sec = sections[s];
+    if (sec.type === 'intro') {
+      if (sec.contentHtml.trim()) {
+        html += '<div class="assignment-intro-text">' + sec.contentHtml + '</div>';
+      }
+      continue;
+    }
+    stepNum++;
+    var stepValue = getStepAssignment(weekNum, stepNum) || (stepNum === 1 ? migratedToStep1 : '');
+    var displayTitle = sec.title.replace(/^\s*Stap\s*\d+\s*[:.\-–—]?\s*/i, '');
+    html += '<div class="assignment-step-card">' +
+      '<div class="step-badge">' + stepNum + '</div>' +
+      (displayTitle ? '<div class="step-title">' + escapeHtml(displayTitle) + '</div>' : '') +
+      (sec.contentHtml.trim() ? '<div class="step-text">' + sec.contentHtml + '</div>' : '') +
+      '<textarea class="assignment-step-textarea" id="assignment-' + weekNum + '-step-' + stepNum + '" placeholder="Typ hier je antwoord voor stap ' + stepNum + '..." rows="4" oninput="handleStepAssignmentInput(' + weekNum + ',' + stepNum + ')">' +
+      escapeHtml(stepValue) + '</textarea>' +
+      '<div class="save-indicator" id="save-indicator-' + weekNum + '-step-' + stepNum + '">' +
+      (stepValue ? '<i class="ico ico-check" style="font-size:0.85rem;color:var(--green);margin-right:0.35rem;"></i>Opgeslagen' : '<i class="ico ico-save" style="font-size:0.85rem;margin-right:0.35rem;"></i>Wordt automatisch opgeslagen') +
+      '</div></div>';
+  }
+
+  return html;
+}
+
 function renderAssignmentWithSteps(descriptionHtml, weekNum, savedAssignment) {
-  // Parse the description to find <ol> elements
+  // Parse the description
   var tempDiv = document.createElement('div');
   tempDiv.innerHTML = descriptionHtml;
+
+  // Pattern A: <h3>Stap N: ...</h3> or <h4>Stap N: ...</h4> headings (weeks 3-8)
+  var allHeaders = tempDiv.querySelectorAll('h3, h4');
+  var hasStapHeader = false;
+  for (var hi = 0; hi < allHeaders.length; hi++) {
+    if (/^\s*Stap\s*\d/i.test(allHeaders[hi].textContent || '')) { hasStapHeader = true; break; }
+  }
+  if (hasStapHeader) {
+    return renderH4StepAssignment(tempDiv, weekNum, savedAssignment);
+  }
+
+  // Pattern B: <ol>...</ol> with <li> steps
   var olElement = tempDiv.querySelector('ol');
 
   // If no <ol>, render the classic single textarea
