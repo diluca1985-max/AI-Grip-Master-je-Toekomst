@@ -1470,6 +1470,121 @@
 
   .bonus-callout ul li { margin-bottom: 0.3rem; }
 
+  /* ===== CERTIFICATE COUNTER TICKER (glassmorphism neon) ===== */
+  .cert-ticker {
+    margin-top: 1rem;
+    padding: 1.25rem 1.4rem;
+    background: linear-gradient(135deg, rgba(124,58,237,0.14) 0%, rgba(245,158,11,0.08) 100%);
+    border: 1px solid rgba(168,139,250,0.38);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.08),
+      0 14px 40px -22px rgba(124,58,237,0.55),
+      0 0 70px -28px rgba(245,158,11,0.35);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cert-ticker.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .cert-ticker::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at top left, rgba(168,139,250,0.22) 0%, transparent 55%),
+      radial-gradient(ellipse at bottom right, rgba(245,158,11,0.18) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  .cert-ticker::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(168,139,250,0.55) 35%, rgba(252,211,77,0.55) 65%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .cert-ticker-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(168,139,250,0.32) 0%, rgba(245,158,11,0.22) 100%);
+    border: 1px solid rgba(168,139,250,0.55);
+    color: #e9d5ff;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    box-shadow:
+      0 0 24px rgba(168,139,250,0.45),
+      inset 0 1px 0 rgba(255,255,255,0.18);
+  }
+
+  .cert-ticker-icon .ico {
+    font-size: 1.45rem;
+  }
+
+  .cert-ticker-body {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .cert-ticker-count {
+    font-family: var(--font-display);
+    font-size: 1.85rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    background: linear-gradient(135deg, #e9d5ff 0%, #fcd34d 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: block;
+    margin-bottom: 0.25rem;
+    filter: drop-shadow(0 0 18px rgba(168,139,250,0.35));
+  }
+
+  .cert-ticker-label {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.01em;
+    line-height: 1.5;
+    display: block;
+  }
+
+  .cert-ticker-label strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  @media (max-width: 480px) {
+    .cert-ticker { padding: 1.1rem 1.15rem; gap: 0.9rem; }
+    .cert-ticker-icon { width: 46px; height: 46px; }
+    .cert-ticker-count { font-size: 1.55rem; }
+    .cert-ticker-label { font-size: 0.78rem; }
+  }
+
   /* ===== TRUST BADGE LINK (clickable badge) ===== */
   .trust-badge-link:hover {
     background: linear-gradient(180deg, rgba(245,158,11,0.09) 0%, rgba(245,158,11,0.03) 100%) !important;
@@ -2467,6 +2582,15 @@
           </svg>
         </span>
       </a>
+
+      <!-- CERTIFICATE COUNTER TICKER -->
+      <div class="cert-ticker" id="certTicker" aria-live="polite">
+        <div class="cert-ticker-icon"><i class="ico ico-award"></i></div>
+        <div class="cert-ticker-body">
+          <span class="cert-ticker-count" id="certTickerCount">0</span>
+          <span class="cert-ticker-label"><strong id="certTickerLabel">certificaten behaald</strong> via AI-Grip</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -2544,6 +2668,61 @@ window.addEventListener('load', function () {
     }
   } catch (e) {}
 });
+
+// ===== CERTIFICATE COUNTER (abacus.jasoncameron.dev) =====
+var CERT_COUNTER_NS = 'aigrip-healthstars-nl';
+var CERT_COUNTER_KEY = 'certificates';
+var CERT_COUNTER_GET = 'https://abacus.jasoncameron.dev/get/' + CERT_COUNTER_NS + '/' + CERT_COUNTER_KEY;
+var CERT_COUNTER_HIT = 'https://abacus.jasoncameron.dev/hit/' + CERT_COUNTER_NS + '/' + CERT_COUNTER_KEY;
+var CERT_COUNTED_FLAG = 'aigrip_cert_counted';
+
+function updateCertTickerDisplay(value) {
+  var tickerEl = document.getElementById('certTicker');
+  var countEl = document.getElementById('certTickerCount');
+  var labelEl = document.getElementById('certTickerLabel');
+  if (!tickerEl || !countEl) return;
+  countEl.textContent = value.toLocaleString('nl-NL');
+  if (labelEl) {
+    labelEl.textContent = value === 1 ? 'certificaat behaald' : 'certificaten behaald';
+  }
+  tickerEl.classList.add('visible');
+}
+
+function loadCertificateCount() {
+  try {
+    fetch(CERT_COUNTER_GET + '?t=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        if (!data || typeof data.value !== 'number') return;
+        updateCertTickerDisplay(data.value);
+      })
+      .catch(function () {});
+  } catch (e) {}
+}
+
+function incrementCertificateCount() {
+  try {
+    if (localStorage.getItem(CERT_COUNTED_FLAG) === '1') {
+      loadCertificateCount();
+      return;
+    }
+    fetch(CERT_COUNTER_HIT, { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        if (!data || typeof data.value !== 'number') return;
+        localStorage.setItem(CERT_COUNTED_FLAG, '1');
+        updateCertTickerDisplay(data.value);
+      })
+      .catch(function () {});
+  } catch (e) {}
+}
+
+// Load count on page ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', loadCertificateCount);
+} else {
+  loadCertificateCount();
+}
 
 // ===== AUTO VERSION CHECK =====
 // Voorkomt dat terugkerende bezoekers vastzitten op een gecachte oude versie.
@@ -3625,23 +3804,23 @@ const courseData = [
       ]
     },
     assignment: {
-      title: "De Grote AI-Ethiek Discussie",
+      title: "Jouw AI-Ethiek Dossier",
       description: `
-      <h3>Opdracht: De Grote AI-Ethiek Discussie</h3>
+      <h3>Opdracht: Jouw AI-Ethiek Dossier</h3>
       <p>
-        In deze opdracht ga je nadenken en discussieren over lastige ethische vragen
-        rondom AI. Er zijn geen goede of foute antwoorden, maar je moet je mening
-        wel goed onderbouwen.
+        In deze opdracht denk je kritisch na over lastige ethische vragen rondom AI.
+        Je doet dit helemaal alleen, met AI zelf als sparringpartner. Er zijn geen
+        goede of foute antwoorden, maar je moet je mening wel goed onderbouwen.
       </p>
 
       <h4>Stap 1: Kies een stelling</h4>
-      <p>Kies een van de volgende stellingen (of je docent wijst er een toe):</p>
+      <p>Kies een van de volgende vijf stellingen:</p>
       <ol>
         <li><strong>"Wie een AI-opdracht geeft, is eigenaar van het resultaat."</strong><br>
         Voorbeeld: je vraagt AI om een logo te ontwerpen. Is dat jouw logo?</li>
 
         <li><strong>"AI gebruiken voor je huiswerk is gewoon slim, niet vals spelen."</strong><br>
-        Voorbeeld: je laat ChatGPT je werkstuk schrijven. Is dat oke?</li>
+        Voorbeeld: je laat ChatGPT je werkstuk schrijven. Is dat oké?</li>
 
         <li><strong>"Je moet altijd vermelden als je AI hebt gebruikt."</strong><br>
         Voorbeeld: je gebruikt AI om een sollicitatiebrief te schrijven. Moet je dat zeggen?</li>
@@ -3653,29 +3832,72 @@ const courseData = [
         Voorbeeld: een AI-afbeelding wint een kunstwedstrijd. Is dat eerlijk?</li>
       </ol>
 
-      <h4>Stap 2: Kies je kant</h4>
+      <h4>Stap 2: Kies je kant en schrijf je argumenten</h4>
       <p>
         Ben je het eens of oneens met de stelling? Schrijf minimaal 3 argumenten
-        op die je mening ondersteunen.
+        op die jouw standpunt ondersteunen. Wees concreet. Gebruik voorbeelden
+        uit je eigen leven, stage of studie.
       </p>
 
-      <h4>Stap 3: Debat</h4>
+      <h4>Stap 3: Zet AI in als tegenpartij</h4>
       <p>
-        Vorm tweetallen of kleine groepjes. De ene helft is voor, de andere tegen.
-        Debatteer 10 minuten. Luister naar elkaars argumenten en probeer te reageren.
+        Open ChatGPT of Copilot. Je gaat AI vragen om jouw standpunt onderuit te
+        halen. Gebruik deze prompt en vul je eigen stelling en standpunt in:
+      </p>
+      <p>
+        <em>"Ik ga een standpunt verdedigen. De stelling is: [vul je stelling in].
+        Ik ben het [eens / oneens] met deze stelling. Geef mij de 3 sterkste
+        tegenargumenten op mijn standpunt. Wees kritisch en eerlijk, niet voorzichtig."</em>
+      </p>
+      <p>
+        Schrijf de drie tegenargumenten die je van AI krijgt letterlijk op. Niet
+        samenvatten, niet filteren.
       </p>
 
-      <h4>Stap 4: Reflectie</h4>
-      <p>Schrijf na het debat een korte reflectie (150-200 woorden):</p>
+      <h4>Stap 4: Reageer op de tegenargumenten</h4>
+      <p>
+        Lees de drie tegenargumenten rustig door. Schrijf per tegenargument 2 tot
+        3 zinnen: ben je het ermee eens, ben je het er niet mee eens, en waarom?
+        Soms heeft AI een punt. Wees eerlijk tegen jezelf.
+      </p>
+
+      <h4>Stap 5: Reflectie</h4>
+      <p>Schrijf een korte reflectie van 150 tot 200 woorden. Beantwoord deze drie vragen:</p>
       <ul>
-        <li>Welk argument van de tegenpartij vond je het sterkst?</li>
+        <li>Welk tegenargument van AI vond je het sterkst?</li>
         <li>Is je mening veranderd? Waarom wel of niet?</li>
         <li>Wat vind je dat er moet veranderen in de regels rondom AI?</li>
       </ul>
 
       <h4>Inleveren</h4>
       <p>
-        Lever je 3 argumenten en je reflectie in als document.
+        Lever je dossier in als één document. Zet erin: je stelling, je 3 eigen
+        argumenten, de 3 tegenargumenten van AI met jouw reactie, en je reflectie.
+      </p>
+
+      <h3>Ga een stap verder: De Grote AI-Ethiek Discussie</h3>
+      <p>
+        Heb je energie over, of werk je samen met klasgenoten? Pak dezelfde
+        stelling erbij en ga er een echt debat over voeren. Niks tegen AI, maar
+        een mens die je in de ogen kijkt en je terugduwt is iets anders.
+      </p>
+      <p>
+        <strong>Stap 1:</strong> Vorm tweetallen of kleine groepjes. De ene helft
+        verdedigt jouw standpunt, de andere helft het tegenovergestelde. Je mag
+        de kant kiezen die je in je dossier NIET verdedigd hebt. Extra leerzaam.
+      </p>
+      <p>
+        <strong>Stap 2:</strong> Debatteer 10 minuten. Luister écht naar elkaars
+        argumenten en reageer op wat de ander zegt in plaats van je eigen verhaal
+        te herhalen.
+      </p>
+      <p>
+        <strong>Stap 3:</strong> Schrijf na afloop 3 zinnen: wat was het sterkste
+        argument van de tegenpartij, en is je mening in het echte gesprek verder
+        verschoven dan tijdens je solo-dossier?
+      </p>
+      <p>
+        Deze bonus is optioneel en telt niet mee voor je certificaat.
       </p>
       `
     },
@@ -5343,6 +5565,9 @@ function generateCertificate() {
     document.getElementById('certNameInput').placeholder = 'Vul eerst je naam in!';
     return;
   }
+
+  // Teller ophogen (eenmalig per apparaat via localStorage guard)
+  incrementCertificateCount();
 
   const today = new Date();
   const dateStr = today.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
