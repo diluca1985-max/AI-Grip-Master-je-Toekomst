@@ -1478,6 +1478,41 @@
     box-shadow: 0 14px 28px -16px rgba(245,158,11,0.4);
   }
 
+  .badge-linkedin-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+    background: rgba(245,158,11,0.1);
+    border: 1px solid rgba(245,158,11,0.32);
+    color: var(--amber-500);
+    margin-top: 0.85rem;
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow:
+      0 4px 14px -6px rgba(245,158,11,0.25),
+      inset 0 1px 0 0 rgba(255,255,255,0.08);
+    position: relative;
+  }
+
+  .badge-linkedin-btn svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+  }
+
+  .trust-badge-link:hover .badge-linkedin-btn {
+    background: rgba(245,158,11,0.22);
+    border-color: rgba(245,158,11,0.55);
+    transform: scale(1.08) rotate(-2deg);
+    box-shadow:
+      0 10px 24px -8px rgba(245,158,11,0.5),
+      inset 0 1px 0 0 rgba(255,255,255,0.15);
+  }
+
   .assignment-outro-text strong { color: var(--text-primary); }
 
   /* Quiz */
@@ -2435,9 +2470,13 @@
       <a href="https://www.linkedin.com/in/luuk-otten/" target="_blank" rel="noopener" class="trust-badge-link" style="margin-top: 1rem; padding: 1.1rem 1.35rem; background: linear-gradient(180deg, rgba(245,158,11,0.05) 0%, rgba(245,158,11,0.01) 100%); border: 1px solid rgba(245,158,11,0.22); border-radius: 14px; display: flex; align-items: flex-start; gap: 0.9rem; text-align: left; text-decoration: none; transition: var(--transition); cursor: pointer;">
         <span style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:10px;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);color:var(--amber-500);flex-shrink:0;"><i class="ico ico-pencil" style="font-size:0.95rem;"></i></span>
         <div style="flex:1;">
-          <strong style="color: var(--amber-500); font-size: 0.8rem; display: block; margin-bottom: 0.2rem; font-family: var(--font-display); letter-spacing: 0.04em; text-transform: uppercase;">Gemaakt door een MBO-docent</strong>
-          <span style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.55; display:block;">17+ jaar onderwijservaring, waarvan 9 jaar in het MBO. Geen consultant, geen techbedrijf. Iemand die zelf voor de klas staat en weet wat werkt.</span>
-          <span style="color: var(--amber-500); font-size: 0.78rem; line-height: 1.55; display:block; margin-top: 0.45rem; font-weight: 600;">Bekijk LinkedIn-profiel <i class="ico ico-arrow-right" style="font-size:0.7rem;vertical-align:-0.05em;"></i></span>
+          <strong style="color: var(--amber-500); font-size: 0.8rem; display: block; margin-bottom: 0.3rem; font-family: var(--font-display); letter-spacing: 0.04em; text-transform: uppercase;">Door een docent, niet door een techbedrijf</strong>
+          <span style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.6; display:block;">Een MBO-docent zag studenten én collega's worstelen met AI. Dit is wat hij eraan deed.</span>
+          <span class="badge-linkedin-btn" aria-label="Bekijk LinkedIn-profiel van Luuk Otten">
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </span>
         </div>
       </a>
     </div>
@@ -2495,6 +2534,28 @@
     }
   } catch (e) {}
 })();
+
+// ===== CERTIFICATE PREVIEW URL =====
+// ?preview=cert -> ga direct naar certificaat-pagina met voorbeeldnaam
+// Zo kan Luuk het certificaat bekijken zonder 10 weken door te werken.
+function triggerCertPreview() {
+  try {
+    showPage('certificate');
+    var input = document.getElementById('certNameInput');
+    if (input) {
+      input.value = 'Voorbeeld Voorbeeldsen';
+      generateCertificate();
+    }
+  } catch (e) { console.error('Preview failed:', e); }
+}
+window.addEventListener('load', function () {
+  try {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('preview') === 'cert') {
+      setTimeout(triggerCertPreview, 200);
+    }
+  } catch (e) {}
+});
 
 // ===== AUTO VERSION CHECK =====
 // Voorkomt dat terugkerende bezoekers vastzitten op een gecachte oude versie.
@@ -5284,7 +5345,7 @@ function generateCertificate() {
             <div class="seal-outer"></div>
             <div class="seal-inner">
               <div class="seal-star">&#x2726;</div>
-              <div class="seal-label">HEALTH STARS<br>EDTECH</div>
+              <div class="seal-label">HEALTH STARS<br>AI-GRIP</div>
             </div>
           </div>
         </div>
@@ -5458,7 +5519,7 @@ function _drawCertificateCanvas(certFrame, estherSigImg) {
   // Label
   ctx.font = '600 5.5px ' + sans;
   ctx.fillText('HEALTH STARS', sealCenterX, sealCenterY + 12);
-  ctx.fillText('EDTECH', sealCenterX, sealCenterY + 19);
+  ctx.fillText('AI-GRIP', sealCenterX, sealCenterY + 19);
   ctx.textBaseline = 'alphabetic';
 
   // Verification line
@@ -5538,7 +5599,7 @@ function showCertificatePreview() {
             <div class="seal-outer"></div>
             <div class="seal-inner">
               <div class="seal-star">&#x2726;</div>
-              <div class="seal-label">HEALTH STARS<br>EDTECH</div>
+              <div class="seal-label">HEALTH STARS<br>AI-GRIP</div>
             </div>
           </div>
         </div>
