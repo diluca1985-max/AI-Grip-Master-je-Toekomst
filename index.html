@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>AI-Grip: Master je Toekomst</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2473,6 +2476,36 @@
     if (params.get('admin') === '1') {
       document.body.classList.add('admin-mode');
     }
+  } catch (e) {}
+})();
+
+// ===== AUTO VERSION CHECK =====
+// Voorkomt dat terugkerende bezoekers vastzitten op een gecachte oude versie.
+// Fetcht version.txt zonder cache; bij verschil met opgeslagen versie -> reload.
+(function checkAppVersion() {
+  try {
+    var STORAGE_KEY = 'aigrip_app_version';
+    var SESSION_KEY = 'aigrip_reload_done';
+    fetch('version.txt?t=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.text() : null; })
+      .then(function (latest) {
+        if (!latest) return;
+        latest = latest.trim();
+        var stored = localStorage.getItem(STORAGE_KEY);
+        if (!stored) {
+          localStorage.setItem(STORAGE_KEY, latest);
+          return;
+        }
+        if (stored !== latest) {
+          localStorage.setItem(STORAGE_KEY, latest);
+          // One reload per version to prevent loops
+          if (sessionStorage.getItem(SESSION_KEY) !== latest) {
+            sessionStorage.setItem(SESSION_KEY, latest);
+            window.location.reload();
+          }
+        }
+      })
+      .catch(function () {});
   } catch (e) {}
 })();
 
