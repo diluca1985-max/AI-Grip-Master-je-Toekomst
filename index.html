@@ -4,102 +4,256 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI-Grip: Master je Toekomst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg-primary: #0f0f1a;
-    --bg-secondary: #161625;
-    --bg-card: rgba(255,255,255,0.04);
-    --bg-card-hover: rgba(255,255,255,0.07);
-    --bg-glass: rgba(255,255,255,0.06);
-    --border-glass: rgba(255,255,255,0.1);
-    --border-glass-hover: rgba(255,255,255,0.18);
+    /* Deep canvas */
+    --bg: #06060c;
+    --bg-deep: #04040a;
+    --bg-elevated: #0c0c18;
 
-    --blue: #4f46e5;
-    --blue-light: #6366f1;
-    --blue-lighter: #818cf8;
+    /* Borders */
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+
+    /* Primary palette (cool purple) */
+    --purple-300: #c4b5fd;
+    --purple-400: #a78bfa;
+    --purple-500: #8b5cf6;
+    --purple-600: #7c3aed;
+    --indigo-500: #6366f1;
+    --indigo-600: #4f46e5;
+
+    /* Accent (warm amber) */
+    --amber-300: #fcd34d;
+    --amber-400: #fbbf24;
+    --amber-500: #f59e0b;
+    --amber-600: #d97706;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%);
+    --gradient-primary-hover: linear-gradient(135deg, #7c8af1 0%, #9c70f8 50%, #b596ff 100%);
+    --gradient-amber: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+    --gradient-text: linear-gradient(180deg, #ffffff 0%, #c4b5fd 100%);
+    --gradient-mesh:
+      radial-gradient(at 18% 10%, rgba(124,58,237,0.20) 0%, transparent 50%),
+      radial-gradient(at 82% 90%, rgba(245,158,11,0.10) 0%, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(99,102,241,0.06) 0%, transparent 60%);
+
+    /* Typography */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-display: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    /* Text */
+    --text: #f1f5f9;
+    --text-faint: #64748b;
+    --white: #ffffff;
+
+    /* === Legacy aliases (kept so existing rules keep working) === */
+    --bg-primary: #06060c;
+    --bg-secondary: #0c0c18;
+    --bg-card: rgba(255,255,255,0.025);
+    --bg-card-hover: rgba(255,255,255,0.05);
+    --bg-glass: rgba(255,255,255,0.04);
+    --border-glass: rgba(255,255,255,0.08);
+    --border-glass-hover: rgba(255,255,255,0.14);
+    --blue: #6366f1;
+    --blue-light: #818cf8;
+    --blue-lighter: #a5b4fc;
     --purple: #7c3aed;
     --purple-light: #a78bfa;
-    --gradient-primary: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-    --gradient-primary-hover: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-
     --orange: #f59e0b;
     --orange-light: #fbbf24;
     --orange-dark: #d97706;
-    --accent: #f59e0b;
-
-    --white: #ffffff;
-    --gray-50: rgba(255,255,255,0.03);
-    --gray-100: rgba(255,255,255,0.06);
-    --gray-200: rgba(255,255,255,0.1);
-    --gray-300: rgba(255,255,255,0.16);
+    --accent: #fbbf24;
+    --gray-50: rgba(255,255,255,0.025);
+    --gray-100: rgba(255,255,255,0.05);
+    --gray-200: rgba(255,255,255,0.08);
+    --gray-300: rgba(255,255,255,0.14);
     --gray-400: rgba(255,255,255,0.4);
-    --gray-500: rgba(255,255,255,0.55);
+    --gray-500: rgba(255,255,255,0.6);
     --gray-600: rgba(255,255,255,0.7);
     --gray-700: rgba(255,255,255,0.85);
     --gray-800: rgba(255,255,255,0.92);
-
-    --text-primary: #e2e8f0;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
     --green: #22c55e;
-    --green-light: rgba(34,197,94,0.15);
+    --green-light: rgba(34,197,94,0.12);
     --green-border: rgba(34,197,94,0.3);
     --red: #ef4444;
-    --red-light: rgba(239,68,68,0.15);
+    --red-light: rgba(239,68,68,0.12);
     --red-border: rgba(239,68,68,0.3);
 
-    --radius: 16px;
+    --radius: 18px;
     --radius-sm: 12px;
     --radius-xs: 8px;
-    --shadow: 0 4px 24px -4px rgba(0,0,0,0.3), 0 0 0 1px var(--border-glass);
-    --shadow-lg: 0 12px 40px -8px rgba(0,0,0,0.4), 0 0 0 1px var(--border-glass);
-    --shadow-xl: 0 24px 60px -12px rgba(0,0,0,0.5), 0 0 0 1px var(--border-glass);
-    --shadow-glow-blue: 0 0 30px -5px rgba(79,70,229,0.3);
-    --shadow-glow-green: 0 0 20px -5px rgba(34,197,94,0.25);
-    --shadow-glow-orange: 0 0 20px -5px rgba(245,158,11,0.25);
-    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow: 0 4px 24px -8px rgba(0,0,0,0.5), 0 0 0 1px var(--border);
+    --shadow-lg: 0 24px 60px -16px rgba(0,0,0,0.6), 0 0 0 1px var(--border);
+    --shadow-xl: 0 40px 100px -20px rgba(0,0,0,0.7), 0 0 0 1px var(--border);
+    --shadow-glow-blue: 0 0 60px -10px rgba(124,58,237,0.5);
+    --shadow-glow-amber: 0 0 60px -10px rgba(245,158,11,0.4);
+    --shadow-glow-green: 0 0 30px -10px rgba(34,197,94,0.4);
+    --shadow-glow-orange: 0 0 30px -10px rgba(245,158,11,0.4);
+    --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background: var(--bg-primary);
-    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv11', 'ss01', 'ss03';
+    background: var(--bg);
+    color: var(--text);
     line-height: 1.7;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    overflow-x: hidden;
   }
+
+  /* Ambient gradient mesh */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: var(--gradient-mesh);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Subtle grid pattern, fades to edges */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+    background-size: 64px 64px;
+    background-position: -1px -1px;
+    pointer-events: none;
+    z-index: 0;
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 90%);
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 90%);
+  }
+
+  .app-header, .page, .app-footer { position: relative; z-index: 1; }
+
+  /* === SVG ICON SYSTEM (line-style, currentColor) === */
+  .ico {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background-color: currentColor;
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    vertical-align: -0.15em;
+    flex-shrink: 0;
+  }
+  .ico-book { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M4 19.5A2.5 2.5 0 0 1 6.5 17H20'/><path d='M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z'/></svg>"); }
+  .ico-target { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'/><circle cx='12' cy='12' r='6'/><circle cx='12' cy='12' r='2'/></svg>"); }
+  .ico-spark { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1'/><circle cx='12' cy='12' r='3'/></svg>"); }
+  .ico-award { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='8' r='6'/><path d='M15.5 13.5 17 22l-5-3-5 3 1.5-8.5'/></svg>"); }
+  .ico-shield { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z'/><path d='m9 12 2 2 4-4'/></svg>"); }
+  .ico-play { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><polygon points='6 3 20 12 6 21 6 3'/></svg>"); }
+  .ico-pencil { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z'/><path d='m15 5 4 4'/></svg>"); }
+  .ico-gear { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='3'/><path d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z'/></svg>"); }
+  .ico-arrow-right { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14'/><path d='m12 5 7 7-7 7'/></svg>"); }
+  .ico-arrow-left { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M19 12H5'/><path d='m12 19-7-7 7-7'/></svg>"); }
+  .ico-arrow-down { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M12 5v14'/><path d='m19 12-7 7-7-7'/></svg>"); }
+  .ico-check { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>"); }
+  .ico-x { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M18 6 6 18'/><path d='m6 6 12 12'/></svg>"); }
+  .ico-save { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z'/><polyline points='17 21 17 13 7 13 7 21'/><polyline points='7 3 7 8 15 8'/></svg>"); }
+  .ico-bulb { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5'/><path d='M9 18h6'/><path d='M10 22h4'/></svg>"); }
+  .ico-note { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M14 3v4a1 1 0 0 0 1 1h4'/><path d='M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z'/><path d='M9 13h6'/><path d='M9 17h6'/></svg>"); }
+  .ico-calc { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><rect x='4' y='2' width='16' height='20' rx='2'/><line x1='8' y1='6' x2='16' y2='6'/><line x1='16' y1='14' x2='16' y2='18'/><path d='M16 10h.01'/><path d='M12 10h.01'/><path d='M8 10h.01'/><path d='M12 14h.01'/><path d='M8 14h.01'/><path d='M12 18h.01'/><path d='M8 18h.01'/></svg>"); }
+  .ico-globe { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'/><path d='M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20'/><path d='M2 12h20'/></svg>"); }
+  .ico-phone { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='2' width='14' height='20' rx='2.5'/><line x1='12' y1='18' x2='12' y2='18'/></svg>"); }
+  .ico-cpu { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><rect x='4' y='4' width='16' height='16' rx='2'/><rect x='9' y='9' width='6' height='6'/><line x1='9' y1='2' x2='9' y2='4'/><line x1='15' y1='2' x2='15' y2='4'/><line x1='9' y1='20' x2='9' y2='22'/><line x1='15' y1='20' x2='15' y2='22'/><line x1='20' y1='9' x2='22' y2='9'/><line x1='20' y1='14' x2='22' y2='14'/><line x1='2' y1='9' x2='4' y2='9'/><line x1='2' y1='14' x2='4' y2='14'/></svg>"); }
+  .ico-building { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><rect x='4' y='2' width='16' height='20' rx='2'/><path d='M9 22v-4h6v4'/><path d='M8 6h.01'/><path d='M16 6h.01'/><path d='M12 6h.01'/><path d='M12 10h.01'/><path d='M12 14h.01'/><path d='M16 10h.01'/><path d='M16 14h.01'/><path d='M8 10h.01'/><path d='M8 14h.01'/></svg>"); }
+  .ico-wrench { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg>"); }
+  .ico-cross { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M11 2a2 2 0 0 0-2 2v5H4a2 2 0 0 0-2 2v2c0 1.1.9 2 2 2h5v5c0 1.1.9 2 2 2h2a2 2 0 0 0 2-2v-5h5a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-5V4a2 2 0 0 0-2-2h-2z'/></svg>"); }
+  .ico-box { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z'/><polyline points='3.27 6.96 12 12.01 20.73 6.96'/><line x1='12' y1='22.08' x2='12' y2='12'/></svg>"); }
+  .ico-briefcase { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='7' width='20' height='14' rx='2' ry='2'/><path d='M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16'/></svg>"); }
+  .ico-utensils { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2'/><path d='M7 2v20'/><path d='M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7'/></svg>"); }
+  .ico-scales { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z'/><path d='m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z'/><path d='M7 21h10'/><path d='M12 3v18'/><path d='M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2'/></svg>"); }
+  .ico-lock { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='11' width='18' height='11' rx='2' ry='2'/><path d='M7 11V7a5 5 0 0 1 10 0v4'/></svg>"); }
+  .ico-alert { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z'/><path d='M12 9v4'/><path d='M12 17h.01'/></svg>"); }
+  .ico-help { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'/><path d='M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3'/><path d='M12 17h.01'/></svg>"); }
+  .ico-megaphone { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='m3 11 18-5v12L3 14v-3z'/><path d='M11.6 16.8a3 3 0 1 1-5.8-1.6'/></svg>"); }
 
   /* ===== HEADER ===== */
   .app-header {
-    background: rgba(15,15,26,0.8);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(6,6,12,0.72);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
     color: var(--white);
     padding: 0 2rem;
-    height: 68px;
+    height: 72px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 1px solid var(--border-glass);
+    border-bottom: 1px solid var(--border);
   }
 
   .app-header .logo {
-    font-size: 1.3rem;
+    font-family: var(--font-display);
+    font-size: 1.02rem;
     font-weight: 700;
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.7rem;
     cursor: pointer;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.015em;
+    color: var(--white);
+  }
+
+  .app-header .logo .logo-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--gradient-primary);
+    color: var(--white);
+    font-weight: 900;
+    font-size: 0.78rem;
+    letter-spacing: -0.04em;
+    box-shadow:
+      0 8px 24px -8px rgba(124,58,237,0.55),
+      inset 0 1px 0 0 rgba(255,255,255,0.22);
+    font-family: var(--font-display);
+    position: relative;
+  }
+
+  .app-header .logo .logo-mark::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 11px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.3), transparent 50%, rgba(245,158,11,0.25));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: 1px;
+    pointer-events: none;
   }
 
   .app-header .logo span.accent {
@@ -107,6 +261,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    font-weight: 700;
   }
 
   .progress-header {
@@ -143,35 +298,107 @@
 
   /* ===== WELCOME PAGE ===== */
   .welcome {
-    min-height: calc(100vh - 68px);
+    min-height: calc(100vh - 72px);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
-    background: radial-gradient(ellipse at 50% 0%, rgba(79,70,229,0.12) 0%, transparent 60%);
+    padding: 4rem 2rem 5rem;
+    position: relative;
+  }
+
+  .welcome::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 700px;
+    background: radial-gradient(ellipse, rgba(124,58,237,0.18) 0%, transparent 60%);
+    pointer-events: none;
+    filter: blur(40px);
+    z-index: 0;
   }
 
   .welcome-card {
-    max-width: 780px;
-    background: var(--bg-glass);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border: 1px solid var(--border-glass);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-xl);
-    padding: 3.5rem;
+    position: relative;
+    max-width: 980px;
+    width: 100%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.012) 100%);
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    border: 1px solid var(--border-strong);
+    border-radius: 28px;
+    box-shadow:
+      0 60px 120px -30px rgba(0,0,0,0.7),
+      0 30px 60px -30px rgba(124,58,237,0.35),
+      inset 0 1px 0 0 rgba(255,255,255,0.08);
+    padding: 4.5rem 4rem 3.5rem;
     text-align: center;
-    animation: fadeInUp 0.6s ease;
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1;
   }
 
-  .welcome-card .emoji-hero { font-size: 4rem; margin-bottom: 1.25rem; }
+  .welcome-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 28px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(168,139,250,0.5) 0%, transparent 35%, transparent 65%, rgba(251,191,36,0.4) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .welcome-card .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.5rem 1.1rem;
+    background: rgba(168,139,250,0.08);
+    border: 1px solid rgba(168,139,250,0.28);
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--purple-300);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 1.85rem;
+  }
+
+  .welcome-card .eyebrow::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--purple-400);
+    box-shadow: 0 0 12px var(--purple-400), 0 0 24px rgba(168,139,250,0.4);
+    animation: pulseDot 2.4s ease-in-out infinite;
+  }
+
+  @keyframes pulseDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.85); }
+  }
+
+  .welcome-card .emoji-hero { display: none; }
 
   .welcome-card h1 {
-    font-size: 2.6rem;
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5.5vw, 4.4rem);
     font-weight: 800;
-    letter-spacing: -0.03em;
-    margin-bottom: 0.5rem;
+    letter-spacing: -0.04em;
+    line-height: 1.02;
+    margin-bottom: 1.25rem;
     color: var(--white);
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .welcome-card h1 span {
@@ -179,77 +406,135 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    display: inline-block;
   }
 
   .welcome-card .subtitle {
     font-size: 1.15rem;
-    color: var(--text-secondary);
-    margin-bottom: 2rem;
+    color: var(--text-muted);
+    margin-bottom: 2.75rem;
+    font-weight: 400;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
   }
 
-  .welcome-card .description {
-    text-align: left;
-    margin-bottom: 2.5rem;
-    color: var(--text-secondary);
-    line-height: 1.8;
-    font-size: 1.05rem;
-  }
+  .welcome-card .description { display: none; }
 
   .welcome-card .features {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
     text-align: left;
   }
 
   .feature-item {
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
-    gap: 0.75rem;
-    padding: 1rem;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border-glass);
-    border-radius: var(--radius-sm);
+    gap: 1rem;
+    padding: 1.65rem 1.35rem;
+    background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(168,139,250,0.5), transparent);
+    opacity: 0;
     transition: var(--transition);
   }
 
   .feature-item:hover {
-    background: rgba(255,255,255,0.07);
-    border-color: var(--border-glass-hover);
+    background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+    border-color: var(--border-strong);
+    transform: translateY(-3px);
   }
 
-  .feature-item .icon { font-size: 1.5rem; flex-shrink: 0; }
-  .feature-item .text { font-size: 0.9rem; color: var(--text-secondary); }
-  .feature-item .text strong { color: var(--white); display: block; margin-bottom: 2px; font-weight: 600; }
+  .feature-item:hover::after { opacity: 1; }
+
+  .feature-item .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(124,58,237,0.18) 0%, rgba(99,102,241,0.08) 100%);
+    border: 1px solid rgba(168,139,250,0.28);
+    font-size: 1.2rem;
+    color: var(--purple-300);
+    flex-shrink: 0;
+  }
+
+  .feature-item:nth-child(2) .icon {
+    background: linear-gradient(135deg, rgba(245,158,11,0.18) 0%, rgba(251,191,36,0.08) 100%);
+    border-color: rgba(251,191,36,0.32);
+    color: var(--amber-400);
+  }
+  .feature-item:nth-child(3) .icon {
+    background: linear-gradient(135deg, rgba(99,102,241,0.18) 0%, rgba(165,180,252,0.08) 100%);
+    border-color: rgba(99,102,241,0.32);
+    color: #a5b4fc;
+  }
+  .feature-item:nth-child(4) .icon {
+    background: linear-gradient(135deg, rgba(251,191,36,0.18) 0%, rgba(245,158,11,0.08) 100%);
+    border-color: rgba(251,191,36,0.32);
+    color: var(--amber-400);
+  }
+
+  .feature-item .text { font-size: 0.86rem; color: var(--text-muted); line-height: 1.55; }
+  .feature-item .text strong { color: var(--white); display: block; margin-bottom: 4px; font-weight: 600; font-size: 0.96rem; letter-spacing: -0.005em; font-family: var(--font-display); }
+
+  @media (max-width: 768px) {
+    .welcome-card { padding: 2.5rem 1.5rem; border-radius: 22px; }
+    .welcome-card .features { grid-template-columns: 1fr 1fr; }
+  }
 
   .btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.9rem 2.2rem;
+    gap: 0.55rem;
+    padding: 1rem 2.4rem;
     border: none;
-    border-radius: var(--radius-sm);
-    font-size: 1.05rem;
+    border-radius: 14px;
+    font-family: var(--font-display);
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
     text-decoration: none;
     letter-spacing: -0.01em;
+    position: relative;
   }
 
   .btn-primary {
     background: var(--gradient-primary);
     color: var(--white);
-    box-shadow: 0 4px 20px -4px rgba(79,70,229,0.4);
+    box-shadow:
+      0 12px 32px -8px rgba(124,58,237,0.55),
+      inset 0 1px 0 0 rgba(255,255,255,0.2);
   }
 
   .btn-primary:hover {
     background: var(--gradient-primary-hover);
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px -4px rgba(79,70,229,0.5);
+    box-shadow:
+      0 20px 48px -8px rgba(124,58,237,0.65),
+      inset 0 1px 0 0 rgba(255,255,255,0.25);
   }
 
   .btn-secondary {
@@ -289,125 +574,214 @@
 
   /* ===== OVERVIEW PAGE ===== */
   .overview {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 2.5rem 2rem;
+    padding: 4rem 2rem 3rem;
+    position: relative;
+  }
+
+  .overview::before {
+    content: '';
+    position: absolute;
+    top: -150px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 500px;
+    background: radial-gradient(ellipse, rgba(124,58,237,0.14) 0%, transparent 60%);
+    pointer-events: none;
+    filter: blur(60px);
+    z-index: -1;
   }
 
   .overview h2 {
-    font-size: 1.8rem;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.8rem);
     font-weight: 800;
     color: var(--white);
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.02em;
+    margin-bottom: 0.85rem;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .overview .overview-subtitle {
-    color: var(--text-secondary);
-    margin-bottom: 2.5rem;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
     font-size: 1.05rem;
+    max-width: 600px;
   }
 
   .weeks-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1.25rem;
   }
 
   .week-card {
-    background: var(--bg-glass);
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border: 1px solid var(--border-glass);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 1.75rem;
+    position: relative;
+    background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.012) 100%);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow:
+      0 4px 24px -8px rgba(0,0,0,0.5),
+      inset 0 1px 0 0 rgba(255,255,255,0.05);
+    padding: 1.95rem 1.75rem 1.85rem;
     cursor: pointer;
     transition: var(--transition);
     border-left: none;
-    position: relative;
-    animation: fadeInUp 0.4s ease both;
+    overflow: hidden;
+    animation: fadeInUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .week-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(168,139,250,0.5), transparent);
+    opacity: 0;
+    transition: var(--transition);
+  }
+
+  .week-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 90% -10%, rgba(168,139,250,0.12) 0%, transparent 50%);
+    opacity: 0;
+    transition: var(--transition);
+    pointer-events: none;
   }
 
   .week-card:nth-child(1) { animation-delay: 0.0s; }
-  .week-card:nth-child(2) { animation-delay: 0.04s; }
-  .week-card:nth-child(3) { animation-delay: 0.08s; }
-  .week-card:nth-child(4) { animation-delay: 0.12s; }
-  .week-card:nth-child(5) { animation-delay: 0.16s; }
-  .week-card:nth-child(6) { animation-delay: 0.2s; }
-  .week-card:nth-child(7) { animation-delay: 0.24s; }
-  .week-card:nth-child(8) { animation-delay: 0.28s; }
-  .week-card:nth-child(9) { animation-delay: 0.32s; }
-  .week-card:nth-child(10) { animation-delay: 0.36s; }
+  .week-card:nth-child(2) { animation-delay: 0.05s; }
+  .week-card:nth-child(3) { animation-delay: 0.1s; }
+  .week-card:nth-child(4) { animation-delay: 0.15s; }
+  .week-card:nth-child(5) { animation-delay: 0.2s; }
+  .week-card:nth-child(6) { animation-delay: 0.25s; }
+  .week-card:nth-child(7) { animation-delay: 0.3s; }
+  .week-card:nth-child(8) { animation-delay: 0.35s; }
+  .week-card:nth-child(9) { animation-delay: 0.4s; }
+  .week-card:nth-child(10) { animation-delay: 0.45s; }
 
   .week-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg), var(--shadow-glow-blue);
-    border-color: var(--border-glass-hover);
-    background: var(--bg-card-hover);
+    transform: translateY(-6px);
+    border-color: rgba(168,139,250,0.4);
+    box-shadow:
+      0 40px 80px -20px rgba(0,0,0,0.6),
+      0 24px 48px -24px rgba(124,58,237,0.45),
+      inset 0 1px 0 0 rgba(255,255,255,0.08);
   }
 
-  .week-card.completed {
-    border-color: var(--green-border);
+  .week-card:hover::before, .week-card:hover::after { opacity: 1; }
+
+  .week-card.completed { border-color: rgba(34,197,94,0.32); }
+
+  .week-card.completed::after {
+    background: radial-gradient(circle at 90% -10%, rgba(34,197,94,0.12) 0%, transparent 50%);
+    opacity: 1;
   }
 
   .week-card.completed:hover {
-    box-shadow: var(--shadow-lg), var(--shadow-glow-green);
+    border-color: rgba(34,197,94,0.5);
+    box-shadow:
+      0 40px 80px -20px rgba(0,0,0,0.6),
+      0 24px 48px -24px rgba(34,197,94,0.35);
   }
 
   .week-card.current {
-    border-color: rgba(79,70,229,0.4);
-    background: rgba(79,70,229,0.08);
-    box-shadow: var(--shadow), inset 0 0 0 1px rgba(79,70,229,0.2);
+    border-color: rgba(251,191,36,0.42);
+    background: linear-gradient(180deg, rgba(245,158,11,0.06) 0%, rgba(245,158,11,0.012) 100%);
+  }
+
+  .week-card.current::after {
+    background: radial-gradient(circle at 90% -10%, rgba(251,191,36,0.2) 0%, transparent 55%);
+    opacity: 1;
   }
 
   .week-card.current:hover {
-    box-shadow: var(--shadow-lg), var(--shadow-glow-blue), inset 0 0 0 1px rgba(79,70,229,0.3);
+    border-color: var(--amber-500);
+    box-shadow:
+      0 40px 80px -20px rgba(0,0,0,0.6),
+      0 24px 48px -24px rgba(245,158,11,0.45);
   }
 
   .week-card .week-number {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    background: rgba(255,255,255,0.06);
-    color: var(--text-muted);
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(168,139,250,0.16) 0%, rgba(99,102,241,0.06) 100%);
+    border: 1px solid rgba(168,139,250,0.28);
+    color: var(--purple-300);
     font-weight: 800;
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    margin-bottom: 1.35rem;
+    font-family: var(--font-display);
+    letter-spacing: -0.025em;
+    position: relative;
+    z-index: 1;
   }
 
   .week-card.completed .week-number {
-    background: var(--green-light);
+    background: linear-gradient(135deg, rgba(34,197,94,0.22) 0%, rgba(34,197,94,0.08) 100%);
+    border-color: rgba(34,197,94,0.45);
     color: var(--green);
   }
 
   .week-card.current .week-number {
-    background: rgba(79,70,229,0.15);
-    color: var(--blue-lighter);
+    background: var(--gradient-amber);
+    border-color: transparent;
+    color: #1a1a1a;
+    box-shadow: 0 10px 28px -8px rgba(245,158,11,0.55);
   }
 
   .week-card .completed-badge {
     position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
-    font-size: 1.2rem;
+    top: 1.6rem;
+    right: 1.6rem;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--green);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    z-index: 1;
+    box-shadow: 0 6px 16px -4px rgba(34,197,94,0.5);
   }
 
   .week-card h3 {
-    font-size: 1.15rem;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
     color: var(--white);
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.55rem;
     font-weight: 700;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    position: relative;
+    z-index: 1;
   }
 
   .week-card .card-subtitle {
     color: var(--text-muted);
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     font-style: normal;
+    line-height: 1.55;
+    position: relative;
+    z-index: 1;
   }
 
   /* ===== WEEK DETAIL PAGE ===== */
@@ -451,44 +825,65 @@
   }
 
   .week-detail .week-header h1 {
-    font-size: 2rem;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.6rem);
     font-weight: 800;
     color: var(--white);
-    margin-bottom: 0.3rem;
-    letter-spacing: -0.03em;
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .week-detail .week-header .subtitle {
     color: var(--text-muted);
-    font-size: 1.05rem;
+    font-size: 1.08rem;
     font-style: normal;
   }
 
   .section {
-    background: var(--bg-glass);
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border: 1px solid var(--border-glass);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 2rem;
+    background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.012) 100%);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    box-shadow:
+      0 20px 60px -20px rgba(0,0,0,0.5),
+      inset 0 1px 0 0 rgba(255,255,255,0.06);
+    padding: 2.25rem;
     margin-bottom: 1.5rem;
   }
 
   .section-title {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.75rem;
+    font-family: var(--font-display);
     font-size: 1.2rem;
     font-weight: 700;
     color: var(--white);
-    margin-bottom: 1.25rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--border-glass);
-    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: -0.015em;
   }
 
-  .section-title .icon { font-size: 1.4rem; }
+  .section-title .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(124,58,237,0.18) 0%, rgba(99,102,241,0.06) 100%);
+    border: 1px solid rgba(168,139,250,0.28);
+    color: var(--purple-300);
+    font-size: 1.05rem;
+    flex-shrink: 0;
+  }
 
   /* Theory */
   .theory-content { color: var(--text-secondary); line-height: 1.85; }
@@ -1339,54 +1734,89 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
-    margin: 2rem 0;
+    margin: 0 0 2rem;
     text-align: left;
   }
 
   .level-card {
-    background: var(--gray-50);
-    border: 3px solid var(--gray-200);
-    border-radius: var(--radius);
-    padding: 1.5rem;
+    position: relative;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.008) 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.6rem 1.35rem;
     cursor: pointer;
     transition: var(--transition);
+    overflow: hidden;
+  }
+
+  .level-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(168,139,250,0.12) 0%, transparent 60%);
+    opacity: 0;
+    transition: var(--transition);
+    pointer-events: none;
   }
 
   .level-card:hover {
-    border-color: var(--orange);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+    border-color: rgba(168,139,250,0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 24px 48px -16px rgba(124,58,237,0.35);
   }
 
+  .level-card:hover::before { opacity: 1; }
+
   .level-card.selected {
-    border-color: var(--orange);
-    background: rgba(245,158,11,0.08);
+    border-color: var(--amber-500);
+    background: linear-gradient(180deg, rgba(245,158,11,0.08) 0%, rgba(245,158,11,0.02) 100%);
+    box-shadow:
+      0 0 0 1px var(--amber-500),
+      0 24px 48px -16px rgba(245,158,11,0.4);
+  }
+
+  .level-card.selected::before {
+    background: radial-gradient(circle at top right, rgba(251,191,36,0.18) 0%, transparent 60%);
+    opacity: 1;
   }
 
   .level-card .level-number {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--blue);
-    color: var(--white);
-    font-weight: 700;
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    background: rgba(168,139,250,0.12);
+    color: var(--purple-300);
+    font-weight: 800;
     font-size: 1rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.9rem;
+    border: 1px solid rgba(168,139,250,0.28);
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  .level-card.selected .level-number {
+    background: var(--gradient-amber);
+    color: #1a1a1a;
+    border-color: transparent;
+    box-shadow: 0 6px 16px -4px rgba(245,158,11,0.6);
   }
 
   .level-card h3 {
-    color: var(--blue);
-    font-size: 1.05rem;
-    margin-bottom: 0.25rem;
+    color: var(--white);
+    font-size: 1rem;
+    margin-bottom: 0.35rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-family: var(--font-display);
   }
 
   .level-card p {
-    font-size: 0.85rem;
-    color: var(--gray-500);
-    line-height: 1.5;
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    line-height: 1.55;
   }
 
   .level-badge {
@@ -1646,12 +2076,14 @@
   /* ===== FOOTER ===== */
   .app-footer {
     text-align: center;
-    padding: 2rem 1rem;
-    color: var(--text-muted);
-    font-size: 0.8rem;
-    border-top: 1px solid var(--border-glass);
-    margin-top: 2rem;
-    letter-spacing: 0.02em;
+    padding: 3rem 1rem 2.25rem;
+    color: var(--text-faint);
+    font-size: 0.72rem;
+    border-top: 1px solid var(--border);
+    margin-top: 5rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
   }
 
 
@@ -1678,7 +2110,7 @@
 <!-- HEADER -->
 <header class="app-header">
   <div class="logo" onclick="showPage('overview')">
-    <span>&#x1F916;</span> <span>AI-Grip: <span class="accent">Master je Toekomst</span></span>
+    <span class="logo-mark">AI</span> <span>AI-Grip<span style="color:var(--text-muted);font-weight:500;margin:0 0.4rem 0 0.5rem;">/</span><span class="accent">Master je Toekomst</span></span>
   </div>
   <div class="progress-header" id="progressHeader" style="display:none;">
     <span class="level-badge" id="levelBadge" onclick="showPage('welcome')" title="Klik om van niveau te wisselen" style="display:none;"></span>
@@ -1686,58 +2118,43 @@
       <div class="progress-bar-fill" id="progressBarFill" style="width:0%"></div>
     </div>
     <span class="progress-text" id="progressText">0% voltooid</span>
-    
   </div>
 </header>
 
-<!-- ADMIN OVERLAY -->
-<div class="admin-overlay" id="adminOverlay">
-  <div class="admin-modal" id="adminModal">
-    <h2>&#x2699; Video-instellingen</h2>
-    <div id="adminRows"></div>
-    <div class="admin-buttons">
-      <button class="admin-btn-close" onclick="closeAdminPanel()">Sluiten</button>
-      <button class="admin-btn-save" onclick="saveAdminUrls()">Opslaan</button>
-    </div>
-  </div>
-</div>
+
 
 <!-- PAGE: WELCOME -->
 <div class="page active" id="page-welcome">
   <div class="welcome">
     <div class="welcome-card">
-      <div class="emoji-hero">&#x1F680;</div>
-      <h1>AI-Grip: <span>Master je Toekomst</span></h1>
-      <p class="subtitle">10 weken AI-geletterdheid voor MBO-docenten en studenten</p>
-
-      <div class="description">
-        <p>Welkom bij AI-Grip! In deze training leer je stap voor stap hoe kunstmatige intelligentie werkt, hoe je het slim kunt inzetten in je opleiding en werk, en hoe je er kritisch mee omgaat. Geen saaie theorie, maar praktische kennis die je meteen kunt toepassen.</p>
-      </div>
+      <span class="eyebrow">AI-geletterdheid &middot; 10 weken &middot; MBO</span>
+      <h1>Master je toekomst <span>met AI</span></h1>
+      <p class="subtitle">Een complete training AI-geletterdheid voor MBO-docenten en studenten. Geen saaie theorie. Praktische kennis die je meteen toepast.</p>
 
       <div class="features">
         <div class="feature-item">
-          <div class="icon">&#x1F4DA;</div>
+          <div class="icon"><i class="ico ico-book"></i></div>
           <div class="text">
             <strong>10 weken</strong>
             Compacte modules met theorie, video en opdrachten
           </div>
         </div>
         <div class="feature-item">
-          <div class="icon">&#x1F3AF;</div>
+          <div class="icon"><i class="ico ico-target"></i></div>
           <div class="text">
             <strong>Praktisch</strong>
             Opdrachten die je direct kunt toepassen
           </div>
         </div>
         <div class="feature-item">
-          <div class="icon">&#x1F9E0;</div>
+          <div class="icon"><i class="ico ico-spark"></i></div>
           <div class="text">
             <strong>Interactief</strong>
             Quizzen met directe feedback
           </div>
         </div>
         <div class="feature-item">
-          <div class="icon">&#x1F3C6;</div>
+          <div class="icon"><i class="ico ico-award"></i></div>
           <div class="text">
             <strong>Certificaat</strong>
             Bewijs van deelname na afronding
@@ -1745,8 +2162,8 @@
         </div>
       </div>
 
-      <h3 style="color: var(--blue); margin-bottom: 0.5rem; font-size: 1.1rem;">Kies je niveau</h3>
-      <p style="color: var(--gray-500); font-size: 0.9rem; margin-bottom: 0.5rem;">De content past zich aan op jouw niveau.</p>
+      <h3 style="color: var(--white); margin-bottom: 0.4rem; font-size: 1.05rem; font-family: var(--font-display); font-weight: 700; letter-spacing: -0.01em;">Kies je niveau</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">De content past zich aan op jouw niveau.</p>
       <div class="level-selector">
         <div class="level-card" id="level-card-2" onclick="selectLevel(2)">
           <div class="level-number">2</div>
@@ -1766,20 +2183,20 @@
       </div>
 
       <button class="btn btn-primary" id="startBtn" onclick="startCourse()" style="opacity:0.5; pointer-events:none;">
-        Kies eerst je niveau &#x2191;
+        Kies eerst je niveau <i class="ico ico-arrow-down" style="font-size:0.9rem;"></i>
       </button>
 
-      <div style="margin-top: 2rem; padding: 1.25rem 1.5rem; background: rgba(79,70,229,0.06); border: 1px solid rgba(79,70,229,0.35); border-radius: var(--radius-sm); text-align: center; box-shadow: 0 0 20px rgba(79,70,229,0.15), inset 0 0 20px rgba(79,70,229,0.05);">
-        <div style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; background: rgba(79,70,229,0.2); font-size: 1.1rem; font-weight: 700; color: #a78bfa; margin-bottom: 0.75rem; box-shadow: 0 0 12px rgba(124,58,237,0.4);">4C</div>
-        <p style="font-size: 1rem; color: #c4b5fd; font-weight: 600; margin-bottom: 0.3rem;">Ontworpen volgens het 4CID-model</p>
-        <p style="font-size: 0.85rem; color: var(--text-muted);">Four Component Instructional Design — het bewezen framework voor complex leren in beroepsonderwijs</p>
+      <div style="margin-top: 2.25rem; padding: 1.5rem 1.75rem; background: linear-gradient(180deg, rgba(124,58,237,0.06) 0%, rgba(124,58,237,0.015) 100%); border: 1px solid rgba(168,139,250,0.25); border-radius: 16px; text-align: center; box-shadow: 0 20px 40px -20px rgba(124,58,237,0.4);">
+        <div style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 12px; background: rgba(168,139,250,0.18); font-family: var(--font-display); font-size: 0.85rem; font-weight: 800; color: #c4b5fd; margin-bottom: 0.85rem; border: 1px solid rgba(168,139,250,0.35); letter-spacing: -0.02em;">4C</div>
+        <p style="font-family: var(--font-display); font-size: 0.95rem; color: #e2d9ff; font-weight: 600; margin-bottom: 0.35rem; letter-spacing: -0.01em;">Ontworpen volgens het 4CID-model</p>
+        <p style="font-size: 0.83rem; color: var(--text-muted); line-height: 1.55;">Four Component Instructional Design &mdash; het bewezen framework voor complex leren in beroepsonderwijs</p>
       </div>
 
-      <div style="margin-top: 1.5rem; padding: 1rem 1.25rem; background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.15); border-radius: var(--radius-sm); display: flex; align-items: flex-start; gap: 0.75rem; text-align: left;">
-        <span style="font-size: 1.3rem; flex-shrink: 0;">&#x1F512;</span>
+      <div style="margin-top: 1.25rem; padding: 1.1rem 1.35rem; background: linear-gradient(180deg, rgba(34,197,94,0.05) 0%, rgba(34,197,94,0.01) 100%); border: 1px solid rgba(34,197,94,0.2); border-radius: 14px; display: flex; align-items: flex-start; gap: 0.9rem; text-align: left;">
+        <span style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:10px;background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.3);color:var(--green);flex-shrink:0;"><i class="ico ico-shield" style="font-size:0.95rem;"></i></span>
         <div>
-          <strong style="color: var(--green); font-size: 0.85rem; display: block; margin-bottom: 0.2rem;">AVG-proof</strong>
-          <span style="color: var(--text-muted); font-size: 0.8rem; line-height: 1.5;">Deze e-learning draait volledig lokaal in je browser. Er worden geen persoonsgegevens verzameld, opgeslagen of verstuurd. Geen account nodig. Geen tracking. Geen cookies. Veilig te gebruiken op elke school.</span>
+          <strong style="color: var(--green); font-size: 0.8rem; display: block; margin-bottom: 0.2rem; font-family: var(--font-display); letter-spacing: 0.04em; text-transform: uppercase;">AVG-proof</strong>
+          <span style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.55;">Deze e-learning draait volledig lokaal in je browser. Geen persoonsgegevens, geen account, geen tracking, geen cookies. Veilig te gebruiken op elke school.</span>
         </div>
       </div>
     </div>
@@ -1847,7 +2264,7 @@ function selectLevel(level) {
   if (btn) {
     btn.style.opacity = '1';
     btn.style.pointerEvents = 'auto';
-    btn.innerHTML = 'Aan de slag &#x2192;';
+    btn.innerHTML = 'Aan de slag <i class="ico ico-arrow-right" style="font-size:0.9rem;"></i>';
   }
 }
 
@@ -1885,7 +2302,11 @@ function toYouTubeEmbed(url) {
 try { var _old = JSON.parse(localStorage.getItem('aigrip_video_urls')); if (_old) { var _hasEmpty = Object.values(_old).some(function(v) { return !v || v.indexOf('youtube.com/embed/ad79') > -1 || v.indexOf('youtube.com/embed/v2gD') > -1 || v.indexOf('youtube.com/embed/pkg') > -1; }); if (_hasEmpty) localStorage.removeItem('aigrip_video_urls'); } } catch(e) { localStorage.removeItem('aigrip_video_urls'); }
 
 function getVideoUrl(weekNum) {
-  // Videos are hardcoded in courseData
+  // Check localStorage for user-overridden URLs
+  try {
+    var stored = JSON.parse(localStorage.getItem('aigrip_video_urls'));
+    if (stored && stored[weekNum] && stored[weekNum].trim() !== '') return stored[weekNum];
+  } catch(e) {}
   // Use hardcoded courseData URLs
   var week = courseData.find(function(w) { return w.week === weekNum; });
   if (week && week.video && week.video.url && week.video.url.trim() !== '') return week.video.url;
@@ -1893,68 +2314,7 @@ function getVideoUrl(weekNum) {
 }
 
 // ===== ADMIN PANEL =====
-function openAdminPanel() {
-  var overlay = document.getElementById('adminOverlay');
-  var container = document.getElementById('adminRows');
-  var stored = {};
-  try { stored = JSON.parse(localStorage.getItem('aigrip_video_urls')) || {}; } catch(e) {}
 
-  var html = '';
-  courseData.forEach(function(week) {
-    if (week.week === 10) {
-      html += '<div class="admin-row">' +
-        '<span class="week-num">Week ' + week.week + '</span>' +
-        '<span class="week-title">' + week.title + '</span>' +
-        '<span class="no-video-label">Geen video — eindopdracht</span>' +
-        '</div>';
-    } else {
-      var currentUrl = stored[week.week] || (week.video ? week.video.url : '') || '';
-      html += '<div class="admin-row">' +
-        '<span class="week-num">Week ' + week.week + '</span>' +
-        '<span class="week-title">' + week.title + '</span>' +
-        '<input type="text" id="admin-url-' + week.week + '" value="' + currentUrl + '" placeholder="YouTube URL...">' +
-        '</div>';
-    }
-  });
-  container.innerHTML = html;
-  overlay.classList.add('open');
-}
-
-function closeAdminPanel() {
-  document.getElementById('adminOverlay').classList.remove('open');
-}
-
-function saveAdminUrls() {
-  var urls = {};
-  courseData.forEach(function(week) {
-    if (week.week === 10) return;
-    var input = document.getElementById('admin-url-' + week.week);
-    if (input && input.value.trim()) {
-      urls[week.week] = input.value.trim();
-    }
-  });
-  if (Object.keys(urls).length > 0) {
-    localStorage.setItem('aigrip_video_urls', JSON.stringify(urls));
-  } else {
-    localStorage.removeItem('aigrip_video_urls');
-  }
-  closeAdminPanel();
-  // Refresh current view if on a week page
-  var weekPage = document.getElementById('page-week');
-  if (weekPage && weekPage.classList.contains('active')) {
-    var weekLabel = weekPage.querySelector('.week-label');
-    if (weekLabel) {
-      var weekNum = parseInt(weekLabel.textContent.replace('Week ', ''));
-      if (!isNaN(weekNum)) renderWeek(weekNum);
-    }
-  }
-}
-
-// Close admin panel on overlay click (outside modal)
-document.addEventListener('click', function(e) {
-  var overlay = document.getElementById('adminOverlay');
-  if (e.target === overlay) closeAdminPanel();
-});
 
 // ===== COURSE DATA =====
 const courseData = [
@@ -1970,7 +2330,7 @@ const courseData = [
       <p><strong>Generatieve AI</strong> (zoals ChatGPT, Gemini of Copilot) maakt iets <em>nieuws</em>. Het genereert tekst, afbeeldingen of code die eerder niet bestonden, op basis van patronen die het geleerd heeft uit miljoenen voorbeelden.</p>
 
       <div class="highlight-box">
-        <strong>&#x1F4A1; Simpel gezegd:</strong> Google zoekt. ChatGPT bedenkt. Dat is het verschil.
+        <strong><i class="ico ico-bulb" style="color:var(--amber-400);margin-right:0.4rem;"></i>Simpel gezegd:</strong> Google zoekt. ChatGPT bedenkt. Dat is het verschil.
       </div>
 
       <h3>Een korte AI-tijdlijn</h3>
@@ -1979,25 +2339,25 @@ const courseData = [
       <div class="timeline">
         <div class="timeline-item">
           <span class="year">1970s</span>
-          <span class="emoji">&#x1F5A9;</span>
+          <span class="emoji"><i class="ico ico-calc"></i></span>
           <span class="label">Rekenmachine</span>
         </div>
-        <div class="timeline-arrow">&#x2192;</div>
+        <div class="timeline-arrow"><i class="ico ico-arrow-right" style="font-size:0.9rem;"></i></div>
         <div class="timeline-item">
           <span class="year">1990s</span>
-          <span class="emoji">&#x1F310;</span>
+          <span class="emoji"><i class="ico ico-globe"></i></span>
           <span class="label">Internet</span>
         </div>
-        <div class="timeline-arrow">&#x2192;</div>
+        <div class="timeline-arrow"><i class="ico ico-arrow-right" style="font-size:0.9rem;"></i></div>
         <div class="timeline-item">
           <span class="year">2007</span>
-          <span class="emoji">&#x1F4F1;</span>
+          <span class="emoji"><i class="ico ico-phone"></i></span>
           <span class="label">Smartphone</span>
         </div>
-        <div class="timeline-arrow">&#x2192;</div>
+        <div class="timeline-arrow"><i class="ico ico-arrow-right" style="font-size:0.9rem;"></i></div>
         <div class="timeline-item">
           <span class="year">2022</span>
-          <span class="emoji">&#x1F916;</span>
+          <span class="emoji"><i class="ico ico-cpu"></i></span>
           <span class="label">ChatGPT</span>
         </div>
       </div>
@@ -2015,7 +2375,7 @@ const courseData = [
       </ul>
 
       <div class="highlight-box">
-        <strong>&#x1F3AF; Kern:</strong> AI is een hulpmiddel. Het is niet magisch, niet eng, en niet foutloos. Het is een gereedschap dat je kunt leren gebruiken, net zoals je ooit leerde internetten.
+        <strong><i class="ico ico-target" style="color:var(--purple-300);margin-right:0.4rem;"></i>Kern:</strong> AI is een hulpmiddel. Het is niet magisch, niet eng, en niet foutloos. Het is een gereedschap dat je kunt leren gebruiken, net zoals je ooit leerde internetten.
       </div>
     `,
     video: { title: "Wat is AI - korte uitleg", url: "https://www.youtube.com/embed/gQmhbXmtKig" },
@@ -2110,12 +2470,12 @@ const courseData = [
 
       <div class="compare-grid">
         <div class="compare-bad">
-          <strong>&#x274C; Slechte prompt</strong>
+          <strong><i class="ico ico-x" style="margin-right:0.35rem;"></i>Slechte prompt</strong>
           <p>"Geef me een recept"</p>
           <p style="font-size:0.85rem; color:#f87171; margin-top:0.5rem;">Vaag, geen context, geen richting. De AI moet gokken wat je bedoelt.</p>
         </div>
         <div class="compare-good">
-          <strong>&#x2705; Goede prompt</strong>
+          <strong><i class="ico ico-check" style="margin-right:0.35rem;"></i>Goede prompt</strong>
           <p>"Geef me een makkelijk Italiaans pastarecept voor 2 personen, klaar in 20 minuten, met ingredienten die je bij de Albert Heijn kunt kopen."</p>
           <p style="font-size:0.85rem; color:#4ade80; margin-top:0.5rem;">Specifiek, duidelijke context en beperkingen.</p>
         </div>
@@ -2133,7 +2493,7 @@ const courseData = [
       <h3>R-O-L in de praktijk</h3>
 
       <div class="example-box">
-        <strong>&#x1F4DD; Voorbeeld 1: Uitleg voor studenten</strong>
+        <strong><i class="ico ico-note" style="color:var(--amber-400);margin-right:0.4rem;"></i>Voorbeeld 1: Uitleg voor studenten</strong>
         <p style="margin-top:0.5rem;">
           <strong>Rol:</strong> "Je bent een ervaren MBO-docent."<br>
           <strong>Opdracht:</strong> "Leg uit wat het verschil is tussen HTTP en HTTPS."<br>
@@ -2142,7 +2502,7 @@ const courseData = [
       </div>
 
       <div class="example-box">
-        <strong>&#x1F4DD; Voorbeeld 2: E-mail schrijven</strong>
+        <strong><i class="ico ico-note" style="color:var(--amber-400);margin-right:0.4rem;"></i>Voorbeeld 2: E-mail schrijven</strong>
         <p style="margin-top:0.5rem;">
           <strong>Rol:</strong> "Je bent mijn persoonlijke assistent."<br>
           <strong>Opdracht:</strong> "Schrijf een nette e-mail naar mijn stagebedrijf om mijn eerste dag te bevestigen."<br>
@@ -2154,22 +2514,22 @@ const courseData = [
 
       <div class="compare-grid">
         <div class="compare-bad">
-          <strong>&#x274C; Slecht</strong>
+          <strong><i class="ico ico-x" style="margin-right:0.35rem;"></i>Slecht</strong>
           <p>"Schrijf een brief"</p>
         </div>
         <div class="compare-good">
-          <strong>&#x2705; Goed (met R-O-L)</strong>
+          <strong><i class="ico ico-check" style="margin-right:0.35rem;"></i>Goed (met R-O-L)</strong>
           <p>"Je bent een HR-adviseur. Schrijf een motivatiebrief voor een stage bij een marketingbureau. Maximaal 250 woorden, enthousiast maar professioneel."</p>
         </div>
       </div>
 
       <div class="compare-grid">
         <div class="compare-bad">
-          <strong>&#x274C; Slecht</strong>
+          <strong><i class="ico ico-x" style="margin-right:0.35rem;"></i>Slecht</strong>
           <p>"Leg fotosynthese uit"</p>
         </div>
         <div class="compare-good">
-          <strong>&#x2705; Goed (met R-O-L)</strong>
+          <strong><i class="ico ico-check" style="margin-right:0.35rem;"></i>Goed (met R-O-L)</strong>
           <p>"Je bent een MBO-docent biologie. Leg fotosynthese uit aan eerstejaars studenten. Gebruik een vergelijking met een keuken, maximaal 80 woorden."</p>
         </div>
       </div>
@@ -2184,7 +2544,7 @@ const courseData = [
       </ul>
 
       <div class="highlight-box">
-        <strong>&#x1F3AF; Onthoud:</strong> AI is zo goed als jouw instructie. Een betere prompt = een beter antwoord. Je hoeft geen programmeur te zijn, je moet gewoon leren duidelijk te communiceren.
+        <strong><i class="ico ico-target" style="color:var(--purple-300);margin-right:0.4rem;"></i>Onthoud:</strong> AI is zo goed als jouw instructie. Een betere prompt = een beter antwoord. Je hoeft geen programmeur te zijn, je moet gewoon leren duidelijk te communiceren.
       </div>
     `,
     video: { title: "Prompt Engineering basics", url: "https://www.youtube.com/embed/Z_-dW77zuwg" },
@@ -2598,14 +2958,14 @@ const courseData = [
     `,
     video: null,
     visualCard: {
-      icon: "🏢",
+      icon: '<i class="ico ico-building"></i>',
       heading: "AI op de werkvloer",
       tips: [
-        { icon: "🔧", text: "Techniek: voorspellend onderhoud en slimme sensoren" },
-        { icon: "🏥", text: "Zorg: AI-triage en spraakherkenning voor verslagen" },
-        { icon: "📦", text: "Logistiek: routeoptimalisatie en magazijnrobots" },
-        { icon: "💼", text: "Administratie: automatische factuurverwerking" },
-        { icon: "🍽️", text: "Horeca: voorraadvoorspelling en persoonlijke menu's" }
+        { icon: '<i class="ico ico-wrench"></i>', text: "Techniek: voorspellend onderhoud en slimme sensoren" },
+        { icon: '<i class="ico ico-cross"></i>', text: "Zorg: AI-triage en spraakherkenning voor verslagen" },
+        { icon: '<i class="ico ico-box"></i>', text: "Logistiek: routeoptimalisatie en magazijnrobots" },
+        { icon: '<i class="ico ico-briefcase"></i>', text: "Administratie: automatische factuurverwerking" },
+        { icon: '<i class="ico ico-utensils"></i>', text: "Horeca: voorraadvoorspelling en persoonlijke menu's" }
       ]
     },
     assignment: {
@@ -2854,14 +3214,14 @@ const courseData = [
     `,
     video: null,
     visualCard: {
-      icon: "⚖️",
+      icon: '<i class="ico ico-scales"></i>',
       heading: "Ethiek & Privacy",
       tips: [
         { icon: "©️", text: "Copyright: van wie is AI-gegenereerde content?" },
-        { icon: "🔒", text: "AVG: wat mag je wel en niet invoeren in AI-tools?" },
-        { icon: "⚠️", text: "Bias: AI kan onbewust discrimineren" },
-        { icon: "🤔", text: "Wanneer is AI inzetten oké en wanneer niet?" },
-        { icon: "📢", text: "Moet je vermelden dat je AI hebt gebruikt?" }
+        { icon: '<i class="ico ico-lock"></i>', text: "AVG: wat mag je wel en niet invoeren in AI-tools?" },
+        { icon: '<i class="ico ico-alert"></i>', text: "Bias: AI kan onbewust discrimineren" },
+        { icon: '<i class="ico ico-help"></i>', text: "Wanneer is AI inzetten oké en wanneer niet?" },
+        { icon: '<i class="ico ico-megaphone"></i>', text: "Moet je vermelden dat je AI hebt gebruikt?" }
       ]
     },
     assignment: {
@@ -3930,7 +4290,7 @@ function initWelcomePage() {
     if (btn) {
       btn.style.opacity = '1';
       btn.style.pointerEvents = 'auto';
-      btn.innerHTML = 'Aan de slag &#x2192;';
+      btn.innerHTML = 'Aan de slag <i class="ico ico-arrow-right" style="font-size:0.9rem;"></i>';
     }
   }
 }
@@ -3947,7 +4307,7 @@ function renderOverview() {
 
     return `
       <div class="week-card ${statusClass}" onclick="showPage('week', ${week.week})">
-        ${completed ? '<span class="completed-badge">&#x2705;</span>' : ''}
+        ${completed ? '<span class="completed-badge"><i class="ico ico-check" style="font-size:0.7rem;"></i></span>' : ''}
         <div class="week-number">${week.week}</div>
         <h3>${week.title}</h3>
         <p class="card-subtitle">${week.subtitle}</p>
@@ -3959,29 +4319,33 @@ function renderOverview() {
   if (progress.completedWeeks.length === 10) {
     grid.innerHTML += `
       <div class="week-card current" onclick="showPage('certificate')" style="border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.08);">
-        <div class="week-number" style="background: rgba(245,158,11,0.15); color: #fbbf24;">&#x1F3C6;</div>
+        <div class="week-number" style="background: var(--gradient-amber); color: #1a1a1a; border-color: transparent; box-shadow: 0 10px 28px -8px rgba(245,158,11,0.55);"><i class="ico ico-award" style="font-size:1.3rem;"></i></div>
         <h3>Certificaat ophalen</h3>
         <p class="card-subtitle">Je hebt alles afgerond!</p>
       </div>
     `;
   }
 
-  // Certificate motivation section
+  // Certificate motivation section — remove any existing one first to prevent duplicates on re-render
+  const existingCert = document.getElementById('certMotivationSection');
+  if (existingCert) existingCert.remove();
+
   const certSection = document.createElement('div');
-  certSection.style.cssText = 'margin-top: 2.5rem; background: var(--bg-glass); backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%); border: 1px solid var(--border-glass); border-radius: 16px; padding: 2rem; text-align: center;';
+  certSection.id = 'certMotivationSection';
+  certSection.style.cssText = 'margin-top: 2.5rem; background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.012) 100%); backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); border: 1px solid var(--border); border-radius: 20px; padding: 2.25rem; text-align: center; position: relative; overflow: hidden;';
   certSection.innerHTML = `
-    <div style="display: flex; align-items: center; gap: 1.5rem; text-align: left;">
-      <div style="flex-shrink: 0; width: 80px; height: 80px; border-radius: 50%; border: 3px solid #b8860b; display: flex; align-items: center; justify-content: center; background: rgba(184,134,11,0.08);">
-        <span style="font-size: 2rem; color: #b8860b;">&#x2726;</span>
+    <div style="display: flex; align-items: center; gap: 1.75rem; text-align: left; position: relative; z-index: 1;">
+      <div style="flex-shrink: 0; width: 72px; height: 72px; border-radius: 18px; background: linear-gradient(135deg, rgba(245,158,11,0.18) 0%, rgba(251,191,36,0.06) 100%); border: 1px solid rgba(251,191,36,0.32); display: flex; align-items: center; justify-content: center; color: var(--amber-400);">
+        <i class="ico ico-award" style="font-size: 1.85rem;"></i>
       </div>
-      <div>
-        <h3 style="color: var(--white); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem;">Certificaat van Deelname</h3>
-        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">Rond alle 10 weken af en ontvang een officieel certificaat van Health Stars EdTech.</p>
-        <div style="display: flex; align-items: center; gap: 0.5rem;">
-          <div style="flex: 1; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden;">
-            <div style="height: 100%; width: ${progress.completedWeeks.length * 10}%; background: linear-gradient(90deg, #b8860b, #d4a843); border-radius: 3px; transition: width 0.5s;"></div>
+      <div style="flex: 1;">
+        <h3 style="font-family: var(--font-display); color: var(--white); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.35rem; letter-spacing: -0.015em;">Certificaat van Deelname</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.85rem; line-height: 1.55;">Rond alle 10 weken af en ontvang een officieel certificaat van Health Stars EdTech.</p>
+        <div style="display: flex; align-items: center; gap: 0.85rem;">
+          <div style="flex: 1; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden;">
+            <div style="height: 100%; width: ${progress.completedWeeks.length * 10}%; background: var(--gradient-amber); border-radius: 3px; transition: width 0.5s; box-shadow: 0 0 12px rgba(245,158,11,0.5);"></div>
           </div>
-          <span style="color: #b8860b; font-size: 0.85rem; font-weight: 600; white-space: nowrap;">${progress.completedWeeks.length}/10</span>
+          <span style="font-family: var(--font-display); color: var(--amber-400); font-size: 0.85rem; font-weight: 700; white-space: nowrap; letter-spacing: -0.01em;">${progress.completedWeeks.length}/10</span>
         </div>
       </div>
     </div>
@@ -4014,7 +4378,7 @@ function handleStepAssignmentInput(weekNum, stepNum) {
   stepSaveTimeouts[key] = setTimeout(function() {
     saveStepAssignment(weekNum, stepNum, el.value);
     if (indicator) {
-      indicator.innerHTML = '&#x2705; Opgeslagen';
+      indicator.innerHTML = '<i class="ico ico-check" style="font-size:0.85rem;color:var(--green);margin-right:0.35rem;"></i>Opgeslagen';
       indicator.className = 'save-indicator saved';
     }
   }, 500);
@@ -4032,7 +4396,7 @@ function renderAssignmentWithSteps(descriptionHtml, weekNum, savedAssignment) {
       '<textarea class="assignment-textarea" id="assignment-' + weekNum + '" placeholder="Typ hier je antwoord..." oninput="handleAssignmentInput(' + weekNum + ')">' +
       escapeHtml(savedAssignment) + '</textarea>' +
       '<div class="save-indicator" id="save-indicator-' + weekNum + '">' +
-      (savedAssignment ? '&#x2705; Opgeslagen' : '&#x1F4BE; Wordt automatisch opgeslagen') +
+      (savedAssignment ? '<i class="ico ico-check" style="font-size:0.85rem;color:var(--green);margin-right:0.35rem;"></i>Opgeslagen' : '<i class="ico ico-save" style="font-size:0.85rem;margin-right:0.35rem;"></i>Wordt automatisch opgeslagen') +
       '</div>';
   }
 
@@ -4092,7 +4456,7 @@ function renderAssignmentWithSteps(descriptionHtml, weekNum, savedAssignment) {
       '<textarea class="assignment-step-textarea" id="assignment-' + weekNum + '-step-' + stepNum + '" placeholder="Typ hier je antwoord voor stap ' + stepNum + '..." rows="3" oninput="handleStepAssignmentInput(' + weekNum + ',' + stepNum + ')">' +
       escapeHtml(stepValue) + '</textarea>' +
       '<div class="save-indicator" id="save-indicator-' + weekNum + '-step-' + stepNum + '">' +
-      (stepValue ? '&#x2705; Opgeslagen' : '&#x1F4BE; Wordt automatisch opgeslagen') +
+      (stepValue ? '<i class="ico ico-check" style="font-size:0.85rem;color:var(--green);margin-right:0.35rem;"></i>Opgeslagen' : '<i class="ico ico-save" style="font-size:0.85rem;margin-right:0.35rem;"></i>Wordt automatisch opgeslagen') +
       '</div></div>';
   }
 
@@ -4162,7 +4526,7 @@ function renderWeek(weekNum) {
   };
 
   let html = `
-    <a class="back-link" onclick="showPage('overview')">&#x2190; Terug naar overzicht</a>
+    <a class="back-link" onclick="showPage('overview')"><i class="ico ico-arrow-left" style="font-size:0.85rem;"></i> Terug naar overzicht</a>
 
     <div class="week-header">
       <span class="week-label">Week ${week.week}</span>
@@ -4172,7 +4536,7 @@ function renderWeek(weekNum) {
 
     <!-- THEORY -->
     <div class="section">
-      <h2 class="section-title"><span class="icon">&#x1F4D6;</span> Theorie</h2>
+      <h2 class="section-title"><span class="icon"><i class="ico ico-book"></i></span> Theorie</h2>
       ${currentLevel === 2 && niveau2Summaries[week.week] ? '<div class="niveau2-samenvatting"><strong>Samenvatting:</strong> ' + niveau2Summaries[week.week] + '</div>' : ''}
       <div class="theory-content">${theoryContent}</div>
       ${currentLevel === 4 && niveau4Verdieping[week.week] ? '<div class="niveau4-verdieping"><strong>Verdieping (niveau 4):</strong><br><em>' + niveau4Verdieping[week.week].vraag + '</em><br><br><a href="' + niveau4Verdieping[week.week].bron + '" target="_blank" rel="noopener">' + niveau4Verdieping[week.week].bronTitel + '</a></div>' : ''}
@@ -4181,12 +4545,12 @@ function renderWeek(weekNum) {
     <!-- VIDEO -->
     ${(function() {
       if (week.week === 10) {
-        return '<div class="section"><h2 class="section-title"><span class="icon">&#x1F3C6;</span> Eindopdracht</h2><div class="video-no-video"><div class="finale-icon">&#x1F3C6;</div><div class="finale-accent"></div><div class="finale-heading">Tijd voor jouw eindopdracht</div><div class="finale-sub">Gebruik alles wat je hebt geleerd. Laat zien wat je kunt.</div></div></div>';
+        return '<div class="section"><h2 class="section-title"><span class="icon"><i class="ico ico-award"></i></span> Eindopdracht</h2><div class="video-no-video"><div class="finale-icon"><i class="ico ico-award" style="font-size:2.5rem;color:var(--amber-400);"></i></div><div class="finale-accent"></div><div class="finale-heading">Tijd voor jouw eindopdracht</div><div class="finale-sub">Gebruik alles wat je hebt geleerd. Laat zien wat je kunt.</div></div></div>';
       }
       if (week.visualCard) {
         var vc = week.visualCard;
-        var tipsHtml = vc.tips.map(function(t) { return '<div style="display:flex;align-items:center;gap:0.75rem;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.05);"><span style="font-size:1.5rem;flex-shrink:0;">' + t.icon + '</span><span style="color:var(--text-secondary);font-size:0.95rem;">' + t.text + '</span></div>'; }).join('');
-        return '<div class="section"><h2 class="section-title"><span class="icon">' + vc.icon + '</span> ' + vc.heading + '</h2><div style="padding:1.5rem;background:rgba(79,70,229,0.06);border:1px solid rgba(79,70,229,0.25);border-radius:var(--radius-sm);box-shadow:0 0 20px rgba(79,70,229,0.1);">' + tipsHtml + '</div></div>';
+        var tipsHtml = vc.tips.map(function(t) { return '<div style="display:flex;align-items:center;gap:1rem;padding:0.85rem 0;border-bottom:1px solid var(--border);"><span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,rgba(124,58,237,0.18) 0%,rgba(99,102,241,0.06) 100%);border:1px solid rgba(168,139,250,0.28);color:var(--purple-300);font-size:1rem;flex-shrink:0;">' + t.icon + '</span><span style="color:var(--text-secondary);font-size:0.95rem;line-height:1.5;">' + t.text + '</span></div>'; }).join('');
+        return '<div class="section"><h2 class="section-title"><span class="icon">' + vc.icon + '</span> ' + vc.heading + '</h2><div style="padding:1.75rem;background:linear-gradient(180deg,rgba(124,58,237,0.06) 0%,rgba(124,58,237,0.012) 100%);border:1px solid rgba(168,139,250,0.25);border-radius:18px;box-shadow:0 20px 50px -20px rgba(124,58,237,0.35);">' + tipsHtml + '</div></div>';
       }
       var videoUrl = getVideoUrl(week.week);
       if (videoUrl && videoUrl.trim() !== '') {
@@ -4197,7 +4561,7 @@ function renderWeek(weekNum) {
         var watchUrl = vidId ? 'https://www.youtube.com/watch?v=' + vidId : videoUrl;
         var thumbUrl = vidId ? 'https://img.youtube.com/vi/' + vidId + '/hqdefault.jpg' : '';
         var title = week.video ? week.video.title : 'Video week ' + week.week;
-        return '<div class="section"><h2 class="section-title"><span class="icon">&#x1F3AC;</span> Video</h2>' +
+        return '<div class="section"><h2 class="section-title"><span class="icon"><i class="ico ico-play"></i></span> Video</h2>' +
           '<a href="' + watchUrl + '" target="_blank" rel="noopener" style="display:block;position:relative;width:100%;padding-bottom:56.25%;border-radius:12px;overflow:hidden;background:#000;text-decoration:none;">' +
           (thumbUrl ? '<img src="' + thumbUrl + '" alt="' + title + '" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0.85;">' : '') +
           '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;background:rgba(255,0,0,0.9);border-radius:16px;display:flex;align-items:center;justify-content:center;">' +
@@ -4210,7 +4574,7 @@ function renderWeek(weekNum) {
 
     <!-- ASSIGNMENT -->
     <div class="section">
-      <h2 class="section-title"><span class="icon">&#x270D;&#xFE0F;</span> Opdracht: ${assignmentContent.title}</h2>
+      <h2 class="section-title"><span class="icon"><i class="ico ico-pencil"></i></span> Opdracht: ${assignmentContent.title}</h2>
       ${renderAssignmentWithSteps(assignmentContent.description, weekNum, savedAssignment)}
     </div>
   `;
@@ -4221,7 +4585,7 @@ function renderWeek(weekNum) {
     const challengeBadge = currentLevel === 4 ? '<span class="quiz-challenge-badge">Uitdagender</span>' : '';
     html += `
       <div class="section">
-        <h2 class="section-title"><span class="icon">&#x1F9E0;</span> Quiz${quizLabel}${challengeBadge}</h2>
+        <h2 class="section-title"><span class="icon"><i class="ico ico-spark"></i></span> Quiz${quizLabel}${challengeBadge}</h2>
         <div id="quiz-container-${weekNum}">
           ${quizContent.map((q, qi) => `
             <div class="quiz-question" id="qq-${weekNum}-${qi}">
@@ -4252,13 +4616,13 @@ function renderWeek(weekNum) {
   html += `
     <div class="complete-section">
       <button class="btn ${completed ? 'btn-secondary' : 'btn-success'}" id="complete-btn-${weekNum}" onclick="handleComplete(${weekNum})">
-        ${completed ? '&#x2705; Afgerond — klik om ongedaan te maken' : '&#x2705; Markeer week als afgerond'}
+        ${completed ? '<i class="ico ico-check" style="font-size:0.95rem;margin-right:0.4rem;"></i>Afgerond — klik om ongedaan te maken' : '<i class="ico ico-check" style="font-size:0.95rem;margin-right:0.4rem;"></i>Markeer week als afgerond'}
       </button>
     </div>
 
     <div class="week-nav-buttons">
-      ${prevWeek ? `<button class="btn btn-outline" onclick="showPage('week', ${prevWeek})">&#x2190; Week ${prevWeek}</button>` : '<span></span>'}
-      ${nextWeek ? `<button class="btn btn-outline" onclick="showPage('week', ${nextWeek})">Week ${nextWeek} &#x2192;</button>` : `<button class="btn btn-primary" onclick="showPage('certificate')">Naar certificaat &#x2192;</button>`}
+      ${prevWeek ? `<button class="btn btn-outline" onclick="showPage('week', ${prevWeek})"><i class="ico ico-arrow-left" style="font-size:0.85rem;"></i> Week ${prevWeek}</button>` : '<span></span>'}
+      ${nextWeek ? `<button class="btn btn-outline" onclick="showPage('week', ${nextWeek})">Week ${nextWeek} <i class="ico ico-arrow-right" style="font-size:0.85rem;"></i></button>` : `<button class="btn btn-primary" onclick="showPage('certificate')">Naar certificaat <i class="ico ico-arrow-right" style="font-size:0.85rem;"></i></button>`}
     </div>
   `;
 
@@ -4289,7 +4653,7 @@ function handleQuizAnswer(weekNum, questionIdx, optionIdx) {
   // Show explanation
   const explEl = document.getElementById(`qe-${weekNum}-${questionIdx}`);
   explEl.className = `quiz-explanation show ${isCorrect ? 'correct-expl' : 'incorrect-expl'}`;
-  explEl.innerHTML = `<strong>${isCorrect ? '&#x2705; Goed!' : '&#x274C; Helaas, niet juist.'}</strong> ${q.explanation}`;
+  explEl.innerHTML = `<strong>${isCorrect ? '<i class="ico ico-check" style="font-size:0.95rem;color:var(--green);margin-right:0.35rem;"></i>Goed!' : '<i class="ico ico-x" style="font-size:0.95rem;color:var(--red);margin-right:0.35rem;"></i>Helaas, niet juist.'}</strong> ${q.explanation}`;
 
   // Check if all questions answered
   const allAnswered = quizContent.every((_, qi) => quizState[`${weekNum}-${qi}`] !== undefined);
@@ -4323,7 +4687,7 @@ function handleAssignmentInput(weekNum) {
   saveTimeout = setTimeout(() => {
     saveAssignment(weekNum, el.value);
     if (indicator) {
-      indicator.innerHTML = '&#x2705; Opgeslagen';
+      indicator.innerHTML = '<i class="ico ico-check" style="font-size:0.85rem;color:var(--green);margin-right:0.35rem;"></i>Opgeslagen';
       indicator.className = 'save-indicator saved';
     }
   }, 500);
@@ -4336,7 +4700,7 @@ function handleComplete(weekNum) {
   const btn = document.getElementById(`complete-btn-${weekNum}`);
   if (btn) {
     btn.className = `btn ${completed ? 'btn-secondary' : 'btn-success'}`;
-    btn.innerHTML = completed ? '&#x2705; Afgerond — klik om ongedaan te maken' : '&#x2705; Markeer week als afgerond';
+    btn.innerHTML = completed ? '<i class="ico ico-check" style="font-size:0.95rem;margin-right:0.4rem;"></i>Afgerond — klik om ongedaan te maken' : '<i class="ico ico-check" style="font-size:0.95rem;margin-right:0.4rem;"></i>Markeer week als afgerond';
   }
   updateProgressBar();
 }
