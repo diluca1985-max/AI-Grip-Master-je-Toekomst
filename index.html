@@ -1470,6 +1470,96 @@
 
   .bonus-callout ul li { margin-bottom: 0.3rem; }
 
+  /* ===== ASSIGNMENT BONUS CARD (apart, prominent onder werkveld) ===== */
+  .assignment-bonus-card {
+    margin-top: 2.5rem;
+    padding: 1.9rem 1.9rem 1.75rem;
+    background:
+      linear-gradient(180deg, rgba(245,158,11,0.09) 0%, rgba(245,158,11,0.025) 100%);
+    border: 1px solid rgba(245,158,11,0.32);
+    border-left: 4px solid var(--amber-500);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.06),
+      0 20px 50px -28px rgba(245,158,11,0.35);
+  }
+
+  .assignment-bonus-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 4px;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(245,158,11,0.7) 0%, rgba(245,158,11,0.1) 70%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .assignment-bonus-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.42rem 0.85rem;
+    background: rgba(245,158,11,0.16);
+    border: 1px solid rgba(245,158,11,0.4);
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--amber-500);
+    margin-bottom: 1rem;
+  }
+
+  .assignment-bonus-label .ico {
+    font-size: 0.9rem;
+  }
+
+  .assignment-bonus-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: var(--white);
+    margin: 0 0 1rem;
+    line-height: 1.2;
+  }
+
+  .assignment-bonus-body p {
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin: 0 0 0.95rem;
+    font-size: 0.96rem;
+  }
+
+  .assignment-bonus-body p strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .assignment-bonus-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .assignment-bonus-body .bonus-footnote {
+    margin-top: 1.25rem;
+    padding-top: 1.1rem;
+    border-top: 1px dashed rgba(245,158,11,0.3);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  @media (max-width: 640px) {
+    .assignment-bonus-card { padding: 1.4rem 1.3rem 1.25rem; margin-top: 2rem; }
+    .assignment-bonus-title { font-size: 1.25rem; }
+  }
+
   /* ===== CERTIFICATE COUNTER TICKER (glassmorphism neon) ===== */
   .cert-ticker {
     margin-top: 1rem;
@@ -1566,11 +1656,12 @@
   }
 
   .cert-ticker-label {
-    font-size: 0.82rem;
-    color: var(--text-secondary);
+    font-size: 0.78rem;
+    color: var(--text-muted);
     letter-spacing: 0.01em;
-    line-height: 1.5;
+    line-height: 1.4;
     display: block;
+    margin-bottom: 0.15rem;
   }
 
   .cert-ticker-label strong {
@@ -1578,11 +1669,30 @@
     font-weight: 600;
   }
 
+  .cert-ticker-brand {
+    display: block;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    color: var(--text-primary);
+    letter-spacing: 0.005em;
+  }
+
+  .cert-ticker-brand-sep {
+    display: inline-block;
+    margin: 0 0.4em;
+    color: var(--text-muted);
+    font-style: normal;
+    font-weight: 300;
+  }
+
   @media (max-width: 480px) {
     .cert-ticker { padding: 1.1rem 1.15rem; gap: 0.9rem; }
     .cert-ticker-icon { width: 46px; height: 46px; }
     .cert-ticker-count { font-size: 1.55rem; }
-    .cert-ticker-label { font-size: 0.78rem; }
+    .cert-ticker-label { font-size: 0.72rem; }
+    .cert-ticker-brand { font-size: 0.88rem; }
   }
 
   /* ===== TRUST BADGE LINK (clickable badge) ===== */
@@ -2588,7 +2698,8 @@
         <div class="cert-ticker-icon"><i class="ico ico-award"></i></div>
         <div class="cert-ticker-body">
           <span class="cert-ticker-count" id="certTickerCount">0</span>
-          <span class="cert-ticker-label"><strong id="certTickerLabel">certificaten behaald</strong> via AI-Grip</span>
+          <span class="cert-ticker-label" id="certTickerLabel">certificaten behaald op</span>
+          <span class="cert-ticker-brand">AI-Grip<span class="cert-ticker-brand-sep">/</span>Master je Toekomst</span>
         </div>
       </div>
     </div>
@@ -2683,7 +2794,7 @@ function updateCertTickerDisplay(value) {
   if (!tickerEl || !countEl) return;
   countEl.textContent = value.toLocaleString('nl-NL');
   if (labelEl) {
-    labelEl.textContent = value === 1 ? 'certificaat behaald' : 'certificaten behaald';
+    labelEl.textContent = value === 1 ? 'certificaat behaald op' : 'certificaten behaald op';
   }
   tickerEl.classList.add('visible');
 }
@@ -3874,32 +3985,37 @@ const courseData = [
         Lever je dossier in als één document. Zet erin: je stelling, je 3 eigen
         argumenten, de 3 tegenargumenten van AI met jouw reactie, en je reflectie.
       </p>
-
-      <h3>Ga een stap verder: De Grote AI-Ethiek Discussie</h3>
-      <p>
-        Heb je energie over, of werk je samen met klasgenoten? Pak dezelfde
-        stelling erbij en ga er een echt debat over voeren. Niks tegen AI, maar
-        een mens die je in de ogen kijkt en je terugduwt is iets anders.
-      </p>
-      <p>
-        <strong>Stap 1:</strong> Vorm tweetallen of kleine groepjes. De ene helft
-        verdedigt jouw standpunt, de andere helft het tegenovergestelde. Je mag
-        de kant kiezen die je in je dossier NIET verdedigd hebt. Extra leerzaam.
-      </p>
-      <p>
-        <strong>Stap 2:</strong> Debatteer 10 minuten. Luister écht naar elkaars
-        argumenten en reageer op wat de ander zegt in plaats van je eigen verhaal
-        te herhalen.
-      </p>
-      <p>
-        <strong>Stap 3:</strong> Schrijf na afloop 3 zinnen: wat was het sterkste
-        argument van de tegenpartij, en is je mening in het echte gesprek verder
-        verschoven dan tijdens je solo-dossier?
-      </p>
-      <p>
-        Deze bonus is optioneel en telt niet mee voor je certificaat.
-      </p>
-      `
+      `,
+      bonus: {
+        label: "Optionele extra opdracht",
+        title: "De Grote AI-Ethiek Discussie",
+        body: `
+        <p>
+          Heb je energie over, of werk je samen met klasgenoten? Pak dezelfde
+          stelling erbij en ga er een echt debat over voeren. Niks tegen AI,
+          maar een mens die je in de ogen kijkt en je terugduwt is iets anders.
+        </p>
+        <p>
+          <strong>Stap 1:</strong> Vorm tweetallen of kleine groepjes. De ene
+          helft verdedigt jouw standpunt, de andere helft het tegenovergestelde.
+          Je mag de kant kiezen die je in je dossier NIET verdedigd hebt. Extra
+          leerzaam.
+        </p>
+        <p>
+          <strong>Stap 2:</strong> Debatteer 10 minuten. Luister écht naar elkaars
+          argumenten en reageer op wat de ander zegt in plaats van je eigen
+          verhaal te herhalen.
+        </p>
+        <p>
+          <strong>Stap 3:</strong> Schrijf na afloop 3 zinnen: wat was het sterkste
+          argument van de tegenpartij, en is je mening in het echte gesprek verder
+          verschoven dan tijdens je solo-dossier?
+        </p>
+        <p class="bonus-footnote">
+          Deze bonus is optioneel en telt niet mee voor je certificaat.
+        </p>
+        `
+      }
     },
     quiz: [
       {
@@ -5386,6 +5502,16 @@ function renderWeek(weekNum) {
     <div class="section">
       <h2 class="section-title"><span class="icon"><i class="ico ico-pencil"></i></span> Opdracht: ${assignmentContent.title}</h2>
       ${renderAssignmentWithSteps(assignmentContent.description, weekNum, savedAssignment)}
+      ${assignmentContent.bonus ? `
+      <div class="assignment-bonus-card">
+        <div class="assignment-bonus-label">
+          <i class="ico ico-spark"></i>
+          <span>${escapeHtml(assignmentContent.bonus.label || 'Optionele extra opdracht')}</span>
+        </div>
+        <h3 class="assignment-bonus-title">${escapeHtml(assignmentContent.bonus.title || '')}</h3>
+        <div class="assignment-bonus-body">${assignmentContent.bonus.body || ''}</div>
+      </div>
+      ` : ''}
     </div>
   `;
 
