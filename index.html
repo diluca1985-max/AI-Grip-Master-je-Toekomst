@@ -2428,6 +2428,100 @@
     color: var(--white);
   }
 
+  /* ===== LANDING PAGE ===== */
+  .landing { max-width: 720px; margin: 0 auto; padding: 4rem 1.5rem 2rem; }
+
+  .landing-hero { text-align: center; margin-bottom: 4rem; }
+  .landing-hero .eyebrow { display: inline-block; font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--purple-300); margin-bottom: 1.25rem; }
+  .landing-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; letter-spacing: -0.025em; line-height: 1.15; color: var(--white); margin-bottom: 1rem; }
+  .landing-hero h1 span { background: var(--gradient-amber); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .landing-hero .subtitle { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.65; max-width: 560px; margin: 0 auto; }
+
+  .landing-section { margin-bottom: 3.5rem; }
+  .landing-section h2 { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: var(--white); letter-spacing: -0.015em; margin-bottom: 1rem; }
+  .landing-section h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+  .landing-section p, .landing-section li { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+  .landing-section ul { list-style: none; padding: 0; }
+  .landing-section ul li { padding: 0.4rem 0; padding-left: 1.4rem; position: relative; }
+  .landing-section ul li::before { content: ''; position: absolute; left: 0; top: 0.85rem; width: 6px; height: 6px; border-radius: 50%; background: var(--purple-400); }
+
+  .landing-card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.012) 100%);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .landing-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+  @media (max-width: 640px) { .landing-grid { grid-template-columns: 1fr; } }
+
+  .landing-grid .landing-card { text-align: center; padding: 1.75rem 1.25rem; }
+  .landing-grid .landing-card .card-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 48px; height: 48px; border-radius: 14px; margin-bottom: 1rem;
+    background: linear-gradient(135deg, rgba(124,58,237,0.18) 0%, rgba(99,102,241,0.06) 100%);
+    border: 1px solid rgba(168,139,250,0.28); color: var(--purple-300);
+  }
+
+  .landing-stat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+  @media (max-width: 640px) { .landing-stat-grid { grid-template-columns: 1fr; } }
+  .landing-stat {
+    background: linear-gradient(180deg, rgba(245,158,11,0.06) 0%, rgba(245,158,11,0.015) 100%);
+    border: 1px solid rgba(245,158,11,0.2);
+    border-radius: 16px; padding: 1.5rem; text-align: center;
+  }
+  .landing-stat .stat-number { font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: var(--amber-400); letter-spacing: -0.03em; }
+  .landing-stat .stat-label { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.45; }
+  .landing-stat .stat-source { font-size: 0.7rem; color: var(--text-faint); margin-top: 0.5rem; }
+
+  .landing-differ { counter-reset: differ; }
+  .landing-differ .differ-item { display: flex; gap: 1.25rem; align-items: flex-start; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+  .landing-differ .differ-item:last-child { border-bottom: none; }
+  .landing-differ .differ-num {
+    counter-increment: differ;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+    background: var(--gradient-primary); color: var(--white);
+    font-family: var(--font-display); font-size: 0.85rem; font-weight: 800;
+  }
+  .landing-differ .differ-num::after { content: counter(differ); }
+
+  .landing-cta-block {
+    text-align: center; padding: 3rem 2rem;
+    background: linear-gradient(180deg, rgba(124,58,237,0.08) 0%, rgba(124,58,237,0.02) 100%);
+    border: 1px solid rgba(168,139,250,0.25); border-radius: 20px;
+  }
+  .landing-cta-block h2 { margin-bottom: 0.5rem; }
+  .landing-cta-block p { color: var(--text-muted); margin-bottom: 1.5rem; }
+  .landing-cta-block .cta-sub { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+  .landing-cta-block .cta-sub h3 { color: var(--amber-400); }
+
+  .btn-landing {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 2rem; border-radius: 12px; border: none;
+    font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+    cursor: pointer; transition: var(--transition); text-decoration: none;
+  }
+  .btn-landing-primary {
+    background: var(--gradient-primary); color: var(--white);
+    box-shadow: 0 12px 32px -8px rgba(124,58,237,0.5);
+  }
+  .btn-landing-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px -8px rgba(124,58,237,0.6); }
+
+  .btn-landing-secondary {
+    background: rgba(255,255,255,0.06); color: var(--text-secondary);
+    border: 1px solid var(--border-strong);
+  }
+  .btn-landing-secondary:hover { background: rgba(255,255,255,0.1); color: var(--white); }
+
+  .landing-divider { height: 1px; background: var(--border); margin: 3.5rem 0; }
+
+  .landing-closing { text-align: center; padding: 1rem 0 2rem; }
+  .landing-closing p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; max-width: 520px; margin: 0 auto; }
+
   /* ===== FOOTER ===== */
   .app-footer {
     text-align: center;
@@ -2468,7 +2562,7 @@
     <span class="logo-mark">AI</span> <span>AI-Grip<span class="logo-sub"><span style="color:var(--text-muted);font-weight:500;margin:0 0.4rem 0 0.5rem;">/</span><span class="accent">Master je Toekomst</span></span></span>
   </div>
   <div class="progress-header" id="progressHeader" style="display:none;">
-    <span class="home-btn" onclick="showPage('welcome')" title="Terug naar startpagina"><i class="ico ico-home" style="font-size:1rem;"></i></span>
+    <span class="home-btn" onclick="showPage('landing')" title="Terug naar startpagina"><i class="ico ico-home" style="font-size:1rem;"></i></span>
     <span class="level-badge" id="levelBadge" onclick="showPage('welcome')" title="Klik om van niveau te wisselen" style="display:none;"></span>
     <div class="progress-bar-container">
       <div class="progress-bar-fill" id="progressBarFill" style="width:0%"></div>
@@ -2490,8 +2584,190 @@
   </div>
 </div>
 
+<!-- PAGE: LANDING -->
+<div class="page active" id="page-landing">
+  <div class="landing">
+
+    <!-- HERO -->
+    <div class="landing-hero">
+      <span class="eyebrow">AI-geletterdheid &middot; MBO &middot; 10 weken</span>
+      <h1>Master je toekomst <span>met AI</span></h1>
+      <p class="subtitle">AI-geletterdheid voor het mbo. Praktisch, toepasbaar en direct inzetbaar.</p>
+    </div>
+
+    <!-- HET PROBLEEM -->
+    <div class="landing-section">
+      <h2>Het probleem</h2>
+      <p style="margin-bottom:1.25rem;">AI verandert het werkveld sneller dan het onderwijs kan bijhouden. Dit cre&euml;ert een groeiende kloof tussen opleiding en praktijk.</p>
+      <div class="landing-card" style="padding:0;overflow:hidden;">
+        <div style="display:flex;align-items:flex-start;gap:1.25rem;padding:1.35rem 1.75rem;border-bottom:1px solid var(--border);">
+          <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);color:var(--red);flex-shrink:0;"><i class="ico ico-alert" style="font-size:0.95rem;"></i></span>
+          <p>Studenten gebruiken AI dagelijks, meestal zonder werkelijk begrip van kwaliteit, risico's of toepassing.</p>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:1.25rem;padding:1.35rem 1.75rem;border-bottom:1px solid var(--border);">
+          <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);color:var(--red);flex-shrink:0;"><i class="ico ico-help" style="font-size:0.95rem;"></i></span>
+          <p>De meeste opleidingen hebben nog geen doorlopende leerlijn voor AI-geletterdheid ontwikkeld.</p>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:1.25rem;padding:1.35rem 1.75rem;">
+          <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);color:var(--red);flex-shrink:0;"><i class="ico ico-x" style="font-size:0.95rem;"></i></span>
+          <p>Docenten willen begeleiden, maar missen structuur, handvatten en deskundigheid.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DE OPLOSSING -->
+    <div class="landing-section">
+      <h2>De oplossing</h2>
+      <div class="landing-card">
+        <p>AI Grip is een praktijkgerichte leerervaring voor AI-geletterdheid in het mbo. Voor zowel studenten als docenten. Leren over de basis van AI in je eigen tempo. Geen losse module. Geen theorie-only aanpak. Maar een direct, praktisch inzetbare e-learning die werkt.</p>
+      </div>
+    </div>
+
+    <!-- WAT AI GRIP ANDERS MAAKT -->
+    <div class="landing-section">
+      <h2>Wat AI Grip anders maakt</h2>
+      <div class="landing-card">
+        <div class="landing-differ">
+          <div class="differ-item">
+            <span class="differ-num"></span>
+            <div>
+              <h3>Leren door doen</h3>
+              <p>Studenten werken met AI binnen of buiten de klas, in hun eigen tempo.</p>
+            </div>
+          </div>
+          <div class="differ-item">
+            <span class="differ-num"></span>
+            <div>
+              <h3>Samen ontwikkelen</h3>
+              <p>Student en docent ontwikkelen gelijktijdig hun vaardigheden. E&#769;e&#769;n aanpak.</p>
+            </div>
+          </div>
+          <div class="differ-item">
+            <span class="differ-num"></span>
+            <div>
+              <h3>Direct inzetbaar</h3>
+              <p>Geen implementatietraject. Morgen te gebruiken in de les.</p>
+            </div>
+          </div>
+          <div class="differ-item">
+            <span class="differ-num"></span>
+            <div>
+              <h3>Gericht op begrip, niet alleen gebruik</h3>
+              <p>Focus op kritisch denken, kwaliteit en verantwoordelijkheid.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTAAT -->
+    <div class="landing-section">
+      <h2>Resultaat</h2>
+      <div class="landing-card" style="padding:0;overflow:hidden;">
+        <div style="display:flex;align-items:flex-start;gap:1.25rem;padding:1.5rem 2rem;border-bottom:1px solid var(--border);">
+          <span style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,rgba(124,58,237,0.18) 0%,rgba(99,102,241,0.06) 100%);border:1px solid rgba(168,139,250,0.28);color:var(--purple-300);flex-shrink:0;"><i class="ico ico-book" style="font-size:1.1rem;"></i></span>
+          <div>
+            <h3 style="margin-bottom:0.3rem;">Voor studenten</h3>
+            <p>Begrijpen hoe AI werkt, het effectief toepassen in hun dagelijks leven, en toekomstbestendige vaardigheden ontwikkelen.</p>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:1.25rem;padding:1.5rem 2rem;border-bottom:1px solid var(--border);">
+          <span style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,rgba(245,158,11,0.18) 0%,rgba(251,191,36,0.06) 100%);border:1px solid rgba(251,191,36,0.28);color:var(--amber-400);flex-shrink:0;"><i class="ico ico-target" style="font-size:1.1rem;"></i></span>
+          <div>
+            <h3 style="margin-bottom:0.3rem;">Voor docenten</h3>
+            <p>Zekerder worden in het gebruik van AI in onderwijs en het integreren zonder extra werkdruk.</p>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:1.25rem;padding:1.5rem 2rem;">
+          <span style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,rgba(34,197,94,0.15) 0%,rgba(34,197,94,0.04) 100%);border:1px solid rgba(34,197,94,0.25);color:var(--green);flex-shrink:0;"><i class="ico ico-building" style="font-size:1.1rem;"></i></span>
+          <div>
+            <h3 style="margin-bottom:0.3rem;">Voor opleidingen</h3>
+            <p>Eerste stap naar structurele AI-geletterdheid, betere aansluiting op de arbeidsmarkt, en direct zichtbaar resultaat.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROGRAMMA-OVERZICHT -->
+    <div class="landing-section">
+      <h2>Programma-overzicht</h2>
+      <div class="landing-card" style="display:flex;align-items:center;gap:1.5rem;">
+        <span style="display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:16px;background:var(--gradient-primary);color:var(--white);font-family:var(--font-display);font-weight:800;font-size:1.1rem;flex-shrink:0;box-shadow:0 8px 24px -8px rgba(124,58,237,0.5);">10</span>
+        <div>
+          <h3>10 weken, modulair opgebouwd</h3>
+          <p style="margin-top:0.4rem;">Van basisbegrip van AI, via toepassing in beroepscontext, naar kritisch gebruik en beoordeling.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="landing-divider"></div>
+
+    <!-- WAAROM NU -->
+    <div class="landing-section">
+      <h2>Waarom nu</h2>
+      <p style="margin-bottom:1.5rem;">De ontwikkeling van AI wacht niet op het onderwijs. Organisaties verwachten dat vaardigheden rondom AI de komende jaren fundamenteel veranderen. Studenten die nu worden opgeleid, moeten daar vandaag op voorbereid worden.</p>
+      <p style="margin-bottom:1.5rem;"><strong style="color:var(--white);">AI-geletterdheid is geen extra. Het wordt een basisvaardigheid.</strong></p>
+
+      <div class="landing-stat-grid">
+        <div class="landing-stat">
+          <div class="stat-number">56%</div>
+          <div class="stat-label">van Gen Z-scholieren gebruikt minstens wekelijks AI</div>
+          <div class="stat-source">Walton Family Foundation &amp; Gallup, 2026</div>
+        </div>
+        <div class="landing-stat">
+          <div class="stat-number">45%</div>
+          <div class="stat-label">van de docenten wereldwijd heeft nog geen AI-training gehad</div>
+          <div class="stat-source">Microsoft, AI in Education Report 2025</div>
+        </div>
+        <div class="landing-stat">
+          <div class="stat-number">39%</div>
+          <div class="stat-label">van de kernvaardigheden verandert of veroudert v&oacute;&oacute;r 2030</div>
+          <div class="stat-source">World Economic Forum, Future of Jobs 2025</div>
+        </div>
+      </div>
+
+      <div class="landing-card" style="margin-top:1.25rem;display:flex;align-items:flex-start;gap:1rem;">
+        <span style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);color:var(--amber-400);flex-shrink:0;"><i class="ico ico-globe" style="font-size:1rem;"></i></span>
+        <div>
+          <p style="margin-bottom:0.3rem;"><strong style="color:var(--amber-400);">En in Nederland?</strong></p>
+          <p>43% van de werkenden gebruikt nu al AI bij hun werk en 41% verwacht dat hun werk deels door AI kan worden overgenomen. De transitie is niet iets van straks, hij is al bezig.</p>
+          <p class="stat-source" style="font-size:0.72rem;color:var(--text-faint);margin-top:0.5rem;">CBS, Belevingen 2025 &mdash; 2026</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="landing-divider"></div>
+
+    <!-- BEWIJS -->
+    <div class="landing-section" style="text-align:center;">
+      <h2>De eerste groep is gestart</h2>
+      <p style="max-width:480px;margin:0 auto;">Docenten en studenten gebruiken AI Grip om direct invulling te geven aan AI in hun onderwijspraktijk. De behoefte is duidelijk. De oplossing is nu beschikbaar.</p>
+    </div>
+
+    <!-- CTA -->
+    <div class="landing-cta-block">
+      <h2>Start direct</h2>
+      <p>Geen account. Geen drempels. Gratis.</p>
+      <button class="btn-landing btn-landing-primary" onclick="showPage('welcome')">Start met AI Grip <i class="ico ico-arrow-right" style="font-size:0.9rem;"></i></button>
+      <div class="cta-sub">
+        <h3>Voor opleidingen en teams</h3>
+        <p style="font-size:0.9rem;">Wil je AI-geletterdheid structureel integreren binnen jouw opleiding of kijken welke mogelijkheden er nog meer zijn?</p>
+        <a href="https://www.linkedin.com/in/luuk-otten/" target="_blank" rel="noopener" class="btn-landing btn-landing-secondary" style="margin-top:1rem;">Neem contact op <i class="ico ico-arrow-right" style="font-size:0.85rem;"></i></a>
+      </div>
+    </div>
+
+    <div class="landing-divider"></div>
+
+    <!-- AFSLUITING -->
+    <div class="landing-closing">
+      <p>AI Grip is ontwikkeld vanuit de praktijk van het mbo. Met &eacute;&eacute;n doel: studenten en docenten voorbereiden op een werkelijkheid die al begonnen is.</p>
+    </div>
+
+  </div>
+</div>
+
 <!-- PAGE: WELCOME -->
-<div class="page active" id="page-welcome">
+<div class="page" id="page-welcome">
   <div class="welcome">
     <div class="welcome-card">
       <span class="eyebrow">AI-geletterdheid &middot; 10 weken &middot; MBO</span>
@@ -4877,13 +5153,22 @@ function showPage(pageId, data) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
 
   const header = document.getElementById('progressHeader');
-  if (pageId === 'welcome') {
+  const appHeader = document.querySelector('.app-header');
+  if (pageId === 'landing') {
     header.style.display = 'none';
+    if (appHeader) appHeader.style.display = 'none';
+  } else if (pageId === 'welcome') {
+    header.style.display = 'none';
+    if (appHeader) appHeader.style.display = 'flex';
   } else {
     header.style.display = 'flex';
+    if (appHeader) appHeader.style.display = 'flex';
   }
 
-  if (pageId === 'overview') {
+  if (pageId === 'landing') {
+    document.getElementById('page-landing').classList.add('active');
+    if (typeof pauseTimer === 'function') pauseTimer();
+  } else if (pageId === 'overview') {
     document.getElementById('page-overview').classList.add('active');
     renderOverview();
     if (typeof pauseTimer === 'function') pauseTimer();
