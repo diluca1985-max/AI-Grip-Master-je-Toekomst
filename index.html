@@ -196,6 +196,7 @@
   .ico-alert { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z'/><path d='M12 9v4'/><path d='M12 17h.01'/></svg>"); }
   .ico-help { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'/><path d='M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3'/><path d='M12 17h.01'/></svg>"); }
   .ico-megaphone { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='m3 11 18-5v12L3 14v-3z'/><path d='M11.6 16.8a3 3 0 1 1-5.8-1.6'/></svg>"); }
+  .ico-home { --svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8'/><path d='M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/></svg>"); }
 
   /* ===== HEADER ===== */
   .app-header {
@@ -2168,9 +2169,31 @@
     background: rgba(255,255,255,0.25);
   }
 
+  .home-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+    flex-shrink: 0;
+  }
+
+  .home-btn:hover {
+    background: rgba(255,255,255,0.15);
+    color: var(--white);
+    border-color: rgba(255,255,255,0.2);
+  }
+
   @media (max-width: 768px) {
     .level-selector { grid-template-columns: 1fr; }
     .level-badge { font-size: 0.7rem; padding: 0.2rem 0.5rem; }
+    .home-btn { width: 30px; height: 30px; border-radius: 8px; }
   }
 
   /* ===== VIDEO SEARCH CARD ===== */
@@ -2445,6 +2468,7 @@
     <span class="logo-mark">AI</span> <span>AI-Grip<span class="logo-sub"><span style="color:var(--text-muted);font-weight:500;margin:0 0.4rem 0 0.5rem;">/</span><span class="accent">Master je Toekomst</span></span></span>
   </div>
   <div class="progress-header" id="progressHeader" style="display:none;">
+    <span class="home-btn" onclick="showPage('welcome')" title="Terug naar startpagina"><i class="ico ico-home" style="font-size:1rem;"></i></span>
     <span class="level-badge" id="levelBadge" onclick="showPage('welcome')" title="Klik om van niveau te wisselen" style="display:none;"></span>
     <div class="progress-bar-container">
       <div class="progress-bar-fill" id="progressBarFill" style="width:0%"></div>
