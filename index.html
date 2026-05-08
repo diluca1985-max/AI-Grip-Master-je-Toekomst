@@ -225,7 +225,10 @@
     cursor: pointer;
     letter-spacing: -0.015em;
     color: var(--white);
+    text-decoration: none;
+    border-bottom: none;
   }
+  .app-header .logo:hover { border-bottom: none; }
 
   .app-header .logo .logo-mark {
     display: inline-flex;
@@ -2596,9 +2599,9 @@
 
 <!-- HEADER -->
 <header class="app-header">
-  <div class="logo" onclick="showPage('overview')">
+  <a href="/" class="logo" aria-label="Naar de landingspagina">
     <span class="logo-mark">AI</span> <span>AI-Grip<span class="logo-sub"><span style="color:var(--text-muted);font-weight:500;margin:0 0.4rem 0 0.5rem;">/</span><span class="accent">Master je Toekomst</span></span></span>
-  </div>
+  </a>
   <div class="progress-header" id="progressHeader" style="display:none;">
     <span class="home-btn" onclick="showPage('welcome')" title="Terug naar startpagina"><i class="ico ico-home" style="font-size:1rem;"></i></span>
     <span class="level-badge" id="levelBadge" onclick="showPage('welcome')" title="Klik om van niveau te wisselen" style="display:none;"></span>
