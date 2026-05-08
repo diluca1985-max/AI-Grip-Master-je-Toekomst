@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# Persoonlijke bestanden — niet publiek
+*.pptx
+*.docx
+Gemini_Generated_Image_*.png
+Logo*.png
+.claude-flow/
