@@ -1063,20 +1063,25 @@ footer .footer-meta {
   .nav-link.active { padding: 0.4rem 0.7rem; }
 }
 
-/* Blok 07 De onderbouwing — drie principes met genummerde prefix */
-.onderbouwing .principe {
-  display: flex;
-  align-items: baseline;
-  gap: 1rem;
-  margin: 0.5rem 0;
-  padding: 0.5rem 0;
+/* Blok 07 De onderbouwing — drie principes met zelfde bewijs-styling als blok 08 */
+.onderbouwing ul.bewijs { list-style: none; margin: 2rem 0 3rem; }
+.onderbouwing ul.bewijs li {
+  position: relative;
+  padding: 0.85rem 0 0.85rem 2.25rem;
+  color: var(--text);
+  font-size: 1.0625rem;
+  border-bottom: 1px solid var(--border);
 }
-.onderbouwing .principe-nr {
-  font-family: var(--font-display, 'Inter', sans-serif);
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: #a855f7;
-  letter-spacing: 0.05em;
-  flex-shrink: 0;
-  min-width: 1.5rem;
+.onderbouwing ul.bewijs li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 1.2rem;
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(135deg, var(--purple-500), var(--amber-500));
+  border-radius: 4px;
+  transform: rotate(45deg);
+  box-shadow: 0 0 12px rgba(168,139,250,0.4);
 }
+.onderbouwing ul.bewijs li:last-child { border-bottom: none; }
