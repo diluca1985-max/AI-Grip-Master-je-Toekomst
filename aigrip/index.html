@@ -8,7 +8,28 @@
 <meta http-equiv="Expires" content="0">
 <meta name="dcterms.rights" content="© 2026 Luuk Otten. CC BY-NC-ND 4.0">
 <meta name="theme-color" content="#06060c">
-<title>AI-Grip: Master je Toekomst</title>
+<title>E-learning AI-geletterdheid mbo · AI Grip / Master je Toekomst</title>
+<meta name="description" content="Gratis e-learning AI-geletterdheid voor docenten en studenten in het mbo. Tien weken, modulair, gedifferentieerd op niveau 2, 3 en 4. Morgen inzetbaar in de les.">
+<meta name="author" content="Luuk Otten">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ai-geletterdheid-mbo.nl/aigrip/">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="nl_NL">
+<meta property="og:url" content="https://ai-geletterdheid-mbo.nl/aigrip/">
+<meta property="og:title" content="E-learning AI-geletterdheid mbo · AI Grip / Master je Toekomst">
+<meta property="og:description" content="Gratis e-learning AI-geletterdheid voor docenten en studenten in het mbo. Tien weken, modulair, gedifferentieerd op niveau 2, 3 en 4.">
+<meta property="og:site_name" content="AI-geletterdheid voor het mbo">
+<meta property="og:image" content="https://ai-geletterdheid-mbo.nl/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="AI Grip / Master je Toekomst, AI-geletterdheid voor het mbo">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="E-learning AI-geletterdheid mbo · AI Grip / Master je Toekomst">
+<meta name="twitter:description" content="Gratis e-learning AI-geletterdheid voor docenten en studenten in het mbo. Tien weken, modulair.">
+<meta name="twitter:image" content="https://ai-geletterdheid-mbo.nl/og-image.png">
+
 <link rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.nl">
 <link rel="icon" type="image/svg+xml" href="https://ai-geletterdheid-mbo.nl/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2775,11 +2796,13 @@
 <!-- FOOTER -->
 <footer class="app-footer">
   <nav class="footer-nav" aria-label="Footer">
-    <a href="/">Home</a>
-    <a href="/programma/">Programma</a>
-    <a href="/onderzoek/">Onderzoek</a>
-    <a href="/over/">Over</a>
-    <a href="/aigrip/">Start e-learning</a>
+    <a href="https://ai-geletterdheid-mbo.nl/">Home</a>
+    <a href="https://ai-geletterdheid-mbo.nl/programma/">Programma</a>
+    <a href="https://ai-geletterdheid-mbo.nl/onderzoek/">Onderzoek</a>
+    <a href="https://ai-geletterdheid-mbo.nl/over/">Over</a>
+    <a href="https://ai-geletterdheid-mbo.nl/prijzen/">Prijzen</a>
+    <a href="https://ai-geletterdheid-mbo.nl/samenwerkingen/">Samenwerkingen</a>
+    <a href="https://ai-geletterdheid-mbo.nl/aigrip/">Start e-learning</a>
   </nav>
   <p class="footer-brand">AI Grip / Master je Toekomst</p>
   <p>&copy; 2026 Luuk Otten &middot; Mogelijk gemaakt door Health Stars EdTech</p>
@@ -5041,17 +5064,24 @@ function showPage(pageId, data) {
 
   if (pageId === 'overview') {
     document.getElementById('page-overview').classList.add('active');
-    renderOverview();
+    currentTimerWeek = null;
     if (typeof pauseTimer === 'function') pauseTimer();
+    renderOverview();
   } else if (pageId === 'week') {
     document.getElementById('page-week').classList.add('active');
+    if (typeof pauseTimer === 'function') pauseTimer();
+    currentTimerWeek = data;
+    setStartDateIfNotSet();
     renderWeek(data);
+    restoreQuizForWeek(data);
     if (typeof startTimer === 'function') { lastActivityTime = Date.now(); startTimer(); }
   } else if (pageId === 'certificate') {
     document.getElementById('page-certificate').classList.add('active');
+    currentTimerWeek = null;
     if (typeof pauseTimer === 'function') pauseTimer();
   } else {
     document.getElementById('page-welcome').classList.add('active');
+    currentTimerWeek = null;
     initWelcomePage();
     if (typeof pauseTimer === 'function') pauseTimer();
   }
@@ -5606,13 +5636,53 @@ function renderWeek(weekNum) {
 }
 
 // ===== QUIZ LOGIC =====
-const quizState = {};
+const quizState = (function loadQuizStateFromProgress() {
+  const out = {};
+  try {
+    const p = getProgress();
+    const scores = p.quizScores || {};
+    Object.keys(scores).forEach(function(wk) {
+      const m = wk.match(/^week(\d+)$/);
+      if (!m) return;
+      const wn = m[1];
+      const answers = scores[wk] || {};
+      Object.keys(answers).forEach(function(qi) {
+        out[wn + '-' + qi] = answers[qi];
+      });
+    });
+  } catch (e) {}
+  return out;
+})();
+
+function restoreQuizForWeek(weekNum) {
+  const week = courseData.find(w => w.week === weekNum);
+  if (!week || !week.quiz) return;
+  const quizContent = L(week.quiz);
+  quizContent.forEach(function(_, qi) {
+    const key = weekNum + '-' + qi;
+    if (quizState[key] !== undefined) {
+      const optionIdx = quizState[key];
+      delete quizState[key]; // tijdelijk wissen zodat handleQuizAnswer doorloopt
+      handleQuizAnswer(weekNum, qi, optionIdx);
+    }
+  });
+}
+
+function persistQuizAnswer(weekNum, questionIdx, optionIdx) {
+  const progress = getProgress();
+  if (!progress.quizScores) progress.quizScores = {};
+  const k = 'week' + weekNum;
+  if (!progress.quizScores[k]) progress.quizScores[k] = {};
+  progress.quizScores[k][questionIdx] = optionIdx;
+  saveProgress(progress);
+}
 
 function handleQuizAnswer(weekNum, questionIdx, optionIdx) {
   const key = `${weekNum}-${questionIdx}`;
   if (quizState[key] !== undefined) return; // already answered
 
   quizState[key] = optionIdx;
+  persistQuizAnswer(weekNum, questionIdx, optionIdx);
   const week = courseData.find(w => w.week === weekNum);
   const quizContent = L(week.quiz);
   const q = quizContent[questionIdx];
@@ -5732,10 +5802,14 @@ function generateCertificate() {
     return;
   }
 
+  setEndDateNow();
+
   const today = new Date();
   const dateStr = today.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
 
-  const timeInvestment = getFormattedTimeInvestment();
+  const studyLoad = getStudyLoadString();
+  const activeTime = getActiveTimeFormatted();
+  const doorlooptijd = getDoorlooptijdString();
 
   document.getElementById('certificateOutput').innerHTML = `
     <div class="certificate-frame" id="certificatePrint">
@@ -5746,7 +5820,9 @@ function generateCertificate() {
         <div class="cert-name">${escapeHtml(name)}</div>
         <p class="cert-statement">heeft met succes afgerond:</p>
         <p class="cert-details">tien weken durende training AI-geletterdheid. Niveau ${getLevel()}</p>
-        <p class="cert-details">Effectieve studietijd: ${timeInvestment}</p>
+        <p class="cert-details">Doorlopen ${doorlooptijd}</p>
+        <p class="cert-details">Studielast (SBU): ${studyLoad}</p>
+        <p class="cert-details">Geregistreerde actieve studietijd: ${activeTime}</p>
         <div class="cert-footer">
           <div class="cert-signature">
             <div class="cert-sig-line"></div>
@@ -5890,8 +5966,9 @@ function _drawCertificateCanvas(certFrame, estherSigImg, sealImg) {
 
   ctx.fillStyle = '#666666';
   ctx.font = '12px ' + sans;
-  const canvasTime = getFormattedTimeInvestment();
-  ctx.fillText('Effectieve studietijd: ' + canvasTime, left, 260);
+  ctx.fillText('Doorlopen ' + getDoorlooptijdString(), left, 256);
+  ctx.fillText('Studielast (SBU): ' + getStudyLoadString(), left, 274);
+  ctx.fillText('Geregistreerde actieve studietijd: ' + getActiveTimeFormatted(), left, 292);
 
   // --- Footer area ---
   const footerY = h - 120;
@@ -5987,7 +6064,9 @@ function showCertificatePreview() {
   const dateStr = today.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
   const previewName = allCompleted ? '(Vul je naam in op de certificaatpagina)' : '(Voorvertoning)';
 
-  const previewTime = getFormattedTimeInvestment();
+  const previewStudyLoad = getStudyLoadString();
+  const previewActive = getActiveTimeFormatted();
+  const previewDoorlooptijd = getDoorlooptijdString();
 
   content.innerHTML = `
     <div class="cert-preview-notice">${allCompleted ? 'Alle weken afgerond! Ga naar de certificaatpagina om je naam in te vullen.' : '(Voorvertoning \u2014 rond alle weken af voor je offici\u00eble certificaat)'}</div>
@@ -5999,7 +6078,9 @@ function showCertificatePreview() {
         <div class="cert-name" style="color:#999999;-webkit-text-fill-color:#999999;">${previewName}</div>
         <p class="cert-statement">heeft met succes afgerond:</p>
         <p class="cert-details">tien weken durende training AI-geletterdheid. Niveau ${getLevel()}</p>
-        <p class="cert-details">Effectieve studietijd: ${previewTime}</p>
+        <p class="cert-details">Doorlopen ${previewDoorlooptijd}</p>
+        <p class="cert-details">Studielast (SBU): ${previewStudyLoad}</p>
+        <p class="cert-details">Geregistreerde actieve studietijd: ${previewActive}</p>
         <div class="cert-footer">
           <div class="cert-signature">
             <div class="cert-sig-line"></div>
@@ -6038,25 +6119,114 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
-// ===== TIMER SYSTEM =====
-const TIMER_KEY = 'aigrip_timer_seconds';
+// ===== TIMER + STUDIELAST =====
+// Per-week actieve tijd in localStorage onder aigrip_week_seconds_1..10.
+// Tab-wissel pauzeert niet; inactiviteits-timeout 30 min.
+const TIMER_WEEK_KEY_PREFIX = 'aigrip_week_seconds_';
+const TIMER_LEGACY_KEY = 'aigrip_timer_seconds';
+const START_DATE_KEY = 'aigrip_start_date';
+const END_DATE_KEY = 'aigrip_end_date';
+const SBU_HOURS_PER_WEEK = 3;
+const WEEK_MIN_ACTIVE_SECONDS = 30 * 60;
+const WEEK_MIN_ASSIGNMENT_CHARS = 50;
 let timerInterval = null;
 let timerRunning = false;
 let lastActivityTime = Date.now();
-const INACTIVITY_TIMEOUT = 5 * 60 * 1000; // 5 minutes
+let currentTimerWeek = null;
+const INACTIVITY_TIMEOUT = 30 * 60 * 1000;
 
-function getTimerSeconds() {
-  return parseInt(localStorage.getItem(TIMER_KEY)) || 0;
+function getWeekSeconds(weekNum) {
+  return parseInt(localStorage.getItem(TIMER_WEEK_KEY_PREFIX + weekNum)) || 0;
 }
 
-function saveTimerSeconds(seconds) {
+function saveWeekSeconds(weekNum, seconds) {
   try {
-    localStorage.setItem(TIMER_KEY, seconds);
+    localStorage.setItem(TIMER_WEEK_KEY_PREFIX + weekNum, seconds);
   } catch (e) {}
+}
+
+function getTotalActiveSeconds() {
+  let total = 0;
+  for (let i = 1; i <= 10; i++) total += getWeekSeconds(i);
+  return total;
+}
+
+function setStartDateIfNotSet() {
+  try {
+    if (!localStorage.getItem(START_DATE_KEY)) {
+      localStorage.setItem(START_DATE_KEY, new Date().toISOString());
+    }
+  } catch (e) {}
+}
+
+function setEndDateNow() {
+  try { localStorage.setItem(END_DATE_KEY, new Date().toISOString()); } catch (e) {}
+}
+
+function formatNlDate(iso) {
+  if (!iso) return null;
+  try {
+    return new Date(iso).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+  } catch (e) { return null; }
+}
+
+function formatHoursMinutes(totalSeconds) {
+  const totalMinutes = Math.round(totalSeconds / 60);
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+  if (hours === 0 && minutes === 0) return '0 uur en 0 minuten';
+  if (hours === 0) return '0 uur en ' + minutes + ' minuten';
+  return hours + ' uur en ' + minutes + ' minuten';
+}
+
+function weekQualifiesForSBU(weekNum) {
+  const progress = getProgress();
+  const assignmentText = (progress.assignments && progress.assignments['week' + weekNum]) || '';
+  const cleanedChars = assignmentText.replace(/\s+/g, '').length;
+  const hasAssignment = cleanedChars >= WEEK_MIN_ASSIGNMENT_CHARS;
+  const week = courseData.find(w => w.week === weekNum);
+  const totalQuestions = (week && week.quiz) ? L(week.quiz).length : 0;
+  const quizForWeek = (progress.quizScores && progress.quizScores['week' + weekNum]) || {};
+  const answeredCount = Object.keys(quizForWeek).length;
+  const hasQuiz = totalQuestions > 0 && answeredCount >= totalQuestions;
+  const hasTime = getWeekSeconds(weekNum) >= WEEK_MIN_ACTIVE_SECONDS;
+  const count = (hasAssignment ? 1 : 0) + (hasQuiz ? 1 : 0) + (hasTime ? 1 : 0);
+  return count >= 2;
+}
+
+function getQualifyingWeeksCount() {
+  let n = 0;
+  for (let i = 1; i <= 10; i++) if (weekQualifiesForSBU(i)) n++;
+  return n;
+}
+
+function getStudyLoadHours() {
+  return getQualifyingWeeksCount() * SBU_HOURS_PER_WEEK;
+}
+
+function getActiveTimeFormatted() {
+  return formatHoursMinutes(getTotalActiveSeconds());
+}
+
+function getStudyLoadString() {
+  const n = getQualifyingWeeksCount();
+  const hours = n * SBU_HOURS_PER_WEEK;
+  return hours + ' uur (' + n + ' van 10 weken voldoen)';
+}
+
+function getDoorlooptijdString() {
+  const startIso = localStorage.getItem(START_DATE_KEY);
+  const endIso = localStorage.getItem(END_DATE_KEY) || new Date().toISOString();
+  const start = formatNlDate(startIso);
+  const end = formatNlDate(endIso);
+  if (!start) return 'nog niet gestart';
+  if (start === end) return 'op ' + start;
+  return 'van ' + start + ' tot ' + end;
 }
 
 function startTimer() {
   if (timerRunning) return;
+  if (currentTimerWeek === null) return;
   timerRunning = true;
   lastActivityTime = Date.now();
   timerInterval = setInterval(function() {
@@ -6064,7 +6234,9 @@ function startTimer() {
       pauseTimer();
       return;
     }
-    saveTimerSeconds(getTimerSeconds() + 1);
+    if (currentTimerWeek !== null) {
+      saveWeekSeconds(currentTimerWeek, getWeekSeconds(currentTimerWeek) + 1);
+    }
   }, 1000);
 }
 
@@ -6079,8 +6251,7 @@ function pauseTimer() {
 
 function resetActivityTimer() {
   lastActivityTime = Date.now();
-  if (!timerRunning && document.visibilityState === 'visible') {
-    // Determine if we are on a week page (not welcome, not overview, not certificate)
+  if (!timerRunning && currentTimerWeek !== null) {
     const weekPage = document.getElementById('page-week');
     if (weekPage && weekPage.classList.contains('active')) {
       startTimer();
@@ -6088,32 +6259,23 @@ function resetActivityTimer() {
   }
 }
 
-// Visibility change: pause when tab is hidden, resume when visible
-document.addEventListener('visibilitychange', function() {
-  if (document.visibilityState === 'hidden') {
-    pauseTimer();
-  } else {
-    const weekPage = document.getElementById('page-week');
-    if (weekPage && weekPage.classList.contains('active')) {
-      lastActivityTime = Date.now();
-      startTimer();
-    }
-  }
-});
-
-// Track user activity for inactivity timeout
 document.addEventListener('click', resetActivityTimer);
 document.addEventListener('scroll', resetActivityTimer);
 document.addEventListener('keydown', resetActivityTimer);
+document.addEventListener('mousemove', resetActivityTimer);
+
+(function migrateLegacyTimer() {
+  try {
+    const legacy = parseInt(localStorage.getItem(TIMER_LEGACY_KEY));
+    if (legacy && legacy > 0) {
+      saveWeekSeconds(1, getWeekSeconds(1) + legacy);
+      localStorage.removeItem(TIMER_LEGACY_KEY);
+    }
+  } catch (e) {}
+})();
 
 function getFormattedTimeInvestment() {
-  const totalSeconds = getTimerSeconds();
-  const totalMinutes = Math.round(totalSeconds / 60);
-  const hours = Math.floor(totalMinutes / 60);
-  const minutes = totalMinutes % 60;
-  if (hours === 0 && minutes === 0) return '0 uur en 0 minuten';
-  if (hours === 0) return '0 uur en ' + minutes + ' minuten';
-  return hours + ' uur en ' + minutes + ' minuten';
+  return getActiveTimeFormatted();
 }
 
 // ===== INIT =====

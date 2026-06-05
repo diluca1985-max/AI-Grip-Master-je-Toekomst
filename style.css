@@ -1055,6 +1055,11 @@ footer .footer-meta {
   .badge-linkedin-btn svg { width: 22px; height: 22px; }
 }
 
+/* Zes nav-items plus CTA: verberg de lange merknaam in de krappe laptopband zodat de balk niet overloopt (logo blijft staan) */
+@media (min-width: 881px) and (max-width: 1060px) {
+  .brand-name { display: none; }
+}
+
 @media (max-width: 480px) {
   .header-inner { gap: 0.4rem; }
   .nav-link { padding: 0.4rem 0.55rem; font-size: 0.78rem; }
