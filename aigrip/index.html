@@ -604,6 +604,29 @@
     color: var(--white);
   }
 
+  .btn-amber {
+    background: var(--gradient-amber);
+    color: #1a1a1a;
+    box-shadow: 0 4px 20px -4px rgba(245,158,11,0.4);
+  }
+
+  .btn-amber:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px -4px rgba(245,158,11,0.5);
+  }
+
+  .btn-tint {
+    background: rgba(99,102,241,0.14);
+    color: #c7d2fe;
+    border: 1px solid rgba(99,102,241,0.4);
+  }
+
+  .btn-tint:hover {
+    background: rgba(99,102,241,0.22);
+    color: var(--white);
+    border-color: rgba(99,102,241,0.6);
+  }
+
   /* ===== OVERVIEW PAGE ===== */
   .overview {
     max-width: 1200px;
@@ -937,6 +960,13 @@
   }
 
   .theory-content .highlight-box strong { color: var(--white); }
+
+  .theory-content .highlight-box.help {
+    background: linear-gradient(180deg, rgba(124,58,237,0.20) 0%, rgba(124,58,237,0.09) 100%);
+    border: 1px solid rgba(168,139,250,0.45);
+    border-left: 5px solid var(--purple-400);
+    box-shadow: 0 18px 44px -16px rgba(124,58,237,0.6);
+  }
 
   .theory-content .example-box {
     background: rgba(245,158,11,0.08);
@@ -1464,6 +1494,23 @@
     border-top: 1px solid rgba(255,255,255,0.06);
     line-height: 1.6;
   }
+
+  /* ===== SELF-CHECK CALLOUT (stelling met drie keuzes) ===== */
+  .selfcheck-items { margin: 0.85rem 0 0.25rem; }
+  .selfcheck-q { padding: 0.9rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .selfcheck-q:first-child { padding-top: 0.35rem; }
+  .selfcheck-q:last-child { border-bottom: none; }
+  .selfcheck-q .sc-stelling { color: var(--text-primary); font-weight: 600; font-size: 0.97rem; margin-bottom: 0.65rem; line-height: 1.4; }
+  .selfcheck-q .sc-opts { display: flex; flex-direction: column; gap: 0.4rem; }
+  .sc-opt {
+    text-align: left; padding: 0.6rem 0.9rem; border-radius: 10px; cursor: pointer; width: 100%;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12);
+    color: var(--text-secondary); font-size: 0.92rem; line-height: 1.4; font-family: inherit;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+  .sc-opt:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.22); }
+  .sc-opt.active { background: rgba(124,58,237,0.24); border-color: var(--purple-400); color: var(--white); }
+  .sc-opt:focus-visible { outline: 2px solid var(--purple-400); outline-offset: 2px; }
 
   /* ===== BONUS CALLOUT (Ga een stap verder) ===== */
   .bonus-callout {
@@ -4098,7 +4145,7 @@ const courseData = [
         check onafhankelijke reviews en betaal veilig, niet vooraf via een tikkie aan een onbekende.
       </li>
     </ul>
-    <div class="highlight-box">
+    <div class="highlight-box help">
       <strong><i class="ico ico-help" style="color:var(--purple-300);margin-right:0.4rem;"></i>Overkomt dit jou, of ken je iemand die dit overkomt?</strong>
       Lees dit dan goed. Dit is misschien wel het belangrijkste stuk van de hele cursus.
       <ul>
@@ -4107,7 +4154,7 @@ const courseData = [
         <li>Blokkeer de persoon en bewaar bewijs. Maak schermafbeeldingen.</li>
         <li>Praat erover met iemand die je vertrouwt. Je hoeft dit niet alleen op te lossen.</li>
       </ul>
-      Gratis en vertrouwelijke hulp krijg je op <a href="https://www.helpwanted.nl" target="_blank" rel="noopener"><strong>helpwanted.nl</strong></a>, speciaal hiervoor gemaakt. Ook een vertrouwenspersoon op school of werk helpt je, of de politie via <a href="tel:09008844">0900-8844</a>. Ben je in direct gevaar? Bel <a href="tel:112">112</a>.
+      Je hoeft dit niet alleen op te lossen. <a href="https://www.slachtofferhulp.nl" target="_blank" rel="noopener"><strong>Slachtofferhulp Nederland</strong></a> helpt je gratis en vertrouwelijk, bel <a href="tel:09000101">0900-0101</a> of chat via de site. Gaat het om beelden? Dan kun je ook terecht bij <a href="https://www.helpwanted.nl" target="_blank" rel="noopener"><strong>helpwanted.nl</strong></a>. Een vertrouwenspersoon op school of werk helpt je net zo goed. Aangifte doe je bij de politie via <a href="tel:09008844">0900-8844</a>. Ben je in direct gevaar? Bel <a href="tel:112">112</a>.
     </div>
 
     <h3>AI als maatje: fijn, maar let op jezelf</h3>
@@ -4226,12 +4273,82 @@ const courseData = [
         <li>Wat vind je dat er moet veranderen in de regels rondom AI?</li>
       </ul>
 
-      <h4>Inleveren</h4>
+      <h4>Stap 6: Jouw weerbaarheidsplan</h4>
       <p>
-        Je antwoorden staan in de tekstvakken hierboven: je stelling, je 3 eigen
-        argumenten, de 3 tegenargumenten van AI met jouw reactie en je reflectie. Wil je je dossier
-        inleveren op school of bij je werk? Download het als PDF met de knop onderaan deze week.
+        Nu maak je het praktisch. Kijk terug naar de vormen van AI-misbruik uit de theorie:
+        gekloonde stemmen, phishing, nepprofielen met chantage en nepwebshops. Beantwoord in je
+        eigen woorden:
       </p>
+      <ul>
+        <li>Welke van deze vormen komt je bekend voor, bij jezelf of bij iemand in je omgeving?</li>
+        <li>Wat ga je vanaf vandaag anders doen om jezelf te beschermen? Noem twee concrete dingen.</li>
+        <li>Met wie praat je als het misgaat en waar vind je hulp?</li>
+      </ul>
+
+      <h4>Check bij jezelf: hoe weerbaar ben jij?</h4>
+      <p>Lees elke stelling en kies het antwoord dat het eerlijkst bij je past. Er is geen goed of fout. Dit is alleen voor jou, er wordt niets opgeslagen buiten je scherm en niets gedeeld.</p>
+      <ol class="selfcheck-list">
+        <li>Bij een dringend verzoek om geld check ik eerst of het echt die persoon is.
+          <ul>
+            <li>Zo doe ik het altijd.</li>
+            <li>Meestal wel, maar niet als het echt spannend wordt.</li>
+            <li>Nee, ik zou waarschijnlijk gewoon reageren.</li>
+          </ul>
+        </li>
+        <li>Ik weet dat een stem aan de telefoon nep kan zijn.
+          <ul>
+            <li>Ja, en ik hou daar rekening mee.</li>
+            <li>Ik heb het gehoord, maar sta er niet bij stil.</li>
+            <li>Nee, dat wist ik niet.</li>
+          </ul>
+        </li>
+        <li>Ik herken phishingmails en klik niet zomaar op een link.
+          <ul>
+            <li>Zo doe ik het altijd.</li>
+            <li>Meestal, maar soms twijfel ik.</li>
+            <li>Ik klik sneller dan ik zou willen.</li>
+          </ul>
+        </li>
+        <li>Bij een bericht van mijn bank of een instantie ga ik zelf naar de officiële app of site.
+          <ul>
+            <li>Altijd.</li>
+            <li>Soms, als ik eraan denk.</li>
+            <li>Nee, ik klik meestal op de link.</li>
+          </ul>
+        </li>
+        <li>Ik weet dat je bij chantage niet moet betalen en juist bewijs moet bewaren.
+          <ul>
+            <li>Ja, dat weet ik zeker.</li>
+            <li>Ik denk het, maar weet het niet zeker.</li>
+            <li>Nee, dat wist ik niet.</li>
+          </ul>
+        </li>
+        <li>Als ik online onder druk werd gezet, zou ik het durven bespreken met iemand.
+          <ul>
+            <li>Ja, ik zou het delen.</li>
+            <li>Misschien, maar het zou me moeite kosten.</li>
+            <li>Nee, ik zou het voor me houden.</li>
+          </ul>
+        </li>
+        <li>Ik check reviews en de betaalmethode voordat ik bij een onbekende webshop koop.
+          <ul>
+            <li>Altijd.</li>
+            <li>Soms.</li>
+            <li>Nee, daar let ik niet op.</li>
+          </ul>
+        </li>
+        <li>Ik weet waar ik hulp vind als het toch misgaat.
+          <ul>
+            <li>Ja, ik weet waar ik moet zijn.</li>
+            <li>Ik zou het moeten opzoeken.</li>
+            <li>Nee, geen idee.</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h4>Ga een stap verder: luister naar echte verhalen</h4>
+      <p>Wil je meer weten? Slachtofferhulp Nederland heeft de podcast <a href="https://open.spotify.com/show/04MRuatSbowxvcZcDClEiR" target="_blank" rel="noopener">Luister zonder Oordeel</a>, waarin mensen vertellen wat hun overkwam en hoe ze verder kwamen. Afleveringen over exposing, sexting en schaamte sluiten aan bij deze les.</p>
+      <p>Meer hulp en informatie vind je op <a href="https://www.slachtofferhulp.nl" target="_blank" rel="noopener">slachtofferhulp.nl</a>.</p>
       `,
       bonus: {
         label: "Optionele extra opdracht",
@@ -5419,6 +5536,28 @@ function toggleChecklistItem(weekNum, itemIdx, liEl) {
   }
 }
 
+function getSelfCheck(weekNum, idx) {
+  var p = getProgress();
+  if (!p.selfcheck) return null;
+  return p.selfcheck['week' + weekNum + '-' + idx] || null;
+}
+
+function setSelfCheck(weekNum, idx, val, btn) {
+  var p = getProgress();
+  if (!p.selfcheck) p.selfcheck = {};
+  var key = 'week' + weekNum + '-' + idx;
+  var toggledOff = (String(p.selfcheck[key]) === String(val));
+  if (toggledOff) { delete p.selfcheck[key]; }
+  else { p.selfcheck[key] = val; }
+  saveProgress(p);
+  var group = btn && btn.closest ? btn.closest('.sc-opts') : null;
+  if (group) {
+    var btns = group.querySelectorAll('.sc-opt');
+    for (var bi = 0; bi < btns.length; bi++) btns[bi].classList.remove('active');
+    if (!toggledOff) btn.classList.add('active');
+  }
+}
+
 function transformAssignmentExtras(htmlString, weekNum) {
   if (!htmlString || !htmlString.trim()) return htmlString;
   var temp = document.createElement('div');
@@ -5434,6 +5573,8 @@ function transformAssignmentExtras(htmlString, weekNum) {
     var sectionType = null, icon = null, className = null;
     if (/^Check je werk/i.test(text)) {
       sectionType = 'checklist'; icon = 'ico-check'; className = 'checklist-callout';
+    } else if (/^Check bij jezelf/i.test(text)) {
+      sectionType = 'selfcheck'; icon = 'ico-alert'; className = 'checklist-callout selfcheck-callout';
     } else if (/^Ga een stap verder/i.test(text)) {
       sectionType = 'bonus'; icon = 'ico-spark'; className = 'bonus-callout';
     } else {
@@ -5477,9 +5618,34 @@ function transformAssignmentExtras(htmlString, weekNum) {
         }
         callout.appendChild(ulNew);
         listSeen = true;
+      } else if ((node.tagName === 'UL' || node.tagName === 'OL') && sectionType === 'selfcheck') {
+        var scWrap = document.createElement('div');
+        scWrap.className = 'selfcheck-items';
+        var outerItems = node.querySelectorAll(':scope > li');
+        for (var si = 0; si < outerItems.length; si++) {
+          var outerLi = outerItems[si];
+          var nestedList = outerLi.querySelector('ul, ol');
+          var optionEls = nestedList ? nestedList.querySelectorAll(':scope > li') : [];
+          var stellingClone = outerLi.cloneNode(true);
+          var nc = stellingClone.querySelector('ul, ol');
+          if (nc && nc.parentNode) nc.parentNode.removeChild(nc);
+          var stellingHtml = stellingClone.innerHTML.trim();
+          var qIdx = checklistItemCounter++;
+          var chosen = getSelfCheck(weekNum, qIdx);
+          var optsHtml = '';
+          for (var oj = 0; oj < optionEls.length; oj++) {
+            optsHtml += '<button type="button" class="sc-opt' + (String(chosen) === String(oj) ? ' active' : '') + '" onclick="setSelfCheck(' + weekNum + ',' + qIdx + ',' + oj + ',this)">' + optionEls[oj].innerHTML + '</button>';
+          }
+          var qBlock = document.createElement('div');
+          qBlock.className = 'selfcheck-q';
+          qBlock.innerHTML = '<div class="sc-stelling">' + stellingHtml + '</div><div class="sc-opts">' + optsHtml + '</div>';
+          scWrap.appendChild(qBlock);
+        }
+        callout.appendChild(scWrap);
+        listSeen = true;
       } else if (node.tagName === 'P') {
         var pEl = document.createElement('p');
-        if (sectionType === 'checklist') {
+        if (sectionType === 'checklist' || sectionType === 'selfcheck') {
           pEl.className = listSeen ? 'callout-outro' : 'callout-intro';
         }
         pEl.innerHTML = node.innerHTML;
@@ -5529,9 +5695,13 @@ function renderH4StepAssignment(tempDiv, weekNum, savedAssignment) {
   for (var i = 0; i < children.length; i++) {
     var node = children[i];
     var isStapHeader = node.nodeType === 1 && (node.tagName === 'H3' || node.tagName === 'H4') && /^\s*Stap\s*\d/i.test(node.textContent || '');
+    var isExtraHeader = node.nodeType === 1 && (node.tagName === 'H3' || node.tagName === 'H4') && (/^\s*Check (je werk|bij jezelf)/i.test(node.textContent || '') || /^\s*Ga een stap verder/i.test(node.textContent || ''));
     if (isStapHeader) {
       sections.push(current);
       current = { type: 'step', title: (node.textContent || '').trim(), contentHtml: '' };
+    } else if (isExtraHeader) {
+      sections.push(current);
+      current = { type: 'extra', title: '', contentHtml: node.outerHTML };
     } else {
       var nodeHtml = node.nodeType === 1 ? node.outerHTML : (node.nodeType === 3 ? (node.textContent || '') : '');
       current.contentHtml += nodeHtml;
@@ -5562,6 +5732,12 @@ function renderH4StepAssignment(tempDiv, weekNum, savedAssignment) {
     if (sec.type === 'intro') {
       if (sec.contentHtml.trim()) {
         html += '<div class="assignment-intro-text">' + sec.contentHtml + '</div>';
+      }
+      continue;
+    }
+    if (sec.type === 'extra') {
+      if (sec.contentHtml.trim()) {
+        html += '<div class="assignment-outro-text">' + transformAssignmentExtras(sec.contentHtml, weekNum) + '</div>';
       }
       continue;
     }
@@ -6122,7 +6298,7 @@ function generateCertificate() {
         <p class="cert-details">tien weken durende training AI-geletterdheid. Niveau ${getLevel()}</p>
         <p class="cert-details">Doorlopen ${doorlooptijd}</p>
         <p class="cert-details">Studielast (SBU): ${studyLoad}</p>
-        <p class="cert-details">Geregistreerde actieve studietijd: ${activeTime}</p>
+        <p class="cert-details">Actieve tijd in de e-learning: ${activeTime}</p>
         <div class="cert-footer">
           <div class="cert-signature">
             <div class="cert-sig-line"></div>
@@ -6142,8 +6318,8 @@ function generateCertificate() {
     <div class="cert-buttons">
       <button class="btn btn-primary" onclick="window.print()">Certificaat afdrukken</button>
       <button class="btn btn-success" onclick="downloadCertificateAsImage()">Opslaan als afbeelding</button>
-      <button class="btn btn-outline" onclick="downloadFullDossier()"><i class="ico ico-save" style="font-size:0.95rem;margin-right:0.4rem;"></i>Download je dossier (PDF)</button>
-      <button class="btn btn-secondary" onclick="showPage('overview')">Terug naar overzicht</button>
+      <button class="btn btn-amber" onclick="downloadFullDossier()"><i class="ico ico-save" style="font-size:0.95rem;margin-right:0.4rem;"></i>Download je dossier (PDF)</button>
+      <button class="btn btn-tint" onclick="showPage('overview')">Terug naar overzicht</button>
     </div>
   `;
 }
@@ -6269,7 +6445,7 @@ function _drawCertificateCanvas(certFrame, estherSigImg, sealImg) {
   ctx.font = '12px ' + sans;
   ctx.fillText('Doorlopen ' + getDoorlooptijdString(), left, 256);
   ctx.fillText('Studielast (SBU): ' + getStudyLoadString(), left, 274);
-  ctx.fillText('Geregistreerde actieve studietijd: ' + getActiveTimeFormatted(), left, 292);
+  ctx.fillText('Actieve tijd in de e-learning: ' + getActiveTimeFormatted(), left, 292);
 
   // --- Footer area ---
   const footerY = h - 120;
@@ -6381,7 +6557,7 @@ function showCertificatePreview() {
         <p class="cert-details">tien weken durende training AI-geletterdheid. Niveau ${getLevel()}</p>
         <p class="cert-details">Doorlopen ${previewDoorlooptijd}</p>
         <p class="cert-details">Studielast (SBU): ${previewStudyLoad}</p>
-        <p class="cert-details">Geregistreerde actieve studietijd: ${previewActive}</p>
+        <p class="cert-details">Actieve tijd in de e-learning: ${previewActive}</p>
         <div class="cert-footer">
           <div class="cert-signature">
             <div class="cert-sig-line"></div>
@@ -6427,7 +6603,7 @@ const TIMER_WEEK_KEY_PREFIX = 'aigrip_week_seconds_';
 const TIMER_LEGACY_KEY = 'aigrip_timer_seconds';
 const START_DATE_KEY = 'aigrip_start_date';
 const END_DATE_KEY = 'aigrip_end_date';
-const SBU_HOURS_PER_WEEK = 3;
+const SBU_HOURS_PER_WEEK = 1.5;
 const WEEK_MIN_ACTIVE_SECONDS = 30 * 60;
 const WEEK_MIN_ASSIGNMENT_CHARS = 50;
 let timerInterval = null;
@@ -6482,7 +6658,12 @@ function formatHoursMinutes(totalSeconds) {
 
 function weekQualifiesForSBU(weekNum) {
   const progress = getProgress();
-  const assignmentText = (progress.assignments && progress.assignments['week' + weekNum]) || '';
+  const assignments = progress.assignments || {};
+  let assignmentText = assignments['week' + weekNum] || '';
+  const stepPrefix = 'week' + weekNum + '_step_';
+  Object.keys(assignments).forEach(function(k) {
+    if (k.indexOf(stepPrefix) === 0) assignmentText += ' ' + (assignments[k] || '');
+  });
   const cleanedChars = assignmentText.replace(/\s+/g, '').length;
   const hasAssignment = cleanedChars >= WEEK_MIN_ASSIGNMENT_CHARS;
   const week = courseData.find(w => w.week === weekNum);
@@ -6512,7 +6693,8 @@ function getActiveTimeFormatted() {
 function getStudyLoadString() {
   const n = getQualifyingWeeksCount();
   const hours = n * SBU_HOURS_PER_WEEK;
-  return hours + ' uur (' + n + ' van 10 weken voldoen)';
+  const hoursStr = (hours % 1 === 0) ? String(hours) : String(hours).replace('.', ',');
+  return hoursStr + ' uur (' + n + ' van 10 weken voldoen)';
 }
 
 function getDoorlooptijdString() {
