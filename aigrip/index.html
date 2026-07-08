@@ -975,6 +975,28 @@
   .theory-content .compare-bad strong { color: var(--red); display: block; margin-bottom: 0.5rem; }
   .theory-content .compare-good strong { color: var(--green); display: block; margin-bottom: 0.5rem; }
 
+  /* Leesbare links in alle content (theorie + opdrachten) op de donkere achtergrond */
+  .theory-content a,
+  .assignment-intro-text a,
+  .assignment-outro-text a,
+  .assignment-description a,
+  .assignment-step-card a,
+  .assignment-bonus-body a {
+    color: var(--purple-300);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.15s ease;
+  }
+
+  .theory-content a:hover,
+  .assignment-intro-text a:hover,
+  .assignment-outro-text a:hover,
+  .assignment-description a:hover,
+  .assignment-step-card a:hover,
+  .assignment-bonus-body a:hover {
+    color: var(--amber-400);
+  }
+
   .theory-content .timeline {
     display: flex;
     align-items: center;
@@ -1775,6 +1797,16 @@
     text-align: center;
     padding: 2.5rem;
     margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .week-download-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    filter: grayscale(0.6);
   }
 
   .week-nav-buttons {
@@ -2764,6 +2796,7 @@
   <div class="overview">
     <h2>Weekoverzicht</h2>
     <p class="overview-subtitle">Klik op een week om te beginnen. Rond alle 10 weken af voor je certificaat.</p>
+    <p class="overview-subtitle" style="font-size:0.88rem; opacity:0.85; margin-top:-0.75rem;">Je antwoorden blijven op je eigen apparaat, er wordt niets verzameld. Rond een week af en download je antwoorden als PDF om ze in te leveren op school of bij je werk.</p>
     <div class="weeks-grid" id="weeksGrid"></div>
   </div>
 </div>
@@ -3113,6 +3146,11 @@ const courseData = [
         <li><strong>Spotify.</strong> Maakt afspeellijsten op basis van je luistergedrag.</li>
       </ul>
 
+      <h3>AI weet niks, AI gokt het volgende woord</h3>
+      <p>Dit is misschien wel het belangrijkste van de hele cursus. Een chatbot als ChatGPT begrijpt niet echt wat hij zegt. Hij voorspelt telkens het volgende woord dat het beste past, op basis van miljoenen teksten die hij ooit heeft gezien. Het is dus geen alwetende computer maar een supersnelle woordvoorspeller.</p>
+      <p>Daarom kan AI je met volle overtuiging iets vertellen wat gewoon niet klopt. Een fout antwoord klinkt precies zo zelfverzekerd als een goed antwoord. Dat noemen we een <strong>hallucinatie</strong>: de AI verzint iets wat niet bestaat en brengt het alsof het een feit is.</p>
+      <p>Denk aan een verzonnen jaartal, een boek dat niet bestaat of een "bron" die nergens op slaat. De AI liegt niet expres. Hij weet simpelweg niet wat waar is en wat niet. Een AI die heel zeker klinkt heeft dus niet automatisch gelijk. In week 3 leer je in drie stappen hoe je checkt of iets echt klopt.</p>
+
       <div class="highlight-box">
         <strong><i class="ico ico-target" style="color:var(--purple-300);margin-right:0.4rem;"></i>Kern:</strong> AI is een hulpmiddel. Het is niet magisch, niet beangstigend en niet foutloos. Het is een gereedschap dat je kunt leren gebruiken, net zoals je ooit leerde omgaan met het internet.
       </div>
@@ -3272,6 +3310,66 @@ const courseData = [
           <p>"Je bent een MBO-docent biologie. Leg fotosynthese uit aan eerstejaars studenten. Gebruik een vergelijking met een keuken, maximaal 80 woorden."</p>
         </div>
       </div>
+
+      <h3>Vervang vage woorden door een concrete opdracht</h3>
+      <p>Krijg je vaak een saai of algemeen antwoord? Meestal ligt dat aan één vaag woord in je opdracht. "Verbeter het" of "maak het korter" laat de AI zelf gokken wat je bedoelt. Zeg in plaats daarvan precies wat je wilt en waaraan je het kunt afmeten. Hieronder zie je hoe.</p>
+
+      <div class="compare-grid">
+        <div class="compare-bad">
+          <strong><i class="ico ico-x" style="margin-right:0.35rem;"></i>Vaag</strong>
+          <p>"Verbeter dit"</p>
+        </div>
+        <div class="compare-good">
+          <strong><i class="ico ico-check" style="margin-right:0.35rem;"></i>Concreet</strong>
+          <p>"Verbeter dit op 3 punten: is het duidelijk, klopt de opbouw en staat mijn belangrijkste punt vooraan?"</p>
+        </div>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-bad">
+          <strong><i class="ico ico-x" style="margin-right:0.35rem;"></i>Vaag</strong>
+          <p>"Maak het korter"</p>
+        </div>
+        <div class="compare-good">
+          <strong><i class="ico ico-check" style="margin-right:0.35rem;"></i>Concreet</strong>
+          <p>"Vat dit samen in 3 zinnen zonder dat de kern wegvalt."</p>
+        </div>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-bad">
+          <strong><i class="ico ico-x" style="margin-right:0.35rem;"></i>Vaag</strong>
+          <p>"Maak het professioneler"</p>
+        </div>
+        <div class="compare-good">
+          <strong><i class="ico ico-check" style="margin-right:0.35rem;"></i>Concreet</strong>
+          <p>"Zorg dat mijn stagebegeleider dit in 5 seconden begrijpt."</p>
+        </div>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-bad">
+          <strong><i class="ico ico-x" style="margin-right:0.35rem;"></i>Vaag</strong>
+          <p>"Fix dit"</p>
+        </div>
+        <div class="compare-good">
+          <strong><i class="ico ico-check" style="margin-right:0.35rem;"></i>Concreet</strong>
+          <p>"Verbeter de spelling en de zinnen, maar houd mijn eigen woorden."</p>
+        </div>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-bad">
+          <strong><i class="ico ico-x" style="margin-right:0.35rem;"></i>Vaag</strong>
+          <p>"Leg het uit"</p>
+        </div>
+        <div class="compare-good">
+          <strong><i class="ico ico-check" style="margin-right:0.35rem;"></i>Concreet</strong>
+          <p>"Doe alsof je mijn docent bent en leg het uit met een voorbeeld uit de praktijk."</p>
+        </div>
+      </div>
+
+      <p>Zie je het patroon? Je pakt het vage woord en zegt erbij: wat wil je, voor wie en waaraan zie je dat het goed is. Dat is de hele truc.</p>
 
       <h3>Tips voor betere prompts</h3>
       <ul>
@@ -3443,6 +3541,25 @@ const courseData = [
       Deel niet zomaar alles door. En als je denkt dat iets een deepfake is, meld het.
       Op de meeste sociale media kun je content rapporteren.
     </p>
+
+    <h3>Niet alleen beeld liegt: check ook wat de chatbot zegt</h3>
+    <p>
+      In week 1 leerde je dat een chatbot het volgende woord gokt en soms met volle overtuiging
+      iets verzint. Dat heet een hallucinatie. Een deepfake is nep beeld, een hallucinatie is nep tekst.
+      Allebei zien er betrouwbaar uit. Daarom check je een belangrijk antwoord van AI net zo goed
+      als een schokkend filmpje.
+    </p>
+    <p>
+      Gebruik deze <strong>drie stappen</strong> om te checken of een AI-antwoord echt klopt:
+    </p>
+    <ol>
+      <li><strong>Klopt het met een tweede bron?</strong> Zoek het los op via Google of een betrouwbare site. Staat het daar ook of vind je nergens iets terug?</li>
+      <li><strong>Bestaat de bron echt?</strong> Geeft de AI een link, een boek of een jaartal? Klik erop en zoek het op. AI verzint regelmatig bronnen die niet bestaan.</li>
+      <li><strong>Kan het echt waar zijn?</strong> Gebruik je gezond verstand. Klinkt het te mooi, te precies of te gek? Dan is extra checken verstandig.</li>
+    </ol>
+    <div class="highlight-box">
+      <strong><i class="ico ico-target" style="color:var(--purple-300);margin-right:0.4rem;"></i>Onthoud:</strong> Gebruik AI om sneller te beginnen, niet om blind op te vertrouwen. Gaat het over je werk of studie, je geld of je gezondheid? Dan check je het altijd zelf na.
+    </div>
     `,
     video: {
       title: "Deepfakes uitgelegd",
@@ -3488,19 +3605,40 @@ const courseData = [
         dat verraadt dat het nep is.
       </p>
 
-      <h4>Stap 4: Reflectie (schriftelijk inleveren)</h4>
+      <h4>Stap 4: Betrap de chatbot</h4>
+      <p>
+        Nu ga je oefenen met nep tekst in plaats van nep beeld. Open een AI-tool (ChatGPT, Gemini
+        of Copilot) en stel een vraag waar je zelf iets van weet: over je opleiding, je beroep,
+        je woonplaats of een hobby. Vraag naar details, namen en jaartallen. Bijvoorbeeld:
+        <em>"Noem drie bekende bedrijven in mijn vakgebied en vertel sinds wanneer ze bestaan."</em>
+      </p>
+      <p>
+        Pak nu één antwoord en doe de <strong>drie-stappen-check</strong> uit de theorie: klopt het
+        met een tweede bron, bestaat de bron echt, en kan het echt waar zijn? Noteer of je een fout
+        of een verzonnen bron hebt gevonden.
+      </p>
+
+      <h4>Stap 5: Reflectie</h4>
       <p>
         Schrijf een verslag van <strong>250-350 woorden</strong> waarin je antwoord geeft op:
       </p>
       <ul>
         <li>Hoeveel had je goed van de 10 op whichfaceisreal.com?</li>
         <li>Welke 3 details bleken voor jou het meest betrouwbaar om AI te herkennen?</li>
+        <li>Vond je bij Stap 4 een fout of een verzonnen bron? Wat was het, en hoe kwam je erachter?</li>
         <li>Wat zou er met jouw leven gebeuren als iemand een deepfake-video van jou maakt
             en die op TikTok zet?</li>
         <li>Hoe betrouwbaar vind je nieuwsbeelden nog, nu je weet hoe goed AI is geworden?</li>
         <li>Wat ga je vanaf nu anders doen als je een opvallende foto of video op
             social media ziet?</li>
       </ul>
+
+      <h4>Samen sterker (optioneel)</h4>
+      <p>
+        Werk je dit samen met iemand anders uit? Wissel je betrapte chatbot-antwoord uit en laat de ander
+        het checken met de drie stappen. Zien jullie dezelfde fouten? Doe je het alleen? Dan sla je deze
+        stap gewoon over. Je opdracht is dan al compleet.
+      </p>
       `
     },
     quiz: [
@@ -3724,7 +3862,7 @@ const courseData = [
 
       <h4>Stap 1: Kies een taak</h4>
       <p>
-        Denk aan je stage, bijbaan of de baan die je later wilt hebben.
+        Denk aan je werk, je stage, je bijbaan of de baan die je later wilt hebben.
         Kies een taak die je saai, repetitief of tijdrovend vindt. Voorbeelden:
       </p>
       <ul>
@@ -3762,10 +3900,8 @@ const courseData = [
       </ul>
 
       <h4>Inleveren</h4>
-      <p>
-        Lever je plan in als document (maximaal 1 A4). Extra: presenteer je plan in twee minuten
-        aan de klas, alsof je het aan je leidinggevende voorlegt.
-      </p>
+      <p>Zet je plan in het tekstvak (maximaal 1 A4). Wil je het inleveren op school of bij je werk? Download het als PDF met de knop onderaan deze week.</p>
+      <p><strong>Extra:</strong> presenteer je plan in twee minuten aan iemand, alsof je het aan je leidinggevende voorlegt. Niemand in de buurt? Neem jezelf op met je telefoon en luister terug.</p>
       `
     },
     quiz: [
@@ -3829,7 +3965,7 @@ const courseData = [
   {
     week: 5,
     title: "Mag dit wel?",
-    subtitle: "Ethiek & Privacy bij AI",
+    subtitle: "Ethiek, privacy en veiligheid",
     theory: `
     <h2>AI kan veel, maar mag het ook?</h2>
     <p>
@@ -3890,12 +4026,12 @@ const courseData = [
           <li>Persoonsgegevens van anderen (naam, adres, telefoonnummer)</li>
           <li>Medische informatie over patiënten</li>
           <li>Vertrouwelijke bedrijfsinformatie</li>
-          <li>Gegevens van klanten of leerlingen</li>
+          <li>Gegevens van klanten, cliënten of leerlingen</li>
         </ul>
       </li>
       <li>
         <strong>Wat mag WEL?</strong> Algemene vragen, anonieme informatie,
-        je eigen schoolopdrachten (als je school het toestaat), creatieve projecten.
+        je eigen opdrachten (als het van je school of werk mag), creatieve projecten.
       </li>
       <li>
         <strong>Voorbeeld:</strong> Een medewerker van Samsung typte vertrouwelijke
@@ -3933,12 +4069,65 @@ const courseData = [
       dat niet zijn.
     </p>
 
+    <h3>Als AI tegen je wordt gebruikt</h3>
+    <p>
+      Dezelfde AI die jou helpt, gebruiken oplichters ook. Ze kunnen er sneller en echter
+      mee werken dan vroeger. Je hoeft niet bang te zijn, maar wel alert. Dit zijn de vier
+      vormen die je nu het vaakst tegenkomt.
+    </p>
+    <ul>
+      <li>
+        <strong>Gekloonde stem.</strong> Uit een paar seconden geluid van social media maakt AI
+        een kopie van iemands stem. Een oplichter belt dan met de "stem" van een familielid:
+        spoed, geld nodig, nu overmaken. <em>Wat je doet:</em> hang op en bel zelf terug op het
+        echte nummer. Spreek met je familie een codewoord af dat je bij echte spoed vraagt.
+      </li>
+      <li>
+        <strong>Phishing en nepberichten.</strong> AI schrijft foutloze nepmails en appjes namens
+        je bank, DUO of een pakketdienst. Aan taalfouten herken je ze niet meer. <em>Wat je doet:</em>
+        klik nooit op de link in zo'n bericht. Ga zelf naar de officiële app of website en check het daar.
+      </li>
+      <li>
+        <strong>Nepprofielen en chantage.</strong> Met AI maken oplichters nepaccounts en nepfoto's,
+        doen zich voor als iemand anders en proberen je geld of naaktbeelden af te troggelen. Soms
+        dreigen ze je beelden te verspreiden als je niet betaalt. Dit heet sextortion.
+      </li>
+      <li>
+        <strong>Nepwebshops.</strong> In een paar minuten maakt AI een echt ogende webshop of
+        advertentie voor spullen die niet bestaan. <em>Wat je doet:</em> zoek de winkel los op,
+        check onafhankelijke reviews en betaal veilig, niet vooraf via een tikkie aan een onbekende.
+      </li>
+    </ul>
+    <div class="highlight-box">
+      <strong><i class="ico ico-help" style="color:var(--purple-300);margin-right:0.4rem;"></i>Overkomt dit jou, of ken je iemand die dit overkomt?</strong>
+      Lees dit dan goed. Dit is misschien wel het belangrijkste stuk van de hele cursus.
+      <ul>
+        <li>Het is niet jouw schuld. De crimineel is fout, jij niet.</li>
+        <li>Stop met betalen en stuur niks meer. Betalen stopt de chantage niet, het lokt juist meer uit.</li>
+        <li>Blokkeer de persoon en bewaar bewijs. Maak schermafbeeldingen.</li>
+        <li>Praat erover met iemand die je vertrouwt. Je hoeft dit niet alleen op te lossen.</li>
+      </ul>
+      Gratis en vertrouwelijke hulp krijg je op <a href="https://www.helpwanted.nl" target="_blank" rel="noopener"><strong>helpwanted.nl</strong></a>, speciaal hiervoor gemaakt. Ook een vertrouwenspersoon op school of werk helpt je, of de politie via <a href="tel:09008844">0900-8844</a>. Ben je in direct gevaar? Bel <a href="tel:112">112</a>.
+    </div>
+
+    <h3>AI als maatje: fijn, maar let op jezelf</h3>
+    <p>
+      Steeds meer mensen praten met een AI-chatbot als vriend, coach of zelfs als therapeut.
+      Het voelt persoonlijk en het oordeelt niet. Dat kan prettig zijn. Toch is het goed om
+      een paar dingen te weten.
+    </p>
+    <ul>
+      <li>Een chatbot geeft niet echt om jou. Hij voorspelt woorden, zoals je in week 1 leerde. Hij voelt niks.</li>
+      <li>Alles wat je typt kan worden opgeslagen. Deel dus niet je diepste geheimen of persoonsgegevens met een AI.</li>
+      <li>Een AI is geen hulpverlener. Zit je echt in de knoop? Praat met een echt mens: een vriend, je mentor of je huisarts. Je kunt ook gratis en anoniem bellen of chatten met <a href="https://www.113.nl" target="_blank" rel="noopener">113 Zelfmoordpreventie</a>.</li>
+    </ul>
+
     <h3>Verantwoordelijk AI-gebruik</h3>
     <p>Wanneer is het in orde om AI te gebruiken en wanneer niet? Een paar vuistregels:</p>
     <ul>
       <li>
         <strong>Wees transparant:</strong> Als je AI hebt gebruikt, zeg dat dan.
-        Bij een werkstuk, een presentatie of een ontwerp.
+        Bij een verslag, een presentatie of een ontwerp.
       </li>
       <li>
         <strong>Controleer altijd:</strong> AI maakt fouten. Neem nooit klakkeloos
@@ -3967,7 +4156,8 @@ const courseData = [
         { icon: '<i class="ico ico-lock"></i>', text: "AVG: wat mag je wel en niet invoeren in AI-tools?" },
         { icon: '<i class="ico ico-alert"></i>', text: "Bias: AI kan onbewust discrimineren" },
         { icon: '<i class="ico ico-help"></i>', text: "Wanneer is AI inzetten oké en wanneer niet?" },
-        { icon: '<i class="ico ico-megaphone"></i>', text: "Moet je vermelden dat je AI hebt gebruikt?" }
+        { icon: '<i class="ico ico-megaphone"></i>', text: "Moet je vermelden dat je AI hebt gebruikt?" },
+        { icon: '<i class="ico ico-alert"></i>', text: "Weerbaarheid: hoe herken je AI-oplichting?" }
       ]
     },
     assignment: {
@@ -3986,8 +4176,8 @@ const courseData = [
         <li><strong>"Wie een AI-opdracht geeft, is eigenaar van het resultaat."</strong><br>
         Voorbeeld: je vraagt AI om een logo te ontwerpen. Is dat jouw logo?</li>
 
-        <li><strong>"AI gebruiken voor je huiswerk is gewoon slim, niet vals spelen."</strong><br>
-        Voorbeeld: je laat ChatGPT je werkstuk schrijven. Is dat oké?</li>
+        <li><strong>"AI gebruiken voor je opdrachten is gewoon slim, niet vals spelen."</strong><br>
+        Voorbeeld: je laat ChatGPT je verslag schrijven. Is dat oké?</li>
 
         <li><strong>"Je moet altijd vermelden als je AI hebt gebruikt."</strong><br>
         Voorbeeld: je gebruikt AI om een sollicitatiebrief te schrijven. Moet je dat zeggen?</li>
@@ -4003,7 +4193,7 @@ const courseData = [
       <p>
         Ben je het eens of oneens met de stelling? Schrijf minimaal 3 argumenten
         op die jouw standpunt ondersteunen. Wees concreet. Gebruik voorbeelden
-        uit je eigen leven, stage of studie.
+        uit je eigen leven, je werk of je opleiding.
       </p>
 
       <h4>Stap 3: Zet AI in als tegenpartij</h4>
@@ -4038,8 +4228,9 @@ const courseData = [
 
       <h4>Inleveren</h4>
       <p>
-        Lever je dossier in als één document. Zet erin: je stelling, je 3 eigen
-        argumenten, de 3 tegenargumenten van AI met jouw reactie en je reflectie.
+        Je antwoorden staan in de tekstvakken hierboven: je stelling, je 3 eigen
+        argumenten, de 3 tegenargumenten van AI met jouw reactie en je reflectie. Wil je je dossier
+        inleveren op school of bij je werk? Download het als PDF met de knop onderaan deze week.
       </p>
       `,
       bonus: {
@@ -4047,7 +4238,7 @@ const courseData = [
         title: "De Grote AI-Ethiek Discussie",
         body: `
         <p>
-          Heb je energie over, of werk je samen met klasgenoten? Pak dezelfde
+          Heb je energie over of werk je dit samen met iemand anders uit? Pak dezelfde
           stelling erbij en ga er een echt debat over voeren. Niets tegen AI,
           maar een mens die je in de ogen kijkt en je terugduwt is iets anders.
         </p>
@@ -4159,7 +4350,7 @@ const courseData = [
       <li><strong>Midjourney</strong> - Staat bekend om kunstzinnige resultaten. Werkt via Discord (betaald).</li>
     </ul>
     <p>
-      <strong>Tip:</strong> Begin met <a href="https://copilot.microsoft.com" target="_blank" rel="noopener">Microsoft Copilot</a>. Het is gratis, je hoeft je niet aan te melden en het gebruikt dezelfde DALL-E technologie als ChatGPT. Perfect voor op school.
+      <strong>Tip:</strong> Begin met <a href="https://copilot.microsoft.com" target="_blank" rel="noopener">Microsoft Copilot</a>. Het is gratis, je hoeft je niet aan te melden en het gebruikt dezelfde DALL-E technologie als ChatGPT. Ideaal om mee te beginnen.
     </p>
 
     <h3>Wat maakt een goede beeldprompt?</h3>
@@ -4189,7 +4380,7 @@ const courseData = [
     <ul>
       <li>In veel landen kun je <strong>geen copyright claimen</strong> op iets dat volledig door AI is gemaakt, omdat er geen menselijke maker is.</li>
       <li>AI-modellen zijn getraind op bestaand werk van kunstenaars. Sommige kunstenaars vinden dat hun werk <strong>zonder toestemming</strong> is gebruikt en hebben rechtszaken aangespannen.</li>
-      <li>Voor schoolopdrachten en persoonlijk gebruik is het meestal geen probleem, maar voor <strong>commercieel gebruik</strong> moet je goed opletten.</li>
+      <li>Voor eigen opdrachten en persoonlijk gebruik is het meestal geen probleem, maar voor <strong>commercieel gebruik</strong> moet je goed opletten.</li>
       <li>Sommige tools, zoals Adobe Firefly, gebruiken alleen beelden waarvoor <strong>toestemming</strong> is gegeven. Dat maakt ze veiliger voor commercieel gebruik.</li>
       <li><strong>Altijd vermelden</strong> dat een beeld door AI is gemaakt. Eerlijkheid duurt het langst.</li>
     </ul>
@@ -4302,9 +4493,9 @@ const courseData = [
     title: "AI als Studiecoach",
     subtitle: "Slimmer leren met kunstmatige intelligentie",
     theory: `
-    <h3>AI gebruiken om te leren (niet om te spieken)</h3>
+    <h3>AI gebruiken om te leren (niet om vals te spelen)</h3>
     <p>
-      Laten we eerlijk zijn: de verleiding is groot om ChatGPT je huiswerk te laten maken. Maar dan leer je niks.
+      Laten we eerlijk zijn: de verleiding is groot om ChatGPT je werk te laten maken. Maar dan leer je niks.
       Het slimme van AI is dat je het kunt gebruiken als een <strong>persoonlijke studiecoach</strong> die 24/7 beschikbaar is.
       Niet om het werk over te nemen, maar om je te helpen het <em>zelf</em> te begrijpen.
     </p>
@@ -4316,7 +4507,7 @@ const courseData = [
     <h3>Technieken: zo gebruik je AI als studietool</h3>
     <ul>
       <li>
-        <strong>Teksten samenvatten</strong> - Plak een lang stuk tekst uit je lesboek en vraag: "Vat dit samen in 5 bullet points."
+        <strong>Teksten samenvatten</strong> - Plak een lang stuk tekst dat je moet doornemen en vraag: "Vat dit samen in 5 bullet points."
         Handig voor een snel overzicht, maar lees daarna altijd de originele tekst nog een keer.
       </li>
       <li>
@@ -4352,16 +4543,16 @@ const courseData = [
       <li><strong>Stap 4:</strong> Verbeter je uitleg op basis van de feedback.</li>
     </ul>
     <p>
-      Dit is <strong>geen vorm van spieken</strong>. Je gebruikt de AI als kritische studiegenoot die je helpt gaten in je kennis te vinden.
+      Dit is <strong>geen vorm van vals spelen</strong>. Je gebruikt de AI als kritische studiegenoot die je helpt gaten in je kennis te vinden.
     </p>
 
     <h3>Wanneer is AI-hulp geen leren meer?</h3>
     <p>
-      Er is een duidelijke grens tussen AI als hulpmiddel en AI als spieken. De vuistregel:
+      Er is een duidelijke grens tussen AI als hulpmiddel en AI als vals spelen. De vuistregel:
     </p>
     <ul>
       <li><strong>Wel toegestaan:</strong> AI vragen om uitleg, om oefenvragen, om feedback op jouw eigen werk, om samenvattingen die je daarna zelf bestudeert.</li>
-      <li><strong>Niet toegestaan:</strong> AI het antwoord laten genereren en dat inleveren als je eigen werk. Een heel werkstuk laten schrijven. Antwoorden kopiëren zonder ze te begrijpen.</li>
+      <li><strong>Niet toegestaan:</strong> AI het antwoord laten genereren en dat inleveren als je eigen werk. Een hele opdracht laten schrijven. Antwoorden kopiëren zonder ze te begrijpen.</li>
     </ul>
     <p>
       De simpelste test: <strong>kun je het zonder AI opnieuw uitleggen of doen?</strong> Zo ja, dan heb je geleerd.
@@ -4369,8 +4560,35 @@ const courseData = [
     </p>
     <p>
       Op veel scholen zijn er regels over AI-gebruik. Ken die regels en houd je eraan.
-      Als je twijfelt, vraag het aan je docent. Eerlijkheid over je AI-gebruik wordt altijd gewaardeerd.
+      Als je twijfelt, vraag het aan je docent, begeleider of leidinggevende. Eerlijkheid over je AI-gebruik wordt altijd gewaardeerd.
     </p>
+
+    <h3>Eerlijk werk afleveren</h3>
+    <p>
+      Dit is belangrijk. Werk dat AI voor je maakt en dat jij inlevert als je eigen werk, is
+      <strong>fraude</strong>. Op school kan dat je diploma raken. Op je werk of in een traject raakt
+      het je geloofwaardigheid. Vals spelen dus, of het nu om een examen, een verslag of een opdracht gaat.
+      De gevolgen verschillen per plek, maar lopen op tot een onvoldoende, iets opnieuw moeten doen of
+      een officiële waarschuwing.
+    </p>
+    <ul>
+      <li>
+        <strong>Detectie is niet betrouwbaar.</strong> Er bestaan tools die zouden moeten herkennen
+        of tekst door AI is gemaakt, maar die zitten er vaak naast. Ze slaan soms vals alarm bij tekst
+        die je zelf hebt geschreven. Zorg daarom dat je je eigen proces kunt laten zien: bewaar je
+        aantekeningen, je tussenversies en je bronnen.
+      </li>
+      <li>
+        <strong>Wees open over je AI-gebruik.</strong> Steeds meer scholen en organisaties vragen je erbij te
+        zetten hoe je AI hebt ingezet. Dat is geen valkuil maar juist je bescherming: je laat zien
+        dat je het als hulpmiddel gebruikte en niet als ghostwriter.
+      </li>
+      <li>
+        <strong>Ken de regels.</strong> De ene plek staat meer toe dan de
+        andere, en per opdracht kan het verschillen. Weet je het niet zeker? Vraag het aan je docent, begeleider of leidinggevende
+        voordat je inlevert, niet erna.
+      </li>
+    </ul>
     `,
     video: {
       title: "Leren met AI",
@@ -4379,11 +4597,11 @@ const courseData = [
     assignment: {
       title: "AI als jouw persoonlijke tutor",
       description: `
-      <p>In deze opdracht ga je AI gebruiken als studietool. Je ervaart zelf hoe krachtig het is als je het goed inzet.</p>
+      <p>In deze opdracht ga je AI gebruiken als leermiddel. Je ervaart zelf hoe krachtig het is als je het goed inzet.</p>
 
-      <h3>Stap 1: Kies een lastig stuk lesstof</h3>
+      <h3>Stap 1: Kies iets moeilijks dat je wilt begrijpen</h3>
       <p>
-        Zoek een stuk tekst uit je lesboek of een artikel dat je moeilijk vindt. Dit mag van elk vak zijn.
+        Zoek een stuk tekst dat je moeilijk vindt: uit een boek, een artikel of iets uit je werk. Dit mag over elk onderwerp gaan.
         Typ het over of maak er een foto van en typ de kern over. Het stuk moet minimaal een halve pagina zijn.
       </p>
 
@@ -4391,7 +4609,7 @@ const courseData = [
       <p>Vraag de AI om dezelfde stof uit te leggen op drie verschillende niveaus:</p>
       <ul>
         <li><strong>Niveau 1:</strong> "Leg dit uit alsof ik 12 jaar oud ben."</li>
-        <li><strong>Niveau 2:</strong> "Leg dit uit voor een MBO-student die het voor het eerst leert."</li>
+        <li><strong>Niveau 2:</strong> "Leg dit uit voor iemand die het voor het eerst leert."</li>
         <li><strong>Niveau 3:</strong> "Leg dit uit zoals een expert het aan een collega zou uitleggen."</li>
       </ul>
       <p>Bewaar alle drie de uitleggen.</p>
@@ -4404,18 +4622,18 @@ const courseData = [
 
       <h3>Stap 4: Doe de toets zelf</h3>
       <p>
-        Maak de toets zonder hulp van AI of je lesboek. Controleer daarna je antwoorden.
+        Maak de toets zonder hulp van AI of je bronnen. Controleer daarna je antwoorden.
         Schrijf op: hoeveel had je goed? Welke vragen vond je lastig? Wat heb je geleerd van de 3 uitleggen?
       </p>
       `
     },
     quiz: [
       {
-        question: "Wat is de slimste manier om AI te gebruiken voor je studie?",
+        question: "Wat is de slimste manier om AI te gebruiken om te leren?",
         options: [
-          "De AI je hele werkstuk laten schrijven en dat inleveren",
+          "De AI je hele opdracht laten schrijven en dat inleveren",
           "AI gebruiken om moeilijke stof op jouw niveau te laten uitleggen",
-          "Alleen de samenvatting van AI lezen en het lesboek overslaan",
+          "Alleen de samenvatting van AI lezen en de rest overslaan",
           "AI-antwoorden kopiëren en uit je hoofd leren"
         ],
         correct: 1,
@@ -4425,7 +4643,7 @@ const courseData = [
         question: "Wat is de Feynman-techniek?",
         options: [
           "Een methode waarbij je alles 10 keer overleest",
-          "Een manier om AI je huiswerk te laten maken",
+          "Een manier om AI je werk te laten maken",
           "Een leermethode waarbij je iets in simpele woorden uitlegt om te testen of je het echt begrijpt",
           "Een techniek om sneller te typen"
         ],
@@ -4433,7 +4651,7 @@ const courseData = [
         explanation: "De Feynman-techniek draait om uitleggen in eenvoudige taal. Kun je iets simpel uitleggen? Dan begrijp je het echt. Kun je dat niet? Dan weet je waar je gaten zitten."
       },
       {
-        question: "Wanneer is AI-gebruik bij studeren 'spieken'?",
+        question: "Wanneer is AI-gebruik bij leren 'vals spelen'?",
         options: [
           "Als je AI vraagt om oefenvragen te maken",
           "Als je AI een moeilijk concept laat uitleggen",
@@ -4441,7 +4659,7 @@ const courseData = [
           "Als je AI feedback vraagt op je eigen tekst"
         ],
         correct: 2,
-        explanation: "Het wordt spieken als je AI-output inlevert alsof je het zelf gemaakt hebt. AI gebruiken om te leren, oefenen en feedback te krijgen is juist slim."
+        explanation: "Het wordt vals spelen als je AI-output inlevert alsof je het zelf gemaakt hebt. AI gebruiken om te leren, oefenen en feedback te krijgen is juist slim."
       },
       {
         question: "Welke studietechniek werkt het MINST goed met AI?",
@@ -4564,7 +4782,7 @@ const courseData = [
       <p>
         Denk na over een gemiddelde dag. Hoeveel AI-vragen stel je? Tel alles mee: ChatGPT, AI in zoekmachines
         (zoals Bing Copilot of Google AI), AI-beeldgeneratie, AI in apps die je gebruikt.
-        Schrijf een schatting op voor een gewone schooldag en voor een vrije dag.
+        Schrijf een schatting op voor een gewone school- of werkdag en voor een vrije dag.
       </p>
 
       <h3>Stap 2: Reken het door</h3>
@@ -4732,13 +4950,13 @@ const courseData = [
     assignment: {
       title: "Mijn beroep over 5 jaar: samenwerken met AI",
       description: `
-      <p>In deze opdracht maak je een korte presentatie (5 slides of een poster) over jouw toekomstige beroep en AI. Je laat zien dat je snapt hoe AI jouw werk gaat veranderen en wat jij daaraan kunt doen.</p>
+      <p>In deze opdracht maak je een korte presentatie (5 slides of een poster) over jouw beroep en AI. Je laat zien dat je snapt hoe AI jouw werk gaat veranderen en wat jij daaraan kunt doen.</p>
 
       <h3>Wat ga je doen?</h3>
       <p>Maak een presentatie of poster met deze 5 onderdelen:</p>
 
       <ol>
-        <li><strong>Welk beroep wil je uitoefenen?</strong><br>Beschrijf kort het beroep dat je wilt doen na je opleiding. Wat spreekt je aan?</li>
+        <li><strong>Welk beroep staat centraal?</strong><br>Beschrijf kort het beroep dat je nu doet of later wilt doen. Wat spreekt je aan?</li>
         <li><strong>Welke taken doe je nu?</strong><br>Noem 4-5 taken die bij dit beroep horen. Denk aan dagelijkse werkzaamheden.</li>
         <li><strong>Welke taken doet AI straks?</strong><br>Welke van die taken kan AI (deels) overnemen? Leg uit waarom.</li>
         <li><strong>Welke taken worden juist belangrijker voor jou?</strong><br>Wat zijn de taken waar jij als mens onmisbaar bent? Denk aan de skills die we deze week besproken hebben.</li>
@@ -4859,13 +5077,13 @@ const courseData = [
     assignment: {
       title: "De Grote AI-Challenge",
       description: `
-      <p>Dit is het: de eindopdracht. Je gaat een <strong>echt praktijkprobleem</strong> oplossen uit jouw opleiding of toekomstige beroep. Je gebruikt alles wat je hebt geleerd en werkt met minimaal 3 verschillende AI-tools.</p>
+      <p>Dit is het: de eindopdracht. Je gaat een <strong>echt praktijkprobleem</strong> oplossen uit jouw opleiding, werk of toekomstige beroep. Je gebruikt alles wat je hebt geleerd en werkt met minimaal 3 verschillende AI-tools.</p>
 
       <h3>De stappen</h3>
       <ol>
         <li>
           <strong>Kies een probleem</strong><br>
-          Kies een realistisch probleem uit jouw opleiding of toekomstige beroep. Voorbeelden:
+          Kies een realistisch probleem uit jouw opleiding, werk of toekomstige beroep. Voorbeelden:
           <ul>
             <li>Hoe kun je de wachttijd in een zorginstelling verkorten?</li>
             <li>Hoe maak je een werkplanning eerlijker voor een horecateam?</li>
@@ -4915,7 +5133,7 @@ const courseData = [
 
       <h3>Ga een stap verder: leg het uit aan iemand</h3>
       <p>Je hebt een eindopdracht gemaakt. Nu gaan we kijken of je het écht snapt. Dit heet de <strong>Feynman-techniek</strong> en het is een van de krachtigste manieren om te leren: <em>als je iets niet eenvoudig kunt uitleggen, snap je het zelf nog niet helemaal.</em></p>
-      <p>Zoek iemand op die naar je wil luisteren. Een vriend, familielid, collega of klasgenoot. Leg in maximaal 5 minuten uit:</p>
+      <p>Zoek iemand op die naar je wil luisteren. Leg in maximaal 5 minuten uit:</p>
       <ul>
         <li>Welk probleem je hebt aangepakt en waarom dat probleem ertoe doet</li>
         <li>Welke AI-tools je gebruikte en waarom juist die</li>
@@ -4953,7 +5171,7 @@ const courseData = [
         question: "Waarom is het belangrijk om bij een AI-project te reflecteren op wat AI deed en wat jij deed?",
         options: [
           "Zodat je kunt bewijzen dat je niet hebt gespiekt",
-          "Omdat je docent dat wil zien",
+          "Omdat je docent of begeleider dat wil zien",
           "Omdat het je helpt begrijpen waar jouw menselijke bijdrage onmisbaar is",
           "Omdat AI altijd fouten maakt die je moet corrigeren"
         ],
@@ -4977,7 +5195,7 @@ const courseData = [
           "Welke AI-tool het beste is",
           "Dat AI alles kan oplossen als je de juiste prompt gebruikt",
           "De basis om AI bewust, kritisch en verantwoord in te zetten in je werk en leven",
-          "Dat je altijd AI moet gebruiken voor je schoolwerk"
+          "Dat je altijd AI moet gebruiken voor je werk"
         ],
         correct: 2,
         explanation: "Het belangrijkste is de basis die je hebt opgebouwd: je kunt AI bewust, kritisch en verantwoord inzetten. Die vaardigheid blijft waardevol, ongeacht welke tools er in de toekomst komen."
@@ -5624,6 +5842,9 @@ function renderWeek(weekNum) {
       <button class="btn ${completed ? 'btn-secondary' : 'btn-success'}" id="complete-btn-${weekNum}" onclick="handleComplete(${weekNum})">
         ${completed ? '<i class="ico ico-check" style="font-size:0.95rem;margin-right:0.4rem;"></i>Afgerond. Klik om ongedaan te maken' : '<i class="ico ico-check" style="font-size:0.95rem;margin-right:0.4rem;"></i>Markeer week als afgerond'}
       </button>
+      <button class="btn ${completed ? 'btn-success' : 'btn-outline'} week-download-btn" id="download-btn-${weekNum}" onclick="downloadWeekDossier(${weekNum})" ${completed ? '' : 'disabled title="Beschikbaar zodra je deze week als afgerond markeert"'}>
+        <i class="ico ico-save" style="font-size:0.95rem;margin-right:0.4rem;"></i>Download je antwoorden (PDF)
+      </button>
     </div>
 
     <div class="week-nav-buttons">
@@ -5748,7 +5969,86 @@ function handleComplete(weekNum) {
     btn.className = `btn ${completed ? 'btn-secondary' : 'btn-success'}`;
     btn.innerHTML = completed ? '<i class="ico ico-check" style="font-size:0.95rem;margin-right:0.4rem;"></i>Afgerond. Klik om ongedaan te maken' : '<i class="ico ico-check" style="font-size:0.95rem;margin-right:0.4rem;"></i>Markeer week als afgerond';
   }
+  var dl = document.getElementById(`download-btn-${weekNum}`);
+  if (dl) {
+    dl.disabled = !completed;
+    dl.className = `btn ${completed ? 'btn-success' : 'btn-outline'} week-download-btn`;
+    if (completed) { dl.removeAttribute('title'); }
+    else { dl.setAttribute('title', 'Beschikbaar zodra je deze week als afgerond markeert'); }
+  }
   updateProgressBar();
+}
+
+// ===== DOSSIER DOWNLOAD (PDF via print, client-side, geen dataverzameling) =====
+function buildDossierHTML(weeks) {
+  var progress = getProgress();
+  var assignments = progress.assignments || {};
+  var level = getLevel();
+  var sections = '';
+  var any = false;
+  weeks.forEach(function(week) {
+    var wk = week.week;
+    var a = L(week.assignment) || {};
+    var answers = '';
+    for (var s = 1; s <= 12; s++) {
+      var val = assignments['week' + wk + '_step_' + s];
+      if (val && val.trim()) {
+        answers += '<h3>Stap ' + s + '</h3><div class="ans">' + escapeHtml(val) + '</div>';
+      }
+    }
+    var single = assignments['week' + wk];
+    if (!answers && single && single.trim()) {
+      answers += '<div class="ans">' + escapeHtml(single) + '</div>';
+    }
+    if (answers) {
+      any = true;
+      sections += '<section><h2>Week ' + wk + ': ' + escapeHtml(week.title) + '</h2>'
+        + (a.title ? '<p class="opd">Opdracht: ' + escapeHtml(a.title) + '</p>' : '')
+        + answers + '</section>';
+    }
+  });
+  if (!any) return null;
+  var d = new Date();
+  var dateStr = d.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+  var timeStr = d.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
+  var css = '*{font-family:\'Inter\',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;box-sizing:border-box;}body{color:#1a1a2e;max-width:720px;margin:0 auto;padding:40px 24px;line-height:1.6;}'
+    + 'header{border-bottom:2px solid #6d28d9;padding-bottom:16px;margin-bottom:28px;}'
+    + 'h1{font-size:1.6rem;margin:0 0 4px;color:#4c1d95;}.meta{color:#666;font-size:0.85rem;margin:0;}'
+    + 'section{margin-bottom:26px;page-break-inside:avoid;}'
+    + 'h2{font-size:1.15rem;color:#4c1d95;border-bottom:1px solid #e5e5ef;padding-bottom:6px;margin:24px 0 8px;}'
+    + '.opd{font-weight:600;color:#333;margin:0 0 12px;}'
+    + 'h3{font-size:0.95rem;color:#6d28d9;margin:16px 0 4px;}'
+    + '.ans{background:#f6f5fb;border-left:3px solid #a78bfa;padding:10px 14px;border-radius:4px;white-space:pre-wrap;margin-bottom:8px;}'
+    + 'footer{margin-top:36px;padding-top:14px;border-top:1px solid #e5e5ef;color:#888;font-size:0.75rem;}'
+    + '@page{size:auto;margin:0;}@media print{body{padding:16mm 14mm;}}';
+  return '<!doctype html><html lang="nl"><head><meta charset="utf-8"><title>Mijn AI-Grip dossier</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>' + css + '</style></head><body>'
+    + '<header><h1>Mijn AI-Grip dossier</h1><p class="meta">AI-Grip: Master je Toekomst &middot; Niveau ' + level + ' &middot; Gedownload op ' + dateStr + ' om ' + timeStr + '</p></header>'
+    + sections
+    + '<footer>Gemaakt met AI-Grip: Master je Toekomst. Je antwoorden staan alleen op je eigen apparaat, er wordt niets verzameld. &copy; 2026 Luuk Otten &middot; Mogelijk gemaakt door Health Stars EdTech.</footer>'
+    + '<scr' + 'ipt>window.onload=function(){var f=(document.fonts&&document.fonts.ready)?document.fonts.ready:Promise.resolve();f.then(function(){setTimeout(function(){window.print();},250);});};</scr' + 'ipt>'
+    + '</body></html>';
+}
+
+function openDossierPrint(html) {
+  var w = window.open('', '_blank');
+  if (!w) { alert('Sta pop-ups toe om je dossier te openen en op te slaan als PDF (kies bij het printen voor "Opslaan als PDF").'); return; }
+  w.document.open();
+  w.document.write(html);
+  w.document.close();
+}
+
+function downloadWeekDossier(weekNum) {
+  var week = courseData.find(function(w) { return w.week === weekNum; });
+  if (!week) return;
+  var html = buildDossierHTML([week]);
+  if (!html) { alert('Je hebt in deze week nog geen antwoorden ingevuld.'); return; }
+  openDossierPrint(html);
+}
+
+function downloadFullDossier() {
+  var html = buildDossierHTML(courseData);
+  if (!html) { alert('Je hebt nog geen antwoorden ingevuld. Vul eerst een opdracht in.'); return; }
+  openDossierPrint(html);
 }
 
 // ===== CERTIFICATE =====
@@ -5836,12 +6136,13 @@ function generateCertificate() {
           </div>
           <div class="cert-official-seal">${generateSealSVG(getLevel())}</div>
         </div>
-        <div class="cert-verification">Uitgegeven door een mbo-docent. Ondergebracht bij Health Stars.</div>
+        <div class="cert-verification">Uitgegeven door een mbo-docent. Mogelijk gemaakt door Health Stars EdTech.</div>
       </div>
     </div>
     <div class="cert-buttons">
       <button class="btn btn-primary" onclick="window.print()">Certificaat afdrukken</button>
       <button class="btn btn-success" onclick="downloadCertificateAsImage()">Opslaan als afbeelding</button>
+      <button class="btn btn-outline" onclick="downloadFullDossier()"><i class="ico ico-save" style="font-size:0.95rem;margin-right:0.4rem;"></i>Download je dossier (PDF)</button>
       <button class="btn btn-secondary" onclick="showPage('overview')">Terug naar overzicht</button>
     </div>
   `;
@@ -6027,7 +6328,7 @@ function _drawCertificateCanvas(certFrame, estherSigImg, sealImg) {
 
   ctx.fillStyle = '#999999';
   ctx.font = '9px ' + sans;
-  ctx.fillText('Uitgegeven door een mbo-docent. Ondergebracht bij Health Stars.', w / 2, h - 24);
+  ctx.fillText('Uitgegeven door een mbo-docent. Mogelijk gemaakt door Health Stars EdTech.', w / 2, h - 24);
 
   // Download
   const link = document.createElement('a');
@@ -6094,7 +6395,7 @@ function showCertificatePreview() {
           </div>
           <div class="cert-official-seal">${generateSealSVG(getLevel())}</div>
         </div>
-        <div class="cert-verification">Uitgegeven door een mbo-docent. Ondergebracht bij Health Stars.</div>
+        <div class="cert-verification">Uitgegeven door een mbo-docent. Mogelijk gemaakt door Health Stars EdTech.</div>
       </div>
     </div>
     <button class="cert-preview-close" onclick="closeCertPreview()">Sluiten</button>
