@@ -2105,6 +2105,20 @@
     margin-top: 0.75rem;
   }
 
+  /* ===== KEUZEDEEL-KORTING: popup + aanbod ===== */
+  .korting-overlay { position:fixed; inset:0; background:rgba(10,8,20,0.72); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; z-index:1000; padding:1.5rem; }
+  .korting-modal { background:linear-gradient(180deg,#1a1330,#120e24); border:1px solid rgba(245,158,11,0.35); border-radius:20px; padding:2rem 1.75rem; max-width:400px; width:100%; text-align:center; box-shadow:0 30px 80px -20px rgba(0,0,0,0.7); }
+  .korting-badge { width:64px; height:64px; border-radius:50%; margin:0 auto 1rem; display:flex; align-items:center; justify-content:center; background:var(--gradient-amber); color:#1a1a1a; font-size:1.8rem; }
+  .korting-modal h3 { color:var(--white); font-family:var(--font-display); font-size:1.3rem; margin:0 0 0.6rem; }
+  .korting-modal p { color:var(--text-secondary); font-size:0.95rem; line-height:1.55; margin:0 0 1.25rem; }
+  .korting-later { display:block; width:100%; margin-top:0.75rem; background:none; border:none; color:var(--text-muted); font-size:0.9rem; cursor:pointer; padding:0.4rem; }
+  .korting-later:hover { color:var(--white); }
+  .keuzedeel-offer { margin-top:2rem; padding:1.75rem; border:1px solid rgba(245,158,11,0.3); border-radius:18px; background:linear-gradient(180deg,rgba(245,158,11,0.08),rgba(245,158,11,0.02)); text-align:center; }
+  .keuzedeel-offer .ko-eyebrow { font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber-400); font-weight:700; margin-bottom:0.4rem; }
+  .keuzedeel-offer .ko-title { font-family:var(--font-display); color:var(--white); font-size:1.2rem; font-weight:700; margin-bottom:0.5rem; }
+  .keuzedeel-offer .ko-sub { color:var(--text-secondary); font-size:0.92rem; line-height:1.5; margin:0 auto 0.85rem; max-width:44ch; }
+  .keuzedeel-offer .ko-price { color:var(--white); font-size:1.4rem; margin-bottom:1rem; }
+
   .cert-buttons {
     margin-top: 2rem;
     display: flex;
@@ -5336,6 +5350,12 @@ const courseData = [
 // ===== STATE MANAGEMENT =====
 const STORAGE_KEY = 'aigrip_progress';
 
+// ===== KEUZEDEEL-KORTING (client-side ontgrendeling, geen tracking) =====
+// TODO: vervang deze twee placeholders door de echte Mollie-betaallinks van Luuk.
+const MOLLIE_LINK_FULL = 'https://ai-geletterdheid-mbo.nl/prijzen/#keuzedeel';      // 44,99 (nog geen Mollie-link)
+const MOLLIE_LINK_DISCOUNT = 'https://ai-geletterdheid-mbo.nl/prijzen/#keuzedeel';  // 34,99 (nog geen Mollie-link)
+const DISCOUNT_POPUP_SHOWN_KEY = 'aigrip_keuzedeel_korting_popup';
+
 function getProgress() {
   try {
     const data = localStorage.getItem(STORAGE_KEY);
@@ -5430,6 +5450,7 @@ function showPage(pageId, data) {
 
   updateProgressBar();
   updateLevelBadge();
+  checkKeuzedeelKorting();
   window.scrollTo(0, 0);
 }
 
@@ -6160,6 +6181,58 @@ function handleComplete(weekNum) {
     else { dl.setAttribute('title', 'Beschikbaar zodra je deze week als afgerond markeert'); }
   }
   updateProgressBar();
+  checkKeuzedeelKorting();
+}
+
+// ===== KEUZEDEEL-KORTING: ontgrendeling en popup =====
+function isKeuzedeelKortingUnlocked() {
+  return getQualifyingWeeksCount() >= 10;
+}
+
+function checkKeuzedeelKorting() {
+  if (!isKeuzedeelKortingUnlocked()) return;
+  try { if (localStorage.getItem(DISCOUNT_POPUP_SHOWN_KEY) === '1') return; } catch (e) {}
+  try { localStorage.setItem(DISCOUNT_POPUP_SHOWN_KEY, '1'); } catch (e) {}
+  showKortingPopup();
+}
+
+function showKortingPopup() {
+  if (document.getElementById('kortingPopupOverlay')) return;
+  var ov = document.createElement('div');
+  ov.id = 'kortingPopupOverlay';
+  ov.className = 'korting-overlay';
+  ov.onclick = function(e) { if (e.target === ov) closeKortingPopup(); };
+  ov.innerHTML = '<div class="korting-modal">' +
+    '<div class="korting-badge"><i class="ico ico-award"></i></div>' +
+    '<h3>Je hebt 10 euro korting ontgrendeld</h3>' +
+    '<p>Je hebt alle tien de weken echt afgerond. Daarmee betaal je geen 44,99 maar <strong>34,99</strong> voor de vervolgcursus: het verdiepende keuzedeel K1499.</p>' +
+    '<a href="' + MOLLIE_LINK_DISCOUNT + '" target="_blank" rel="noopener" class="btn btn-amber" style="width:100%;justify-content:center;">Bekijk de vervolgcursus</a>' +
+    '<button type="button" class="korting-later" onclick="closeKortingPopup()">Later</button>' +
+    '</div>';
+  document.body.appendChild(ov);
+}
+
+function closeKortingPopup() {
+  var ov = document.getElementById('kortingPopupOverlay');
+  if (ov && ov.parentNode) ov.parentNode.removeChild(ov);
+}
+
+function buildKeuzedeelOffer() {
+  var unlocked = isKeuzedeelKortingUnlocked();
+  var link = unlocked ? MOLLIE_LINK_DISCOUNT : MOLLIE_LINK_FULL;
+  var priceHtml = unlocked
+    ? '<span style="text-decoration:line-through;opacity:0.55;">&euro;44,99</span> &nbsp;<strong>&euro;34,99</strong>'
+    : '<strong>&euro;44,99</strong>';
+  var sub = unlocked
+    ? 'Je hebt alle tien de weken afgerond, dus je 10 euro korting is ontgrendeld.'
+    : 'Rond alle tien de weken echt af volgens de SBU-criteria en ontgrendel 10 euro korting.';
+  return '<div class="keuzedeel-offer">' +
+    '<div class="ko-eyebrow">Ga verder: keuzedeel K1499</div>' +
+    '<div class="ko-title">De verdiepende vervolgcursus</div>' +
+    '<p class="ko-sub">' + sub + '</p>' +
+    '<div class="ko-price">' + priceHtml + '</div>' +
+    '<a href="' + link + '" target="_blank" rel="noopener" class="btn btn-amber" style="justify-content:center;">Bekijk de vervolgcursus <i class="ico ico-arrow-right" style="font-size:0.85rem;"></i></a>' +
+    '</div>';
 }
 
 // ===== DOSSIER DOWNLOAD (PDF via print, client-side, geen dataverzameling) =====
@@ -6328,6 +6401,7 @@ function generateCertificate() {
       <button class="btn btn-amber" onclick="downloadFullDossier()"><i class="ico ico-save" style="font-size:0.95rem;margin-right:0.4rem;"></i>Download je dossier (PDF)</button>
       <button class="btn btn-tint" onclick="showPage('overview')">Terug naar overzicht</button>
     </div>
+    ${buildKeuzedeelOffer()}
   `;
 }
 
