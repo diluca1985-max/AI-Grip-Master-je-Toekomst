@@ -2462,6 +2462,51 @@
     text-decoration: underline;
   }
 
+  .niveau4-verdieping ol { margin: 0.5rem 0 0 1.25rem; }
+  .niveau4-verdieping ol li { margin-bottom: 0.4rem; }
+
+  .rubric-box {
+    margin-top: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    background: rgba(124,58,237,0.05);
+    border: 1px solid rgba(168,139,250,0.22);
+    border-radius: var(--radius-sm);
+  }
+
+  .rubric-head {
+    display: flex;
+    align-items: center;
+    color: var(--white);
+    font-weight: 700;
+    font-size: 0.98rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .rubric-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-top: 1px solid var(--border);
+    align-items: baseline;
+  }
+
+  .rubric-label {
+    color: var(--purple-300);
+    font-weight: 600;
+    font-size: 0.92rem;
+  }
+
+  .rubric-text {
+    color: var(--text-secondary);
+    font-size: 0.94rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 600px) {
+    .rubric-row { grid-template-columns: 1fr; gap: 0.15rem; }
+  }
+
   .quiz-hint {
     margin-top: 0.5rem;
     padding: 0.6rem 1rem;
@@ -3286,6 +3331,42 @@ const courseData = [
         <strong><i class="ico ico-target" style="color:var(--purple-300);margin-right:0.4rem;"></i>Kern:</strong> AI is een hulpmiddel. Het is niet magisch, niet beangstigend en niet foutloos. Het is een gereedschap dat je kunt leren gebruiken, net zoals je ooit leerde omgaan met het internet.
       </div>
     `,
+    theorySimple: `
+      <p>Je hebt vast al gehoord van <strong>AI</strong>. Dat is de afkorting van kunstmatige intelligentie: slimme computersoftware. Maar wat is het precies?</p>
+
+      <h3>Google zoekt, ChatGPT bedenkt</h3>
+      <p>Een <strong>zoekmachine</strong> zoals Google zoekt pagina's die al bestaan. Het wijst je de weg naar informatie.</p>
+      <p><strong>Generatieve AI</strong> zoals ChatGPT maakt iets <em>nieuws</em>: tekst, plaatjes of code die er nog niet waren.</p>
+
+      <div class="highlight-box">
+        <strong><i class="ico ico-bulb" style="color:var(--amber-400);margin-right:0.4rem;"></i>Kort:</strong> Google zoekt. ChatGPT bedenkt. Dat is het verschil.
+      </div>
+
+      <h3>AI zit al overal</h3>
+      <p>Je gebruikt AI vaak zonder het te weten:</p>
+      <ul>
+        <li><strong>TikTok</strong> kiest welke video's je ziet.</li>
+        <li><strong>Snapchat</strong> herkent je gezicht voor filters.</li>
+        <li><strong>Netflix</strong> raadt films aan die je leuk vindt.</li>
+        <li><strong>Google Maps</strong> zoekt de snelste route.</li>
+      </ul>
+
+      <h3>AI weet niks, AI gokt het volgende woord</h3>
+      <p>Dit is het belangrijkste van de hele cursus. ChatGPT begrijpt niet echt wat hij zegt. Hij raadt telkens welk woord het beste past. Daardoor kan AI heel zeker klinken en tóch iets vertellen wat niet klopt.</p>
+      <p>Dat noemen we een <strong>hallucinatie</strong>: de AI verzint iets. Bijvoorbeeld een jaartal of een bron die niet bestaat. Een AI die zeker klinkt, heeft dus niet altijd gelijk. In week 3 leer je hoe je checkt of iets echt klopt.</p>
+
+      <div class="highlight-box">
+        <strong><i class="ico ico-target" style="color:var(--purple-300);margin-right:0.4rem;"></i>Kern:</strong> AI is een hulpmiddel. Niet magisch en niet foutloos. Je kunt leren er goed mee om te gaan.
+      </div>
+    `,
+    theoryDeep: `
+      <h3>Verdieping: hoe die woordvoorspeller echt werkt</h3>
+      <p>Een taalmodel als ChatGPT is getraind op enorme hoeveelheden tekst. Tijdens die training leert het niet <em>feiten</em>, maar <em>waarschijnlijkheden</em>: gegeven de woorden tot nu toe, welk volgende woord (of woorddeel) past statistisch het beste? Het model heeft geen intern besef van waar of onwaar. Daarom is een hallucinatie geen bug die je er helemaal uit kunt halen, maar een gevolg van hoe het systeem in de kern werkt.</p>
+      <p>Let ook op het onderscheid tussen <strong>smalle AI</strong> en <strong>brede AI</strong>. Alles wat vandaag bestaat is smalle AI: goed in één taak (tekst voorspellen, gezichten herkennen, routes berekenen). Een systeem dat als een mens over allerlei domeinen kan redeneren (brede of algemene AI) bestaat nog niet. Wie beweert dat ChatGPT "denkt" of "begrijpt", verwart die twee.</p>
+      <div class="niveau4-verdieping">
+        <strong>Denkvraag (niveau 4):</strong><br><em>Als een taalmodel geen besef heeft van waarheid, waarom klinken de antwoorden dan toch zo overtuigend? En wat betekent dat voor de manier waarop jij de output moet controleren?</em>
+      </div>
+    `,
     video: { title: "Wat is AI - korte uitleg", url: "https://www.youtube.com/embed/gQmhbXmtKig" },
     assignment: {
       title: "De AI-detective",
@@ -3307,6 +3388,22 @@ const courseData = [
         </ul>
         <p>Schrijf je bevindingen hieronder op. Probeer bij elk voorbeeld ook uit te leggen <em>waarom</em> je denkt dat er wel of geen AI in zit.</p>
       `
+    },
+    assignmentDeep: `
+      <p><strong>Extra stap (niveau 4).</strong> Kies één van je drie apps en analyseer die dieper:</p>
+      <ol>
+        <li>Welke gegevens heeft de app van jou nodig om te werken? (denk aan kijkgedrag, locatie, foto's)</li>
+        <li>Wat gebeurt er als de AI een fout maakt? Bedenk een concreet voorbeeld.</li>
+        <li>Wie is er verantwoordelijk voor die fout: jij, het bedrijf, of de maker van de AI? Beargumenteer je antwoord.</li>
+      </ol>
+    `,
+    rubric: {
+      title: "De AI-detective",
+      levels: [
+        { label: "Voldoende", text: "Je benoemt minstens 3 apps of apparaten en beschrijft kort wat ze doen." },
+        { label: "Goed", text: "Je legt bij elke app beargumenteerd uit waarom er wel of geen AI in zit." },
+        { label: "Uitstekend", text: "Je analyseert minstens één app kritisch: welke gegevens, welk foutrisico en wie verantwoordelijk is." }
+      ]
     },
     quiz: [
       {
@@ -3398,6 +3495,60 @@ const courseData = [
   },
   {
     week: 2,
+    theorySimple: `
+      <p>Je hebt een slimme AI. Maar hoe krijg je er <strong>goede antwoorden</strong> uit? Dat begint bij hoe je je vraag stelt. Dat heet <strong>prompt engineering</strong>.</p>
+
+      <h3>Een vage vraag geeft een vaag antwoord</h3>
+      <p>Zeg je tegen een kok "geef me een recept", dan weet hij niet wat je wilt. Sushi? Een taart? Bij AI is het net zo. Vraag je iets vaags, dan krijg je iets vaags terug.</p>
+
+      <div class="highlight-box">
+        <strong><i class="ico ico-bulb" style="color:var(--amber-400);margin-right:0.4rem;"></i>Kort:</strong> Hoe duidelijker je vraag, hoe beter het antwoord.
+      </div>
+
+      <h3>De R-O-L methode</h3>
+      <p>Met de <strong>R-O-L methode</strong> maak je snel een goede prompt. Drie onderdelen:</p>
+      <ul>
+        <li><strong>R = Rol.</strong> Wie moet de AI zijn? Bijvoorbeeld een docent of een coach.</li>
+        <li><strong>O = Opdracht.</strong> Wat moet de AI doen? Schrijven, uitleggen of samenvatten.</li>
+        <li><strong>L = Limiet.</strong> Wat zijn de grenzen? Lengte, taal, stijl of doelgroep.</li>
+      </ul>
+      <p>Zo wordt "schrijf een brief" ineens: "Je bent een HR-adviseur. Schrijf een motivatiebrief voor een stage bij een marketingbureau. Maximaal 250 woorden, enthousiast maar netjes."</p>
+
+      <h3>Vervang vage woorden</h3>
+      <p>Krijg je een saai antwoord? Vaak komt dat door een vaag woord. "Verbeter dit" of "maak het korter" laat de AI gokken. Zeg precies wat je wilt. In plaats van "maak het korter" zeg je "vat dit samen in 3 zinnen zonder dat de kern wegvalt".</p>
+
+      <h3>Itereren</h3>
+      <p>Is het antwoord nog niet goed? Pas je prompt aan en probeer opnieuw. Meer detail, een andere rol of een andere limiet. Dat heet <strong>itereren</strong>.</p>
+
+      <div class="highlight-box">
+        <strong><i class="ico ico-target" style="color:var(--purple-300);margin-right:0.4rem;"></i>Onthoud:</strong> AI is zo goed als jouw instructie. Je hoeft geen programmeur te zijn. Je moet leren duidelijk vragen.
+      </div>
+    `,
+    theoryDeep: `
+      <h3>Verdieping: waarom een scherpe prompt werkt</h3>
+      <p>In week 1 leerde je dat een taalmodel telkens het volgende woord voorspelt op basis van wat er tot nu toe staat. Je prompt is precies die begintekst. Hoe vager je begint, hoe meer richtingen het model op kan, en hoe groter de kans dat het een algemeen middenmootantwoord kiest. Geef je in je prompt een rol, een duidelijke opdracht en een limiet, dan maak je het aantal passende vervolgen kleiner. Je stuurt het model naar een smaller deel van alles wat het zou kunnen zeggen.</p>
+      <p>Daarom werkt R-O-L geen trucje maar een stuurmiddel. De rol bepaalt de toon en het vakgebied, de opdracht bepaalt de vorm, de limiet snijdt de rest weg. Let wel op het verschil tussen sturen en controleren. Een scherpe prompt maakt de kans op een bruikbaar antwoord groter, maar het model blijft woorden voorspellen en kan nog steeds iets stelligs beweren dat niet klopt. Beter vragen vervangt het checken uit week 1 dus niet, het komt erbij.</p>
+      <p>Itereren is hierbij geen teken dat je iets fout deed. Je leest het antwoord, ziet wat mist en past je prompt aan. Elke ronde stuur je preciezer bij. Wie in één keer het perfecte antwoord verwacht, begrijpt het gereedschap verkeerd.</p>
+      <div class="niveau4-verdieping">
+        <strong>Denkvraag (niveau 4):</strong><br><em>Als een scherpere prompt de kans op een goed antwoord vergroot maar geen juist antwoord garandeert, hoe bepaal je dan bij welke opdrachten je vooral moet sturen en bij welke je vooral moet checken?</em>
+      </div>
+    `,
+    assignmentDeep: `
+      <p><strong>Extra stap (niveau 4).</strong> Je hebt nu een slechte en een goede motivatiebrief naast elkaar. Analyseer je eigen R-O-L-prompt kritisch:</p>
+      <ol>
+        <li>Benoem per onderdeel (Rol, Opdracht, Limiet) welk woord in jouw prompt het antwoord het sterkst stuurde. Leg uit waarom.</li>
+        <li>Verander bewust één limiet (bijvoorbeeld toon of lengte) en draai de prompt opnieuw. Beschrijf wat er in het antwoord veranderde.</li>
+        <li>Lees de goede brief na als een kritische stagebegeleider. Welke bewering zou je zelf nog moeten controleren voordat je de brief verstuurt?</li>
+      </ol>
+    `,
+    rubric: {
+      title: "De Motivatiebrief-challenge",
+      levels: [
+        { label: "Voldoende", text: "Je levert een slechte en een goede prompt in en kopieert beide resultaten." },
+        { label: "Goed", text: "Je goede prompt gebruikt herkenbaar de R-O-L methode en je legt in 2-3 zinnen uit welke brief beter is en waarom." },
+        { label: "Uitstekend", text: "Je analyseert je eigen prompt: welk woord het antwoord het sterkst stuurde, wat er verandert als je een limiet aanpast en welke bewering je nog moet controleren." }
+      ]
+    },
     title: "De Kunst van het Praten",
     subtitle: "Prompt Engineering",
     goals: [
@@ -3687,6 +3838,63 @@ const courseData = [
   },
   {
     week: 3,
+    theorySimple: `
+      <p>Een <strong>deepfake</strong> is een foto, video of geluid dat door AI is gemaakt of bewerkt. De AI leert hoe iemand eruitziet of klinkt en maakt daar een nieuwe versie van. Soms is die zo goed dat je het verschil niet meer ziet.</p>
+
+      <h3>Hoe wordt het gemaakt?</h3>
+      <p>De AI krijgt honderden of duizenden foto's en video's van iemand te zien. Zo leert hij elk detail: hoe het gezicht beweegt en hoe het licht op de huid valt. Daarna maakt hij een nieuw beeld dat levensecht lijkt. Vroeger had je daar een duur lab voor nodig. Nu kan het met een app op je telefoon.</p>
+
+      <h3>Waarom is dit gevaarlijk?</h3>
+      <ul>
+        <li><strong>Nepnieuws:</strong> een deepfake van een politicus die iets zegt wat hij nooit gezegd heeft.</li>
+        <li><strong>Oplichting:</strong> criminelen klonen de stem van een directeur en vragen om geld. In 2024 werd zo in Hong Kong 25 miljoen dollar overgemaakt.</li>
+        <li><strong>Cyberpesten:</strong> iemands gezicht wordt op een ander lichaam geplakt. Dit overkomt vooral meisjes en vrouwen.</li>
+      </ul>
+
+      <h3>Hoe herken je een deepfake?</h3>
+      <ul>
+        <li><strong>Handen:</strong> tel de vingers en kijk of ze er natuurlijk uitzien.</li>
+        <li><strong>Oren en ogen:</strong> vaak niet symmetrisch of een beetje leeg.</li>
+        <li><strong>Huid:</strong> soms te glad en te perfect, zonder porien.</li>
+        <li><strong>Bron:</strong> waar komt het vandaan? Een betrouwbare nieuwssite of alleen een willekeurig account?</li>
+      </ul>
+
+      <h3>Nep beeld en nep tekst</h3>
+      <p>Een deepfake is nep beeld. Een <strong>hallucinatie</strong> van een chatbot is nep tekst: de AI verzint dan een feit of een bron. Allebei zien er betrouwbaar uit. Daarom check je een belangrijk AI-antwoord net zo goed als een schokkend filmpje.</p>
+      <p>Doe dan deze <strong>drie stappen</strong>:</p>
+      <ol>
+        <li>Klopt het met een tweede bron?</li>
+        <li>Bestaat de bron echt? Klik op de link of zoek het jaartal op.</li>
+        <li>Kan het echt waar zijn? Gebruik je gezond verstand.</li>
+      </ol>
+      <div class="highlight-box">
+        <strong><i class="ico ico-target" style="color:var(--purple-300);margin-right:0.4rem;"></i>Onthoud:</strong> Gaat het over je werk, je geld of je gezondheid? Dan check je het altijd zelf na.
+      </div>
+    `,
+    theoryDeep: `
+      <h3>Verdieping: waarom de checklist een houdbaarheidsdatum heeft</h3>
+      <p>De kenmerken uit de basistheorie, zoals rare handen, te gladde huid en een vervormde achtergrond, zijn geen vaste wetten. Het zijn de fouten die de AI op dit moment nog maakt. Een deepfake ontstaat doordat een model patronen naleert uit heel veel voorbeeldbeelden. Elke keer dat makers zien waar het misgaat, trainen ze het model bij op precies die zwakke plek. De vinger die vandaag verraadt dat een beeld nep is, kan volgend jaar perfect zijn. Je leert dus geen definitieve trucjes maar een houding: twijfelen zodra beeld te mooi uitkomt.</p>
+      <p>Onder dat praktische punt zit een principieel punt. Een deepfake en een hallucinatie komen uit dezelfde manier van werken: een AI die patronen namaakt zonder te weten of het resultaat waar is. Het verschil zit alleen in de vorm, beeld tegenover tekst. Dat verschuift waar het bewijs vandaan moet komen. Vroeger gold een foto of een opname zelf als bewijs dat iets was gebeurd. Nu kan het beeld dat bewijs niet meer dragen en moet de betrouwbaarheid ergens anders vandaan komen: van de bron, de context en de vraag of meerdere onafhankelijke plekken hetzelfde melden.</p>
+      <div class="niveau4-verdieping">
+        <strong>Denkvraag (niveau 4):</strong><br><em>Als beeld en geluid geen bewijs meer zijn dat iets echt is gebeurd, waaraan ontleen jij dan nog je vertrouwen dat een gebeurtenis klopt? En wie loopt het grootste risico op het moment dat dat vertrouwen wegvalt?</em>
+      </div>
+    `,
+    assignmentDeep: `
+      <p><strong>Extra stap (niveau 4).</strong> Je hebt nu geoefend met het herkennen van nepbeeld en met de drie-stappen-check op een AI-antwoord. Analyseer nu wat dat buiten de oefening betekent:</p>
+      <ol>
+        <li>Kijk terug naar de details die jou hielpen om AI te herkennen. Leg per detail uit waarom dat kenmerk over een paar jaar waarschijnlijk niet meer werkt.</li>
+        <li>Bedenk een concrete situatie uit je eigen beroep of stage waarin een deepfake of een verzonnen AI-bron echte schade zou aanrichten. Beschrijf wie er wordt getroffen en hoe.</li>
+        <li>Stel dat jij zo'n nepbeeld ontdekt voordat het schade doet. Beschrijf stap voor stap wat je zou doen en wie je zou waarschuwen.</li>
+      </ol>
+    `,
+    rubric: {
+      title: "Spot de Bot",
+      levels: [
+        { label: "Voldoende", text: "Je doet de test op whichfaceisreal.com en thispersondoesnotexist.com, noteert waar je op let en schrijft het gevraagde reflectieverslag." },
+        { label: "Goed", text: "Je past daarnaast de drie-stappen-check toe op een AI-antwoord en beschrijft welke fout of verzonnen bron je vond en hoe je erachter kwam." },
+        { label: "Uitstekend", text: "Je legt uit waarom de herkenkenmerken hun houdbaarheid verliezen en koppelt het risico van deepfakes en verzonnen bronnen aan een concrete situatie uit je eigen beroep of stage." }
+      ]
+    },
     title: "Fake of Echt?",
     subtitle: "Deepfakes & Desinformatie",
     goals: [
@@ -3980,6 +4188,75 @@ const courseData = [
   },
   {
     week: 4,
+    theorySimple: `
+      <h2>AI is al overal op de werkvloer</h2>
+      <p>Misschien denk je dat AI iets is voor techbedrijven. Dat klopt niet. AI wordt nu al gebruikt in bijna elke sector. Van de garage tot het ziekenhuis en van het magazijn tot het restaurant. De kans is groot dat jij er op je werk ook mee te maken krijgt.</p>
+      <p>Robots nemen je baan niet over. Je werk verandert wel. Saaie, herhalende taken worden geautomatiseerd. Jij houdt tijd over voor het werk waar je goed in bent, zoals contact met mensen en problemen oplossen.</p>
+
+      <div class="highlight-box">
+        <strong><i class="ico ico-bulb" style="color:var(--amber-400);margin-right:0.4rem;"></i>Eerst zelf raden:</strong> schrijf op waar jij denkt dat AI in jouw sector al wordt gebruikt. Check na het lezen of je gelijk had.
+      </div>
+
+      <h3>Techniek</h3>
+      <ul>
+        <li><strong>Voorspellend onderhoud:</strong> sensoren op machines meten temperatuur, trillingen en geluid. AI voorspelt wanneer een onderdeel kapotgaat. Je vervangt het voordat de machine uitvalt.</li>
+        <li><strong>Slimme sensoren:</strong> in fabrieken hangen sensoren die met AI verbonden zijn. Ze geven een melding bij een lekkage of een machine die raar loopt, nog voordat jij het zelf merkt.</li>
+      </ul>
+
+      <h3>Zorg</h3>
+      <ul>
+        <li><strong>AI-triage:</strong> bel je de huisartsenpost, dan schat AI in hoe urgent je klacht is. Op basis van je symptomen bepaalt het systeem of je vandaag nog moet komen.</li>
+        <li><strong>Spraakherkenning:</strong> artsen en verpleegkundigen praten gewoon en de computer schrijft het verslag. Dat scheelt soms een uur per dag.</li>
+        <li>In sommige ziekenhuizen analyseert AI röntgenfoto's en herkent zo afwijkingen die heel klein zijn.</li>
+      </ul>
+
+      <h3>Logistiek</h3>
+      <ul>
+        <li><strong>Routeoptimalisatie:</strong> bezorgdiensten zoals PostNL en DHL laten AI de snelste route berekenen. De AI kijkt naar verkeer, weer en het aantal pakketten. Dat bespaart brandstof en tijd.</li>
+        <li><strong>Magazijnrobots:</strong> bij Bol.com en Amazon rijden robots door het magazijn. AI bepaalt de route en welke producten het eerst gepakt worden.</li>
+      </ul>
+
+      <h3>Administratie</h3>
+      <ul>
+        <li><strong>Factuurverwerking:</strong> AI leest facturen, herkent de bedragen en boekt ze automatisch in. Geen overtypen meer.</li>
+        <li><strong>Chatbots:</strong> een chatbot beantwoordt vragen als "Waar is mijn pakket?" en handelt zo 80% van de vragen af.</li>
+      </ul>
+
+      <h3>Horeca</h3>
+      <ul>
+        <li><strong>Voorraadvoorspelling:</strong> AI kijkt naar het weer en de drukte in de buurt om te voorspellen hoeveel gasten er komen. Je bestelt precies genoeg en gooit minder eten weg.</li>
+        <li>McDonald's past bij de drive-through het menu op het scherm aan, bijvoorbeeld meer ijsjes op een warme dag.</li>
+      </ul>
+
+      <div class="highlight-box">
+        <strong><i class="ico ico-target" style="color:var(--purple-300);margin-right:0.4rem;"></i>Kern:</strong> AI vervangt geen mensen, maar verandert wat je doet. De saaie taken gaan naar AI. Het werk met mensen en creativiteit blijft bij jou.
+      </div>
+    `,
+    theoryDeep: `
+      <h3>Verdieping: taken verschuiven, geen banen die verdwijnen</h3>
+      <p>De voorbeelden in dit hoofdstuk hebben iets gemeen. AI neemt telkens een <em>taak</em> over, niet een hele <em>baan</em>. Dat onderscheid is belangrijker dan het lijkt. Een baan is een bundel taken. AI pikt daaruit de delen die voorspelbaar en herhalend zijn, zoals een factuur inboeken of een standaardvraag beantwoorden. Wat overblijft is het deel dat lastig in regels te vatten is, zoals een boze klant kalmeren of een uitzondering beoordelen.</p>
+      <p>Daarom is het zinvol om naar taken te kijken en niet naar functietitels. Twee mensen met dezelfde functie kunnen heel verschillend werk doen. Bij de een bestaat de dag vooral uit invoeren en sorteren, bij de ander uit overleg en beslissingen. De eerste voelt AI eerder in het werk terugkomen dan de tweede. Wie begrijpt uit welke taken zijn eigen werk bestaat, kan gerichter inschatten wat er verandert en waar hij zelf het verschil blijft maken.</p>
+      <p>Let ook op de grens van wat AI overneemt. Bij de schadeclaim uit dit hoofdstuk keurt AI de eenvoudige gevallen goed en gaan de complexe naar een mens. Die knip is een keuze van het bedrijf en geen natuurwet. Waar je die grens legt, bepaalt hoeveel verantwoordelijkheid je bij het systeem neerlegt.</p>
+      <div class="niveau4-verdieping">
+        <strong>Denkvraag (niveau 4):</strong><br><em>Neem een functie die jij goed kent. Welke taken daarin zou een bedrijf morgen aan AI durven overlaten, en welke niet? Wat zegt jouw antwoord over wat mensen op die plek onmisbaar maakt?</em>
+      </div>
+    `,
+    assignmentDeep: `
+      <p><strong>Extra stap (niveau 4).</strong> Je hebt nu een AI-plan gemaakt om je leidinggevende te overtuigen. Draai het om en toets je eigen plan kritisch:</p>
+      <ol>
+        <li>Splits de taak die je koos in kleinere stukken. Welke stukken kan AI echt overnemen en welke moet een mens blijven doen? Leg je grens uit.</li>
+        <li>Bedenk wat er misgaat als de AI een fout maakt in deze taak. Wie merkt die fout, en wie is verantwoordelijk voor de gevolgen?</li>
+        <li>Verzin het sterkste tegenargument dat je leidinggevende kan geven, bijvoorbeeld over kosten, betrouwbaarheid of weerstand bij collega's. Schrijf op hoe je daarop zou antwoorden.</li>
+      </ol>
+    `,
+    rubric: {
+      title: "Jouw AI-plan voor de werkvloer",
+      levels: [
+        { label: "Voldoende", text: "Je kiest een saaie of tijdrovende taak, beschrijft die en bedenkt een passende AI-oplossing." },
+        { label: "Goed", text: "Je maakt een overtuigend mini-plan met het probleem, de oplossing, de voordelen voor het bedrijf en wat er nodig is om te starten." },
+        { label: "Uitstekend", text: "Je toetst je eigen plan kritisch: je legt de grens tussen mens en AI uit, benoemt het foutrisico met de verantwoordelijkheid en weerlegt het sterkste tegenargument." }
+      ]
+    },
     title: "De Slimme Assistent op de Werkvloer",
     subtitle: "AI in jouw toekomstige baan",
     goals: [
@@ -4310,6 +4587,114 @@ const courseData = [
   },
   {
     week: 5,
+    theorySimple: `
+      <h2>AI kan veel, maar mag het ook?</h2>
+      <p>AI schrijft teksten, maakt plaatjes, componeert muziek en programmeert code. Maar mag dat allemaal? En zo ja, wanneer wel en wanneer niet?</p>
+      <p>Deze week is opgeknipt in drie delen. Deel 1 gaat over de regels. Deel 2 over jouw veiligheid. Deel 3 geeft je vuistregels. Neem na elk deel even pauze en doe de korte check.</p>
+
+      <h2>Deel 1 van 3: de regels</h2>
+
+      <h3>Auteursrecht: van wie is het?</h3>
+      <p>Je vraagt een AI om een plaatje in de stijl van Van Gogh. Van wie is dat plaatje dan? Daar is nog geen duidelijk antwoord op.</p>
+      <ul>
+        <li><strong>Het probleem:</strong> AI is getraind op miljoenen afbeeldingen van echte kunstenaars. Die gaven daar vaak geen toestemming voor en kregen er niks voor.</li>
+        <li><strong>Kunstenaars zijn boos:</strong> hun werk traint een AI die hun eigen baan overbodig maakt. Dat vinden ze oneerlijk.</li>
+        <li><strong>De wet:</strong> in Nederland en Europa heeft materiaal dat AI maakt waarschijnlijk geen auteursrecht, want er is geen menselijke maker. Dit is nog in ontwikkeling.</li>
+      </ul>
+
+      <h3>Privacy: wat mag je invoeren?</h3>
+      <p>Alles wat je in een AI-tool typt, kan worden opgeslagen. Het kan zelfs gebruikt worden om de AI te verbeteren. Denk dus goed na over wat je deelt.</p>
+      <ul>
+        <li><strong>AVG:</strong> in Europa mogen persoonsgegevens niet zomaar verwerkt worden. Denk aan namen, adressen, BSN-nummers en medische gegevens.</li>
+        <li><strong>Niet invoeren:</strong> persoonsgegevens van anderen, medische informatie over patiënten, vertrouwelijke bedrijfsinformatie en gegevens van klanten, cliënten of leerlingen.</li>
+        <li><strong>Wel oké:</strong> algemene vragen, anonieme informatie en je eigen opdrachten, als je school of werk dat toestaat.</li>
+        <li><strong>Voorbeeld:</strong> een medewerker van Samsung typte geheime broncode in ChatGPT om hulp te vragen. Die code werd trainingsdata. Daarna verbood Samsung ChatGPT op het werk.</li>
+      </ul>
+
+      <h3>Bias: is AI eerlijk?</h3>
+      <p>AI is niet slim. AI is een spiegel van de data waarmee het is getraind. Is die data niet eerlijk, dan is de AI dat ook niet.</p>
+      <ul>
+        <li><strong>Sollicitatie-AI:</strong> Amazon bouwde een AI die cv's beoordeelde. De data was vooral van mannen. De AI gaf vrouwen lagere scores. Amazon stopte er uiteindelijk mee.</li>
+        <li><strong>Gezichtsherkenning:</strong> die werkt slechter bij mensen met een donkere huidskleur, omdat de trainingsdata vooral foto's van witte mensen bevatte.</li>
+        <li><strong>Zoekmachines:</strong> zoek je op "CEO", dan zie je vooral witte mannen. Niet omdat alleen zij CEO zijn, maar omdat de data die scheve verdeling weerspiegelt.</li>
+      </ul>
+      <p>Bias is gevaarlijk. Het versterkt bestaande ongelijkheid. En mensen vertrouwen AI-uitkomsten al snel als "objectief", terwijl ze dat niet zijn.</p>
+
+      <div class="highlight-box">
+        <strong><i class="ico ico-target" style="color:var(--purple-300);margin-right:0.4rem;"></i>Even checken (deel 1):</strong> kun je zonder terug te lezen uitleggen wat bias is, met één voorbeeld? En welke gegevens zet je nooit in een AI-tool? Lukt dat, ga dan door naar deel 2.
+      </div>
+
+      <h2>Deel 2 van 3: jouw veiligheid</h2>
+
+      <h3>Als AI tegen je wordt gebruikt</h3>
+      <p>Dezelfde AI die jou helpt, gebruiken oplichters ook. Ze werken er sneller en echter mee dan vroeger. Je hoeft niet bang te zijn, maar wel alert. Dit zijn de vier vormen die je nu het vaakst tegenkomt.</p>
+      <ul>
+        <li><strong>Gekloonde stem.</strong> Uit een paar seconden geluid van social media maakt AI een kopie van iemands stem. Een oplichter belt dan met de stem van een familielid: spoed, geld nodig, nu overmaken. <em>Wat je doet:</em> hang op en bel zelf terug op het echte nummer. Spreek met je familie een codewoord af.</li>
+        <li><strong>Phishing en nepberichten.</strong> AI schrijft foutloze nepmails en appjes namens je bank, DUO of een pakketdienst. Aan taalfouten herken je ze niet meer. <em>Wat je doet:</em> klik nooit op de link, ga zelf naar de officiële app of website.</li>
+        <li><strong>Nepprofielen en chantage.</strong> Met AI maken oplichters nepaccounts en nepfoto's. Ze proberen je geld of naaktbeelden af te troggelen en dreigen die te verspreiden als je niet betaalt. Dit heet sextortion.</li>
+        <li><strong>Nepwebshops.</strong> In een paar minuten maakt AI een echt ogende webshop voor spullen die niet bestaan. <em>Wat je doet:</em> zoek de winkel los op, check onafhankelijke reviews en betaal niet vooraf via een tikkie aan een onbekende.</li>
+      </ul>
+      <div class="highlight-box help">
+        <strong><i class="ico ico-help" style="color:var(--purple-300);margin-right:0.4rem;"></i>Overkomt dit jou, of ken je iemand die dit overkomt?</strong>
+        <ul>
+          <li>Het is niet jouw schuld. De crimineel is fout, jij niet.</li>
+          <li>Stop met betalen en stuur niks meer. Betalen stopt de chantage niet, het lokt juist meer uit.</li>
+          <li>Blokkeer de persoon en bewaar bewijs. Maak schermafbeeldingen.</li>
+          <li>Praat erover met iemand die je vertrouwt. Je hoeft dit niet alleen op te lossen.</li>
+        </ul>
+        <a href="https://www.slachtofferhulp.nl" target="_blank" rel="noopener"><strong>Slachtofferhulp Nederland</strong></a> helpt je gratis en vertrouwelijk, bel <a href="tel:09000101">0900-0101</a> of chat via de site. Gaat het om beelden? Dan kun je ook terecht bij <a href="https://www.helpwanted.nl" target="_blank" rel="noopener"><strong>helpwanted.nl</strong></a>. Aangifte doe je bij de politie via <a href="tel:09008844">0900-8844</a>. Ben je in direct gevaar? Bel <a href="tel:112">112</a>.
+      </div>
+
+      <h3>AI als maatje: fijn, maar let op jezelf</h3>
+      <p>Steeds meer mensen praten met een AI-chatbot als vriend of coach. Het voelt persoonlijk en het oordeelt niet. Dat kan prettig zijn. Toch is dit goed om te weten.</p>
+      <ul>
+        <li>Een chatbot geeft niet echt om jou. Hij voorspelt woorden, zoals je in week 1 leerde. Hij voelt niks.</li>
+        <li>Alles wat je typt kan worden opgeslagen. Deel dus geen diepste geheimen of persoonsgegevens met een AI.</li>
+        <li>Een AI is geen hulpverlener. Zit je echt in de knoop? Praat met een echt mens, of bel gratis en anoniem met <a href="https://www.113.nl" target="_blank" rel="noopener">113 Zelfmoordpreventie</a>.</li>
+      </ul>
+
+      <div class="highlight-box">
+        <strong><i class="ico ico-target" style="color:var(--purple-300);margin-right:0.4rem;"></i>Even checken (deel 2):</strong> wat doe je als "je moeder" belt met een dringend verzoek om geld? En waar vind je hulp als iemand je chanteert met beelden?
+      </div>
+
+      <h2>Deel 3 van 3: jouw vuistregels</h2>
+
+      <h3>Verantwoordelijk AI-gebruik</h3>
+      <p>Wanneer is AI gebruiken oké en wanneer niet? Een paar vuistregels:</p>
+      <ul>
+        <li><strong>Wees transparant:</strong> heb je AI gebruikt, zeg dat dan. Bij een verslag, een presentatie of een ontwerp.</li>
+        <li><strong>Controleer altijd:</strong> AI maakt fouten. Neem nooit klakkeloos over wat AI zegt en check de feiten.</li>
+        <li><strong>Bescherm privacy:</strong> voer nooit persoonsgegevens van anderen in bij een AI-tool.</li>
+        <li><strong>Denk na over impact:</strong> kan iemand nadeel hebben van jouw AI-gebruik? Wees dan extra voorzichtig.</li>
+        <li><strong>Blijf zelf nadenken:</strong> AI is een hulpmiddel, geen vervanging voor je eigen denkvermogen.</li>
+      </ul>
+    `,
+    theoryDeep: `
+      <h3>Verdieping: waarom "kan" en "mag" niet hetzelfde zijn</h3>
+      <p>Deze week draait om één onderscheid dat makkelijk vervaagt: iets kunnen is niet hetzelfde als iets mogen. Een AI kán een stem klonen, een cv beoordelen, een tekst in andermans stijl maken of in een paar minuten een webshop in elkaar zetten. Of dat mag, hangt af van wetten, van afspraken en van wat je zelf verantwoord vindt. Techniek loopt daarbij bijna altijd vooruit op de regels. Daarom staat de wet rond auteursrecht en AI ook nog niet vast: de rechter en de wetgever lopen achter de technologie aan.</p>
+      <p>Kijk ook naar waaróm bias zo hardnekkig is. Bias in AI is meestal geen losse fout die je er even uit haalt. Het model neemt de patronen uit zijn trainingsdata over, ook de scheve. Was het verleden oneerlijk, dan leert het model dat die oneerlijkheid normaal is. En omdat mensen de uitkomst voor "objectief" aanzien, krijgt een oude ongelijkheid een nieuw, technisch jasje. Zo versterkt een systeem discriminatie zonder dat iemand dat bewust bedoelde.</p>
+      <p>Datzelfde speelt bij verantwoordelijkheid. Als een AI schade veroorzaakt, bij wie ligt die dan? Bij de gebruiker die op verzenden drukte? Bij het bedrijf dat het model bouwde? Of bij niemand, omdat "de computer het deed"? Wie de verantwoordelijkheid bij de machine legt, verschuift hem in feite naar niemand. En precies daar ontstaat het risico.</p>
+      <div class="niveau4-verdieping">
+        <strong>Denkvraag (niveau 4):</strong><br><em>Neem een concreet voorbeeld uit deze week, bijvoorbeeld de sollicitatie-AI van Amazon. Bij wie zou jij de verantwoordelijkheid voor de schade leggen, en welk tegenargument tegen jouw keuze is het lastigst te weerleggen?</em>
+      </div>
+    `,
+    assignmentDeep: `
+      <p><strong>Extra stap (niveau 4).</strong> Je hebt een stelling verdedigd en AI je laten tegenspreken. Nu kijk je kritisch naar het gesprek zelf en naar de regels erachter.</p>
+      <ol>
+        <li>Bekijk de drie tegenargumenten die AI je gaf. Welk belang zit er achter elk argument, en van wie? Denk aan de maker, de gebruiker, de kunstenaar of de samenleving.</li>
+        <li>Zoek in je eigen stelling het punt waar "kan" en "mag" uit elkaar lopen. Waar botst wat technisch mogelijk is met wat jij eerlijk vindt?</li>
+        <li>Bedenk een situatie waarin jouw standpunt niet langer houdbaar is. Onder welke voorwaarde zou je van mening veranderen?</li>
+        <li>Schrijf één regel of afspraak op die dit probleem eerlijker zou maken, en benoem wie die regel zou moeten handhaven.</li>
+      </ol>
+    `,
+    rubric: {
+      title: "Jouw AI-Ethiek Dossier",
+      levels: [
+        { label: "Voldoende", text: "Je kiest een stelling, schrijft minstens drie eigen argumenten op en noteert de tegenargumenten van AI letterlijk." },
+        { label: "Goed", text: "Je reageert inhoudelijk op elk tegenargument en maakt een concreet weerbaarheidsplan met wat je anders gaat doen en waar je hulp vindt." },
+        { label: "Uitstekend", text: "Je legt de belangen achter de argumenten bloot, laat zien waar 'kan' en 'mag' botsen en benoemt onder welke voorwaarde je je eigen standpunt zou wijzigen." }
+      ]
+    },
     title: "Mag dit wel?",
     subtitle: "Ethiek, privacy en veiligheid",
     goals: [
@@ -4823,6 +5208,62 @@ const courseData = [
   },
   {
     week: 6,
+    theorySimple: `
+      <p>Je typt een beschrijving en de AI maakt er een <strong>plaatje</strong> van. Maar hoe kan dat?</p>
+
+      <h3>De AI heeft veel plaatjes gezien</h3>
+      <p>Een AI-beeldgenerator is getraind op miljoenen afbeeldingen van internet. Zo heeft hij geleerd welke vormen en kleuren bij welke woorden horen. Typ je "een kat op een skateboard in een stad", dan maakt de AI daar een nieuw beeld van.</p>
+      <p>Het is dus <strong>geen knip-en-plakwerk</strong>. De AI pakt geen bestaande foto, maar maakt iets nieuws. Net als jij: je hebt katten gezien en kunt er zelf eentje tekenen die niet echt bestaat.</p>
+
+      <div class="highlight-box">
+        <strong><i class="ico ico-bulb" style="color:var(--amber-400);margin-right:0.4rem;"></i>Kort:</strong> De AI zoekt geen plaatje op. Hij maakt een nieuw plaatje.
+      </div>
+
+      <h3>Waar kun je het maken?</h3>
+      <p>Begin met <strong>Microsoft Copilot</strong>. Het is gratis, je hoeft je niet aan te melden en het gebruikt dezelfde DALL-E techniek als ChatGPT. Andere tools zijn Canva Magic Media, Adobe Firefly en Midjourney.</p>
+
+      <h3>Wat is een goede beeldprompt?</h3>
+      <p>Net als bij tekst geldt: <strong>hoe beter je vraag, hoe beter het beeld</strong>. Zet in je prompt:</p>
+      <ul>
+        <li><strong>Onderwerp</strong>: wat staat er op het beeld?</li>
+        <li><strong>Stijl</strong>: cartoon, fotorealistisch of schilderij?</li>
+        <li><strong>Sfeer en kleuren</strong>: welk gevoel wil je?</li>
+        <li><strong>Compositie</strong>: close-up of van bovenaf?</li>
+      </ul>
+      <p>Typ dus niet "een hond" maar bijvoorbeeld: "Een golden retriever puppy die in een herfstbos speelt, warm zonlicht, fotorealistisch." Je eerste beeld is bijna nooit goed. Pas je prompt aan en probeer opnieuw.</p>
+
+      <h3>Van wie is een AI-beeld?</h3>
+      <p>Dit is lastig. Onthoud dit:</p>
+      <ul>
+        <li>In veel landen kun je <strong>geen copyright claimen</strong> op een beeld dat volledig door AI is gemaakt.</li>
+        <li>Voor school en jezelf mag het meestal. Bij <strong>commercieel gebruik</strong> moet je opletten.</li>
+        <li><strong>Zeg altijd</strong> dat een beeld door AI is gemaakt.</li>
+      </ul>
+    `,
+    theoryDeep: `
+      <h3>Verdieping: waarom een prompt zo veel verschil maakt</h3>
+      <p>Omdat de AI heeft geleerd welke woorden bij welke beelden horen, stuur je met elk woord een klein beetje bij. Laat je onderwerp, stijl of compositie weg, dan vult de AI dat zelf in met wat statistisch het vaakst voorkomt. Dat is precies waarom een vage prompt vaak een saai, gemiddeld beeld oplevert: je hebt de keuze aan de AI overgelaten in plaats van hem zelf te maken. Itereren werkt om dezelfde reden. Je verandert niet je geduld maar je woorden, en daarmee verschuif je waar de AI naartoe rekent.</p>
+      <p>Let ook op het verschil tussen twee vragen die door elkaar lopen. De ene is <strong>technisch</strong>: mag ik dit beeld gebruiken volgens de regels rond auteursrecht? De andere is <strong>ethisch</strong>: vind ik het eerlijk tegenover de kunstenaars op wier werk het model is getraind? Een tool als Adobe Firefly probeert de eerste vraag makkelijker te maken door alleen beeld met toestemming te gebruiken, maar dat neemt de tweede vraag niet automatisch weg. Wie AI-beeld inzet op werk of stage, doet er goed aan beide vragen apart te stellen.</p>
+      <div class="niveau4-verdieping">
+        <strong>Denkvraag (niveau 4):</strong><br><em>Als je vermeldt dat een beeld door AI is gemaakt, ben je dan eerlijk genoeg? Of blijft er een bezwaar bestaan zolang het model getraind is op werk van kunstenaars die daar geen toestemming voor gaven?</em>
+      </div>
+    `,
+    assignmentDeep: `
+      <p><strong>Extra stap (niveau 4).</strong> Je hebt je beste ontwerp gekozen. Analyseer nu het proces en de gevolgen ervan:</p>
+      <ol>
+        <li>Leg je drie prompts naast elkaar. Beschrijf per aanpassing welk woord je veranderde en wat dat deed met het beeld. Zo laat je zien dat je het resultaat stuurt en niet afwacht.</li>
+        <li>Stel dat dit bedrijf echt bestond en je logo commercieel wilde gebruiken. Welke vraag rond auteursrecht komt dan op je af, en hoe zou je die oplossen?</li>
+        <li>Beargumenteer of je bij dit beeld zou vermelden dat het door AI is gemaakt. Verandert dat iets aan hoe een klant of docent het ontwerp beoordeelt?</li>
+      </ol>
+    `,
+    rubric: {
+      title: "Ontwerp een logo of poster voor een fictief bedrijf",
+      levels: [
+        { label: "Voldoende", text: "Je verzint een bedrijf, maakt minimaal 3 varianten met AI en kiest er een uit." },
+        { label: "Goed", text: "Je legt beargumenteerd uit waarom je gekozen ontwerp bij het bedrijf en de doelgroep past, en welke prompt het opleverde." },
+        { label: "Uitstekend", text: "Je analyseert je drie prompts naast elkaar, benoemt het auteursrechtvraagstuk bij commercieel gebruik en onderbouwt of je AI-gebruik zou vermelden." }
+      ]
+    },
     title: "Creativiteit met AI",
     subtitle: "Beeld & Design met kunstmatige intelligentie",
     goals: [
@@ -5033,6 +5474,85 @@ const courseData = [
   },
   {
     week: 7,
+    theorySimple: `
+      <h3>AI om te leren, niet om te spieken</h3>
+      <p>
+        De verleiding is groot om ChatGPT je werk te laten maken. Maar dan leer je niks.
+        Gebruik AI liever als een <strong>studiecoach</strong> die dag en nacht klaarstaat.
+        Niet om het werk over te nemen, maar om je te helpen het <em>zelf</em> te snappen.
+      </p>
+
+      <div class="highlight-box">
+        <strong>Kort:</strong> AI is als een personal trainer. Hij helpt je beter trainen, maar het werk doe je zelf.
+      </div>
+
+      <h3>Zo gebruik je AI om te leren</h3>
+      <ul>
+        <li><strong>Samenvatten:</strong> plak een lange tekst en vraag om een korte samenvatting. Lees daarna wel het origineel.</li>
+        <li><strong>Uitleg op jouw niveau:</strong> vraag "Leg dit uit alsof ik 12 ben". Hoe concreter je vraagt, hoe beter het antwoord.</li>
+        <li><strong>Jezelf overhoren:</strong> laat de AI vragen stellen over een hoofdstuk.</li>
+        <li><strong>Oefentoets:</strong> vraag om oefenvragen met de antwoorden onderaan, zodat je eerst zelf nadenkt.</li>
+        <li><strong>Studieplan:</strong> geef aan wat je moet leren en vraag om een planning.</li>
+      </ul>
+
+      <h3>De Feynman-techniek</h3>
+      <p>
+        De <strong>Feynman-techniek</strong> is een bekende leermethode. Het idee is simpel:
+        als je iets in eenvoudige woorden kunt uitleggen, snap je het echt.
+      </p>
+      <ul>
+        <li>Bestudeer een onderwerp.</li>
+        <li>Leg het in je eigen woorden uit aan de AI.</li>
+        <li>Vraag: "Klopt mijn uitleg? Wat mis ik?"</li>
+        <li>Verbeter je uitleg met de feedback.</li>
+      </ul>
+      <p>Dit is geen spieken. De AI is hier je kritische studiegenoot.</p>
+
+      <h3>Wanneer is het vals spelen?</h3>
+      <p>
+        De simpelste test: <strong>kun je het zonder AI opnieuw uitleggen of doen?</strong>
+        Zo ja, dan heb je geleerd. Zo nee, dan heb je gespiekt.
+      </p>
+      <ul>
+        <li><strong>Wel oke:</strong> AI vragen om uitleg, oefenvragen of feedback op je eigen werk.</li>
+        <li><strong>Niet oke:</strong> een AI-antwoord inleveren alsof je het zelf maakte. Dat is <strong>fraude</strong>.</li>
+      </ul>
+      <p>
+        Ken de regels van je school of werk. Twijfel je? Vraag het aan je docent of begeleider voordat je inlevert.
+        Bewaar je aantekeningen en tussenversies, zodat je je eigen proces kunt laten zien.
+      </p>
+    `,
+    theoryDeep: `
+      <h3>Verdieping: waarom uitleggen je slimmer maakt dan overlezen</h3>
+      <p>
+        Overlezen voelt productief, maar je herkent de stof alleen. Herkennen is iets anders dan zelf kunnen oproepen. Bij de Feynman-techniek dwing je jezelf om de stof actief uit de kast te halen en te ordenen in eigen woorden. Precies op het moment dat je vastloopt, merk je waar je begrip een gat heeft. Dat gat zou je bij passief overlezen nooit hebben opgemerkt, omdat de tekst het antwoord al voor je invulde.
+      </p>
+      <p>
+        Hier zit ook de grens tussen leren met AI en je denkwerk uitbesteden. Als je de AI je uitleg laat controleren en verbeteren, blijf jij degene die de kennis opbouwt. Als je de AI de uitleg laat schrijven, mis je juist die worsteling waarin het begrip ontstaat. De uitkomst op papier kan hetzelfde lijken, maar in je hoofd is er een groot verschil: in het ene geval kun je het later zelf, in het andere geval leunde je op een systeem dat er straks niet is.
+      </p>
+      <p>
+        Let ook op wat je feedback vraagt. Vraag je "geef me het goede antwoord", dan neem je iets over. Vraag je "waar zit mijn redenering fout en waarom", dan gebruik je de AI om je eigen denken scherper te maken. Dezelfde tool, een heel ander leereffect.
+      </p>
+      <div class="niveau4-verdieping">
+        <strong>Denkvraag (niveau 4):</strong><br><em>Twee studenten leveren een even goede samenvatting in. De een schreef die zelf en liet de AI erop reageren, de ander liet de AI de samenvatting schrijven. Op papier is het resultaat gelijk. Waaraan zou een docent tijdens een mondelinge toelichting het verschil alsnog merken?</em>
+      </div>
+    `,
+    assignmentDeep: `
+      <p><strong>Extra stap (niveau 4).</strong> Onderzoek niet alleen of je de stof snapt, maar ook hoe je de AI hebt ingezet:</p>
+      <ol>
+        <li>Vergelijk de drie uitleggen uit stap 2. Welke keuzes maakte de AI om de stof simpeler te maken? Wat liet hij weg bij niveau 1, en klopte dat weglaten of ging er iets belangrijks verloren?</li>
+        <li>Neem je eigen Feynman-uitleg uit stap 5 en laat de AI er kritisch op reageren met de vraag: "Waar is mijn redenering onvolledig?" Verwerk de feedback en beschrijf wat je uitleg beter maakte.</li>
+        <li>Bepaal per stap van deze opdracht of jouw AI-gebruik binnen de regels van je opleiding valt. Waar zit de grens tussen leren en inleveren van andermans werk, en hoe zou je je gebruik verantwoorden als een docent ernaar vraagt?</li>
+      </ol>
+    `,
+    rubric: {
+      title: "AI als jouw persoonlijke tutor",
+      levels: [
+        { label: "Voldoende", text: "Je hebt de stof laten uitleggen op drie niveaus, een oefentoets gemaakt en die zelf ingevuld." },
+        { label: "Goed", text: "Je legt de kern in je eigen woorden uit volgens de Feynman-techniek en benoemt wat je van de drie uitleggen hebt geleerd." },
+        { label: "Uitstekend", text: "Je vergelijkt de drie uitleggen kritisch, verbetert je eigen uitleg met gerichte AI-feedback en verantwoordt of je AI-gebruik binnen de regels blijft." }
+      ]
+    },
     goals: [
       "AI inzetten als tutor: moeilijke stof laten uitleggen op jouw niveau",
       "de Feynman-techniek gebruiken: iets in je eigen woorden uitleggen om je begrip te testen",
@@ -5297,6 +5817,76 @@ const courseData = [
   },
   {
     week: 8,
+    theorySimple: `
+      <h3>AI is niet gratis (ook al betaal jij niks)</h3>
+      <p>Een vraag aan ChatGPT voelt gratis. Toch draait er achter je scherm een grote machine. Elke AI-vraag kost <strong>stroom, water en grondstoffen</strong>. Die kosten zie je niet, maar ze zijn er wel.</p>
+
+      <h3>Datacenters: de fabrieken van AI</h3>
+      <p>AI draait op <strong>datacenters</strong>. Dat zijn grote gebouwen vol computers die dag en nacht aanstaan. In Nederland staan er veel bij Amsterdam. Google, Microsoft en Amazon hebben er honderden.</p>
+      <p>Zo'n datacenter gebruikt evenveel stroom als <strong>een kleine stad</strong>. Alle datacenters samen gebruiken nu ongeveer 1 tot 2 procent van alle stroom op aarde. Door AI groeit dat snel.</p>
+
+      <h3>Water: koeling is alles</h3>
+      <p>Computers worden heet als ze hard werken. AI-computers werken <em>heel</em> hard. Om ze koel te houden, gebruiken datacenters veel <strong>water</strong>. Microsoft gebruikte in 2022 ongeveer 6,4 miljard liter. Dat zijn 2.500 olympische zwembaden. Een jaar later was het nog meer.</p>
+      <p>Waar water schaars is, wordt dat een probleem.</p>
+
+      <h3>Trainen kost veel, gebruiken kost weinig per keer</h3>
+      <p>Er is een groot verschil tussen het <strong>trainen</strong> en het <strong>gebruiken</strong> van AI:</p>
+      <ul>
+        <li><strong>Trainen:</strong> een groot model bouwen kost maandenlang werk op duizenden computers. Dat stoot evenveel CO2 uit als honderden vliegreizen. Maar het gebeurt maar af en toe.</li>
+        <li><strong>Gebruiken:</strong> elke vraag van jou kost ook stroom. Lang werd gezegd dat een AI-vraag 10 keer zoveel kost als een Google-zoekopdracht. Nieuwer onderzoek (Epoch AI, 2025) schat een tekstvraag op ongeveer 0,3 wattuur. Dat is ongeveer gelijk aan een zoekopdracht. Per vraag dus weinig.</li>
+      </ul>
+
+      <div class="highlight-box">
+        <strong><i class="ico ico-bulb" style="color:var(--amber-400);margin-right:0.4rem;"></i>Kort:</strong> Eén AI-vraag kost weinig. De echte impact zit in het totaal: miljarden vragen per dag.
+      </div>
+
+      <h3>Zet het in perspectief</h3>
+      <ul>
+        <li>Een Google-zoekopdracht: ongeveer 0,3 Wh</li>
+        <li>Een ChatGPT-tekstvraag: ongeveer 0,3 Wh</li>
+        <li>Een AI-afbeelding: ongeveer 2 tot 10 Wh</li>
+        <li>Een uur Netflix: ongeveer 50 tot 100 Wh</li>
+        <li>Een uur gamen: ongeveer 100 tot 200 Wh</li>
+      </ul>
+      <p>Let op: deze cijfers kunnen over een paar jaar anders zijn. Cijfers blijven checken hoort bij AI-geletterdheid.</p>
+
+      <h3>Grondstoffen in een AI-chip</h3>
+      <p>AI-chips (zoals de GPU's van NVIDIA) bevatten <strong>zeldzame metalen</strong>: kobalt, lithium en zeldzame aardmetalen. Die worden gedolven in mijnen in Afrika en Zuid-Amerika, soms onder slechte omstandigheden. Door AI stijgt de vraag hard.</p>
+
+      <h3>Wat kun je zelf doen?</h3>
+      <ul>
+        <li><strong>Stel gerichte vragen.</strong> Een goede vraag is beter dan tien vage vragen.</li>
+        <li><strong>Gebruik AI alleen als het echt helpt.</strong> Voor een spelling-check heb je geen AI nodig.</li>
+        <li><strong>Kies de juiste tool.</strong> Soms is Google genoeg.</li>
+        <li><strong>Maak niet eindeloos beelden voor de lol.</strong> Elk plaatje kost stroom.</li>
+      </ul>
+    `,
+    theoryDeep: `
+      <h3>Verdieping: waarom klein toch groot wordt</h3>
+      <p>De losse cijfers uit deze week lijken geruststellend. Een tekstvraag van ongeveer 0,3 wattuur voelt als niets, zeker naast een avond Netflix. Toch is dat precies de denkfout waar je op moet letten. De kosten van AI zitten niet in de losse vraag, maar in twee dingen die je op je scherm nooit ziet: de <strong>schaal</strong> en de <strong>ingebouwde voetafdruk</strong>.</p>
+      <p>Met schaal bedoelen we het optellen. Een kleine hoeveelheid maal miljarden keren per dag wordt een enorme hoeveelheid. En er speelt iets vervelends mee: als iets goedkoop en makkelijk wordt, gaan mensen het juist méér gebruiken. Elke keer dat AI zuiniger wordt per vraag, kan het totale verbruik alsnog stijgen, simpelweg omdat we meer vragen stellen. Zuiniger per stuk betekent dus niet vanzelf zuiniger in totaal.</p>
+      <p>Met ingebouwde voetafdruk bedoelen we alles wat al gebeurd is voordat jij je eerste vraag stelt. De stroom van jouw vraag is maar één deel. Daarvoor is een model getraind, is er een datacenter gebouwd, zijn er chips geproduceerd en zijn er metalen uit de grond gehaald. Die kosten reken je zelden mee, want ze staan los van het moment waarop jij typt. Wie alleen naar die 0,3 wattuur kijkt, kijkt naar het topje en niet naar de berg eronder.</p>
+      <p>Dat verklaart ook waarom het onderscheid tussen trainen en gebruiken zo belangrijk is. Trainen is een eenmalige, zichtbare piek. Gebruiken is een dunne, continue stroom die nooit stopt. Beide tellen mee, maar je moet ze anders wegen. En het maakt duidelijk waarom een enkel cijfer, hoe netjes gemeten ook, nooit het hele verhaal vertelt.</p>
+      <div class="niveau4-verdieping">
+        <strong>Denkvraag (niveau 4):</strong><br><em>Stel dat AI volgend jaar de helft zuiniger wordt per vraag. Waarom kan het totale energieverbruik dan tóch stijgen, en wat zegt dat over de vraag wie er verantwoordelijk is voor de milieu-impact: de gebruiker of de maker?</em>
+      </div>
+    `,
+    assignmentDeep: `
+      <p><strong>Extra stap (niveau 4).</strong> Je hebt nu je eigen AI-verbruik doorgerekend en vergeleken. Ga een laag dieper en kijk kritisch naar je eigen berekening.</p>
+      <ol>
+        <li>Je berekening telt alleen de stroom van je vragen. Wat mist er in dat plaatje? Noem minstens twee kosten die je niet hebt meegerekend, en leg uit waarom die lastig in wattuur te vangen zijn.</li>
+        <li>Bedenk een situatie waarin minder AI-vragen stellen het milieu tóch niet helpt, of juist een situatie waarin één AI-vraag energie bespaart in plaats van kost. Beargumenteer je voorbeeld.</li>
+        <li>Wie zou volgens jou het meeste moeten doen aan de milieu-impact van AI: de gebruiker, de school of het opleidingsbedrijf, of het techbedrijf? Onderbouw je keuze met een argument dat verder gaat dan "zij verdienen er het meest aan".</li>
+      </ol>
+    `,
+    rubric: {
+      title: "Bereken je AI-voetafdruk",
+      levels: [
+        { label: "Voldoende", text: "Je schat je AI-gebruik in, rekent het verbruik in wattuur door en zet het naast andere dagelijkse activiteiten." },
+        { label: "Goed", text: "Je maakt een overzichtelijk lijstje of tabel en reflecteert onderbouwd op wat je opvalt en waar je bewust zou kunnen minderen." },
+        { label: "Uitstekend", text: "Je kijkt kritisch naar je eigen berekening: je benoemt kosten die buiten de wattuur-som vallen en neemt een beargumenteerd standpunt in over wie verantwoordelijk is." }
+      ]
+    },
     title: "De Schaduwkant: Data & Milieu",
     subtitle: "De verborgen kosten van kunstmatige intelligentie",
     goals: [
@@ -5550,6 +6140,74 @@ const courseData = [
   },
   {
     week: 9,
+    theorySimple: `
+      <h3>De arbeidsmarkt verandert en jij verandert mee</h3>
+      <p>AI wordt steeds slimmer. Sommige taken veranderen of verdwijnen. Er komen ook nieuwe taken bij. De vraag is niet: "Neemt AI mijn baan over?" De vraag is: <strong>"Hoe werk ik straks samen met AI?"</strong></p>
+
+      <div class="highlight-box">
+        <strong><i class="ico ico-bulb" style="color:var(--amber-400);margin-right:0.4rem;"></i>Ken je deze sectoren nog?</strong> Je zag ze in week 4. We kijken nu een stap verder: niet wat AI nu doet, maar wat er de komende jaren verschuift en wat er van jou wordt gevraagd.
+      </div>
+
+      <h3>Wat verandert er per sector?</h3>
+      <p>In elke sector geldt hetzelfde patroon. AI pakt het routinewerk. Het echte mensenwerk blijft.</p>
+      <ul>
+        <li><strong>Zorg.</strong> AI helpt bij dossiers, gezondheidsdata en roosters. Persoonlijk contact en empathie blijven mensenwerk.</li>
+        <li><strong>Techniek.</strong> Robots en AI doen kwaliteitscontroles en sturen machines aan. Problemen oplossen en improviseren blijft mensenwerk.</li>
+        <li><strong>Administratie.</strong> AI verwerkt facturen, voert data in en sorteert e-mails. Overzicht houden en met klanten praten blijft mensenwerk.</li>
+        <li><strong>Logistiek.</strong> AI plant routes en voorraden. Omgaan met onverwachte situaties en klantcontact blijft mensenwerk.</li>
+        <li><strong>Horeca.</strong> AI helpt bij voorraad en planning. Gastvrijheid en creativiteit in de keuken blijven mensenwerk.</li>
+      </ul>
+
+      <h3>Welke vaardigheden worden meer waard?</h3>
+      <p>AI is goed in data, patronen en snelheid. Maar mensen zijn beter in andere dingen. Die worden steeds belangrijker:</p>
+      <ul>
+        <li><strong>Empathie.</strong> Aanvoelen hoe iemand zich voelt.</li>
+        <li><strong>Creativiteit.</strong> Echt nieuwe ideeën bedenken.</li>
+        <li><strong>Kritisch denken.</strong> Klopt de AI-output wel? Mist er iets?</li>
+        <li><strong>Samenwerken.</strong> In een team werken en afspraken maken.</li>
+        <li><strong>Aanpassingsvermogen.</strong> Snel leren en meegaan met verandering.</li>
+      </ul>
+
+      <h3>De hybride vakman</h3>
+      <p>De <strong>hybride vakman</strong> combineert twee dingen: sterke vakkennis en digitale vaardigheden. Denk aan een verpleegkundige die AI gebruikt om sneller informatie te vinden. Of een monteur die met een AI-tool storingen voorspelt. Zij kennen hun vak en zetten AI in als hulpmiddel.</p>
+
+      <h3>De cijfers</h3>
+      <p>Volgens het World Economic Forum (WEF) verandert <strong>39% van de kernvaardigheden</strong> die je voor je werk nodig hebt voor 2030. Dat is veel. Het betekent niet dat je alles opnieuw moet leren. Het betekent dat je moet blijven leren.</p>
+
+      <h3>Hoe bereid je je voor?</h3>
+      <ul>
+        <li><strong>Blijf nieuwsgierig.</strong> Probeer nieuwe tools uit.</li>
+        <li><strong>Ontwikkel je menselijke vaardigheden.</strong> Oefen met samenwerken en creatief denken.</li>
+        <li><strong>Leer AI gebruiken.</strong> Als gereedschap, niet als doel.</li>
+        <li><strong>Wees niet bang voor verandering.</strong> Jouw generatie heeft AI en jij bent er klaar voor.</li>
+      </ul>
+    `,
+    theoryDeep: `
+      <h3>Verdieping: waarom AI juist het voorspelbare werk pakt</h3>
+      <p>Er zit een logica achter welk werk AI het eerst overneemt. AI is sterk in taken waarbij het patroon telkens hetzelfde is en de uitkomst te controleren valt: invoeren, sorteren, plannen, patronen herkennen in data. Zulke taken kun je terugbrengen tot regels en voorbeelden, en daar leert een AI-systeem van. Het werk dat blijft, is precies het tegenovergestelde. Empathie, improviseren als iets kapotgaat, een moeilijk gesprek voeren: dat hangt af van de situatie van dat moment en laat zich niet in vaste regels vangen.</p>
+
+      <p>Daarom is het scherper om niet over hele beroepen te denken, maar over losse taken. Een beroep verdwijnt zelden in zijn geheel. Wat gebeurt, is dat de taken binnen dat beroep verschuiven. Het routinedeel gaat naar de AI, en het deel dat oordeel, contact of creativiteit vraagt wordt juist zwaarder en belangrijker. Zo bekeken is de hybride vakman geen mens die naast een machine staat, maar iemand die de taakverdeling bewust maakt: de AI rekent en voorspelt, de vakman kent de context en neemt de beslissing.</p>
+
+      <p>Dat verklaart ook waarom menselijke vaardigheden meer waard worden in plaats van minder. Naarmate AI het voorspelbare werk goedkoop en snel maakt, wordt het schaarse deel, jouw oordeel en jouw contact met mensen, relatief kostbaarder. De verandering die het WEF beschrijft gaat dus niet alleen over nieuwe technische kennis, maar over een verschuiving in wat een werkgever eigenlijk van je vraagt.</p>
+
+      <div class="niveau4-verdieping"><strong>Denkvraag (niveau 4):</strong><br><em>Kies een taak uit je eigen beroep waarvan je denkt dat AI hem overneemt. Verandert die taak echt helemaal, of blijft er een menselijk restje over dat iemand moet blijven doen? En als dat restje er is, wordt jouw rol dan kleiner of juist belangrijker?</em></div>
+    `,
+    assignmentDeep: `
+      <p><strong>Extra stap (niveau 4).</strong> Je presentatie laat zien welke taken verschuiven. Voeg nu een analyselaag toe die verder gaat dan opsommen. Je onderzoekt je eigen aannames en onderbouwt waarom een taak wel of niet naar AI gaat.</p>
+      <ol>
+        <li>Pak de taken die je bij onderdeel 3 aan AI toewees. Ga per taak na of AI hem echt volledig overneemt, of dat er een menselijk deel overblijft (controleren, beslissen, uitleggen). Beschrijf dat restje concreet.</li>
+        <li>Kies één menselijke vaardigheid uit deze week en leg met een voorbeeld uit je beroep uit waarom een AI-systeem die vaardigheid niet kan nabootsen. Redeneer vanuit het onderscheid tussen voorspelbaar werk en werk dat afhangt van de situatie.</li>
+        <li>Bekijk je twee voorbereidingsacties kritisch. Zijn ze meetbaar en toetsbaar? Herschrijf minstens één actie zo dat je over een half jaar kunt vaststellen of je hem echt hebt gehaald.</li>
+      </ol>
+    `,
+    rubric: {
+      title: "Mijn beroep over 5 jaar: samenwerken met AI",
+      levels: [
+        { label: "Voldoende", text: "De vijf onderdelen zijn ingevuld voor een gekozen beroep. De student noemt taken die AI overneemt en taken die mensenwerk blijven, en geeft minstens twee voorbereidingsacties. De presentatie of poster is te volgen." },
+        { label: "Goed", text: "De student maakt duidelijk onderscheid tussen routinewerk voor AI en taken die contact, oordeel of creativiteit vragen, en koppelt dit aan de menselijke vaardigheden uit deze week. De voorbereidingsacties zijn concreet en passen bij het eigen beroep." },
+        { label: "Uitstekend", text: "Naast een sterke basispresentatie voert de student de extra stap uit: per taak wordt onderbouwd of AI hem echt volledig overneemt of dat er een menselijk deel overblijft, één menselijke vaardigheid wordt met een beroepsvoorbeeld beargumenteerd vanuit het onderscheid tussen voorspelbaar en situatie-afhankelijk werk, en minstens één voorbereidingsactie is herschreven tot een meetbaar doel." }
+      ]
+    },
     title: "Toekomst en jouw vaardigheden",
     subtitle: "Welke vaardigheden heb jij nodig in een wereld met AI?",
     goals: [
@@ -5772,6 +6430,73 @@ const courseData = [
   },
   {
     week: 10,
+    theorySimple: `
+      <h3>Terugblik: wat een reis</h3>
+      <p>Tien weken geleden begon je aan deze training. Misschien wist je toen nog niet wat AI was. Misschien had je er al mee gespeeld. Hoe je ook startte: je hebt veel geleerd. We kijken terug. Maar niet door alles te herlezen.</p>
+
+      <div class="highlight-box">
+        <strong><i class="ico ico-bulb" style="color:var(--amber-400);margin-right:0.4rem;"></i>Eerst zelf:</strong> pak pen en papier of open je notities. Schrijf per week uit je hoofd één ding op dat je is bijgebleven. Negen weken, negen regels. Kijk daarna pas naar het lijstje hieronder. Wat je zelf ophaalt, blijft het langst hangen.
+      </div>
+
+      <ul>
+        <li><strong>Week 1:</strong> wat AI is en waarom het kan hallucineren.</li>
+        <li><strong>Week 2:</strong> prompten met de R-O-L-methode.</li>
+        <li><strong>Week 3:</strong> deepfakes herkennen en feiten checken.</li>
+        <li><strong>Week 4:</strong> AI op de werkvloer en jouw AI-plan.</li>
+        <li><strong>Week 5:</strong> privacy, bias en AI-oplichting.</li>
+        <li><strong>Week 6:</strong> beelden maken en auteursrecht.</li>
+        <li><strong>Week 7:</strong> AI als studiecoach en de Feynman-techniek.</li>
+        <li><strong>Week 8:</strong> de verborgen kosten van AI.</li>
+        <li><strong>Week 9:</strong> jouw vaardigheden en de hybride vakman.</li>
+      </ul>
+
+      <h3>De kernboodschap</h3>
+      <p>Onthoud vooral dit:</p>
+      <p><strong>AI is een gereedschap, geen vervanging. Jij bepaalt hoe je het inzet.</strong></p>
+      <p>Een hamer bouwt geen huis. Een laptop schrijft geen verslag. En AI lost geen probleem op zonder jouw input en jouw beoordeling. AI maakt je sterker, maar alleen als jij aan het stuur zit.</p>
+
+      <h3>Wat betekent "AI-geletterd" zijn?</h3>
+      <p>Je bent AI-geletterd als je:</p>
+      <ul>
+        <li>Weet wat AI wel en niet kan</li>
+        <li>AI kunt gebruiken voor je werk en studie</li>
+        <li>Kritisch kijkt naar wat AI oplevert</li>
+        <li>Weet wanneer AI wel en niet past</li>
+        <li>Nadenkt over eerlijkheid en privacy</li>
+        <li>AI ziet als hulpmiddel, niet als vervanging van je eigen denken</li>
+      </ul>
+      <p>Dat heb je de afgelopen tien weken geleerd. Daar mag je best trots op zijn.</p>
+
+      <h3>Wat nu?</h3>
+      <p>Deze training is een begin, geen einde. AI verandert snel. Er komen steeds nieuwe tools bij. Maar je basis blijft waardevol. Blijf nieuwsgierig en blijf kritisch. De techniek verandert, jouw menselijke kwaliteiten worden alleen maar meer waard.</p>
+
+      <h3>Gefeliciteerd</h3>
+      <p>Je hebt de training AI-Grip: Master je Toekomst bijna afgerond. Dat is een prestatie. Nu de laatste opdracht. Daarna is het certificaat van jou.</p>
+    `,
+    theoryDeep: `
+      <h3>Verdieping: waarom je vaardigheid blijft terwijl de tools verdwijnen</h3>
+      <p>De kernboodschap van deze training, AI is een gereedschap en jij zit aan het stuur, klinkt eenvoudig. Toch zit er een belangrijk onderscheid onder. Een gereedschap kun je op twee manieren gebruiken. Je laat het je werk overnemen, of je zet het in om je eigen oordeel scherper te maken. Bij de eerste manier lever je je denkwerk in en word je afhankelijk. Bij de tweede manier blijf je zelf de baas over de uitkomst en gebruik je AI om sneller of breder te werken dan je in je eentje zou kunnen.</p>
+      <p>Dat verklaart ook waarom AI-geletterdheid geen lijstje trucjes is dat bij de volgende update veroudert. De knoppen veranderen, maar de vaardigheid eronder blijft overeind. Je stelt een scherpe vraag en je vertrouwt de uitkomst pas nadat je hem hebt gecontroleerd. En je ziet waar jouw eigen inbreng het verschil maakt. Wie alleen de knoppen van vandaag kent, staat straks stil. Wie het denken eronder beheerst, pakt elke nieuwe tool moeiteloos op.</p>
+      <div class="niveau4-verdieping">
+        <strong>Denkvraag (niveau 4):</strong><br><em>Waar ligt voor jou de grens tussen AI gebruiken om beter te worden en AI gebruiken om zelf minder te hoeven denken? Kun je een moment uit deze training noemen waar die grens dun was?</em>
+      </div>
+    `,
+    assignmentDeep: `
+      <p><strong>Extra stap (niveau 4).</strong> Je oplossing is af. Onderzoek nu hoe houdbaar en eerlijk hij is, alsof je hem echt zou voorstellen aan een opdrachtgever.</p>
+      <ol>
+        <li>Bedenk wie last kan krijgen van jouw oplossing als hij echt wordt ingevoerd. Wie profiteert en wie niet? Noem minstens één groep die je bij het bedenken over het hoofd zag.</li>
+        <li>Vraag één van je AI-tools bewust om tegenspraak en laat hem de zwakste plek in je plan aanwijzen. Beoordeel daarna zelf of die kritiek terecht is en wat je ermee doet.</li>
+        <li>Leg uit wat er misgaat als iemand jouw oplossing klakkeloos overneemt zonder de menselijke controle die jij erin hebt gestopt. Waar zit precies het risico?</li>
+      </ol>
+    `,
+    rubric: {
+      title: "De Grote AI-Challenge",
+      levels: [
+        { label: "Voldoende", text: "Je lost een realistisch probleem uit je opleiding of beroep op met minimaal 3 verschillende AI-tools en legt in je presentatie uit wat AI deed en wat jij deed." },
+        { label: "Goed", text: "Je oplossing is concreet en onderbouwd, je legt per tool uit waarom je die koos en je checkt de informatie van AI op betrouwbaarheid." },
+        { label: "Uitstekend", text: "Je kijkt kritisch naar je eigen oplossing zoals in de extra stap: je benoemt wie er nadeel van kan hebben, laat AI je plan tegenspreken en legt uit waar menselijke controle onmisbaar blijft." }
+      ]
+    },
     title: "De Grote AI-Challenge",
     subtitle: "Laat zien wat je hebt geleerd. Dit is jouw moment.",
     goals: [
@@ -6594,7 +7319,7 @@ function renderWeek(weekNum) {
 
   const completed = isWeekCompleted(weekNum);
   const savedAssignment = getAssignment(weekNum);
-  const theoryContent = L(week.theory);
+  let theoryContent = L(week.theory);
   const assignmentContent = L(week.assignment);
   const quizContent = L(week.quiz);
   const hasQuiz = quizContent && quizContent.length > 0;
@@ -6602,6 +7327,14 @@ function renderWeek(weekNum) {
   const nextWeek = weekNum < 10 ? weekNum + 1 : null;
 
   const currentLevel = getLevel();
+
+  // Echte niveaudifferentiatie (Fase D): theorySimple vervangt de basistheorie op niveau 2,
+  // theoryDeep komt er bovenop op niveau 4. Waar deze velden bestaan, vervallen de oude
+  // cosmetische samenvattings-/verdiepingsboxen zodat er geen dubbeling ontstaat.
+  const usesLeveledSimple = currentLevel === 2 && week.theorySimple;
+  const usesLeveledDeep = currentLevel === 4 && week.theoryDeep;
+  if (usesLeveledSimple) theoryContent = week.theorySimple;
+  if (usesLeveledDeep) theoryContent = theoryContent + week.theoryDeep;
 
   // Niveau 2: inleidende samenvattingen per week
   const niveau2Summaries = {
@@ -6668,9 +7401,9 @@ function renderWeek(weekNum) {
     <!-- THEORY -->
     <div class="section">
       <h2 class="section-title"><span class="icon"><i class="ico ico-book"></i></span> Theorie</h2>
-      ${currentLevel === 2 && niveau2Summaries[week.week] ? '<div class="niveau2-samenvatting"><strong>Samenvatting:</strong> ' + niveau2Summaries[week.week] + '</div>' : ''}
+      ${currentLevel === 2 && !usesLeveledSimple && niveau2Summaries[week.week] ? '<div class="niveau2-samenvatting"><strong>Samenvatting:</strong> ' + niveau2Summaries[week.week] + '</div>' : ''}
       <div class="theory-content">${theoryContent}</div>
-      ${currentLevel === 4 && niveau4Verdieping[week.week] ? '<div class="niveau4-verdieping"><strong>Verdieping (niveau 4):</strong><br><em>' + niveau4Verdieping[week.week].vraag + '</em><br><br><a href="' + niveau4Verdieping[week.week].bron + '" target="_blank" rel="noopener">' + niveau4Verdieping[week.week].bronTitel + '</a></div>' : ''}
+      ${currentLevel === 4 && !usesLeveledDeep && niveau4Verdieping[week.week] ? '<div class="niveau4-verdieping"><strong>Verdieping (niveau 4):</strong><br><em>' + niveau4Verdieping[week.week].vraag + '</em><br><br><a href="' + niveau4Verdieping[week.week].bron + '" target="_blank" rel="noopener">' + niveau4Verdieping[week.week].bronTitel + '</a></div>' : ''}
     </div>
 
     <!-- VIDEO -->
@@ -6707,6 +7440,13 @@ function renderWeek(weekNum) {
     <div class="section">
       <h2 class="section-title"><span class="icon"><i class="ico ico-pencil"></i></span> Opdracht: ${assignmentContent.title}</h2>
       ${renderAssignmentWithSteps(assignmentContent.description, weekNum, savedAssignment)}
+      ${currentLevel === 4 && week.assignmentDeep ? '<div class="niveau4-verdieping">' + week.assignmentDeep + '</div>' : ''}
+      ${week.rubric ? `
+      <div class="rubric-box">
+        <div class="rubric-head"><i class="ico ico-check" style="font-size:0.9rem;color:var(--purple-300);margin-right:0.45rem;"></i>Zo weet je of het goed genoeg is</div>
+        ${week.rubric.levels.map(l => `<div class="rubric-row"><span class="rubric-label">${l.label}</span><span class="rubric-text">${l.text}</span></div>`).join('')}
+      </div>
+      ` : ''}
       ${assignmentContent.bonus ? `
       <div class="assignment-bonus-card">
         <div class="assignment-bonus-label">
