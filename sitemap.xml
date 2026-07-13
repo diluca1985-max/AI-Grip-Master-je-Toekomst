@@ -2,13 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ai-geletterdheid-mbo.nl/</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-07-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://ai-geletterdheid-mbo.nl/visie/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ai-geletterdheid-mbo.nl/didactiek/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ai-geletterdheid-mbo.nl/onderbouwing/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://ai-geletterdheid-mbo.nl/programma/</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -20,7 +38,7 @@
   </url>
   <url>
     <loc>https://ai-geletterdheid-mbo.nl/over/</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-07-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -32,25 +50,19 @@
   </url>
   <url>
     <loc>https://ai-geletterdheid-mbo.nl/prijzen/</loc>
-    <lastmod>2026-07-08</lastmod>
+    <lastmod>2026-07-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://ai-geletterdheid-mbo.nl/keuzedeel/</loc>
-    <lastmod>2026-07-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
     <loc>https://ai-geletterdheid-mbo.nl/voorwaarden/</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-07-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://ai-geletterdheid-mbo.nl/aigrip/</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-07-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
