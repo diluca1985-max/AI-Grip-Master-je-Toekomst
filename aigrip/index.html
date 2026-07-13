@@ -3107,7 +3107,10 @@ function updateLevelBadge() {
 
 // Helper: get level-specific content from an object with keys 2, 3, 4
 function L(obj) {
+  // Arrays (zoals quizvragen) zijn zelf de inhoud, geen niveau-map: ongewijzigd teruggeven.
+  if (Array.isArray(obj)) return obj;
   if (!obj || typeof obj !== 'object') return obj;
+  // Niveau-gedifferentieerde inhoud: object met sleutels 2/3/4. Val terug op niveau 3.
   const level = getLevel();
   return obj[level] || obj[3] || obj;
 }
@@ -4025,9 +4028,9 @@ const courseData = [
         telefoon nog voordat je het probleem zelf zou merken.
       </li>
       <li>
-        <strong>Voorbeeld:</strong> Bij een autofabrikant in Duitsland voorspelt AI
-        welke lasrobots onderhoud nodig hebben. Resultaat: 30% minder stilstand en
-        flink bespaard op reparatiekosten.
+        <strong>Voorbeeld:</strong> Autofabrikanten laten AI voorspellen welke
+        lasrobots onderhoud nodig hebben. Dat scheelt onverwachte stilstand en
+        reparatiekosten.
       </li>
     </ul>
 
